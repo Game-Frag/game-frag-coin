@@ -1,0 +1,6 @@
+usr/local/bin/gamefrag-qt usr/bin
+share/pixmaps/gamefrag32.xpm usr/share/pixmaps
+share/pixmaps/gamefrag16.xpm usr/share/pixmaps
+share/pixmaps/gamefrag128.png usr/share/pixmaps
+debian/gamefrag-qt.desktop usr/share/applications
+debian/gamefrag-qt.protocol usr/share/kde4/services/

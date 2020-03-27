@@ -1,0 +1,81 @@
+policy_module(gamefrag, 1.100.1)
+
+########################################
+#
+# Declarations
+#
+
+type gamefrag_t;
+type gamefrag_exec_t;
+init_daemon_domain(gamefrag_t, gamefrag_exec_t)
+
+permissive gamefrag_t;
+
+type gamefrag_initrc_exec_t;
+init_script_file(gamefrag_initrc_exec_t)
+
+type gamefrag_conf_t;
+files_type(gamefrag_conf_t)
+
+type gamefrag_var_lib_t;
+files_type(gamefrag_var_lib_t)
+
+type gamefrag_var_run_t;
+files_type(gamefrag_var_run_t)
+
+type gamefrag_port_t;
+corenet_port(gamefrag_port_t)
+
+########################################
+#
+# gamefrag local policy
+#
+allow gamefrag_t self:process { fork };
+
+allow gamefrag_t self:fifo_file rw_fifo_file_perms;
+allow gamefrag_t self:unix_stream_socket create_stream_socket_perms;
+
+manage_dirs_pattern(gamefrag_t, gamefrag_conf_t, gamefrag_conf_t)
+manage_files_pattern(gamefrag_t, gamefrag_conf_t, gamefrag_conf_t)
+
+manage_dirs_pattern(gamefrag_t, gamefrag_var_lib_t, gamefrag_var_lib_t)
+manage_files_pattern(gamefrag_t, gamefrag_var_lib_t, gamefrag_var_lib_t)
+files_var_lib_filetrans(gamefrag_t, gamefrag_var_lib_t, { dir file })
+
+manage_dirs_pattern(gamefrag_t, gamefrag_var_run_t, gamefrag_var_run_t)
+manage_files_pattern(gamefrag_t, gamefrag_var_run_t, gamefrag_var_run_t)
+
+sysnet_dns_name_resolve(gamefrag_t)
+corenet_all_recvfrom_unlabeled(gamefrag_t)
+
+allow gamefrag_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_generic_if(gamefrag_t)
+corenet_tcp_sendrecv_generic_node(gamefrag_t)
+corenet_tcp_sendrecv_all_ports(gamefrag_t)
+corenet_tcp_bind_generic_node(gamefrag_t)
+
+gen_require(`
+    type gamefrag_port_t;
+')
+allow gamefrag_t gamefrag_port_t:tcp_socket name_bind;
+
+gen_require(`
+    type gamefrag_port_t;
+')
+allow gamefrag_t gamefrag_port_t:tcp_socket name_connect;
+
+domain_use_interactive_fds(gamefrag_t)
+
+files_read_etc_files(gamefrag_t)
+
+miscfiles_read_localization(gamefrag_t)
+
+sysnet_dns_name_resolve(gamefrag_t)
+
+allow gamefrag_t gamefrag_exec_t:file execute_no_trans;
+allow gamefrag_t self:process setsched;
+corecmd_exec_ls(gamefrag_t)
+corenet_tcp_connect_http_port(gamefrag_t)
+dev_read_urand(gamefrag_t)
+fs_getattr_xattr_fs(gamefrag_t)
+kernel_read_system_state(gamefrag_t)

@@ -1,0 +1,8 @@
+/usr/bin/gamefrag-cli		--	gen_context(system_u:object_r:gamefrag_exec_t,s0)
+/usr/sbin/gamefragd		--	gen_context(system_u:object_r:gamefrag_exec_t,s0)
+/usr/lib(64)?/gamefrag/gamefragd		--	gen_context(system_u:object_r:gamefrag_exec_t,s0)
+
+/etc/gamefrag(/.*)?		gen_context(system_u:object_r:gamefrag_conf_t,s0)
+/var/lib/gamefrag(/.*)?		gen_context(system_u:object_r:gamefrag_var_lib_t,s0)
+
+(/var)?/run/gamefragd(/.*)?   gen_context(system_u:object_r:gamefrag_var_run_t,s0)

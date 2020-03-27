@@ -1,0 +1,860 @@
+# Copyright (c) 2013-2016 The Bitcoin Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+bin_PROGRAMS += qt/gamefrag-qt
+EXTRA_LIBRARIES += qt/libbitcoinqt.a
+
+# gamefrag qt core #
+QT_TS = \
+  qt/locale/gamefrag_bg.ts \
+  qt/locale/gamefrag_ca.ts \
+  qt/locale/gamefrag_cs.ts \
+  qt/locale/gamefrag_da.ts \
+  qt/locale/gamefrag_de.ts \
+  qt/locale/gamefrag_en.ts \
+  qt/locale/gamefrag_en_GB.ts \
+  qt/locale/gamefrag_en_US.ts \
+  qt/locale/gamefrag_eo.ts \
+  qt/locale/gamefrag_es.ts \
+  qt/locale/gamefrag_es_ES.ts \
+  qt/locale/gamefrag_fi.ts \
+  qt/locale/gamefrag_fr_FR.ts \
+  qt/locale/gamefrag_hi_IN.ts \
+  qt/locale/gamefrag_hr.ts \
+  qt/locale/gamefrag_hr_HR.ts \
+  qt/locale/gamefrag_it.ts \
+  qt/locale/gamefrag_ja.ts \
+  qt/locale/gamefrag_ko_KR.ts \
+  qt/locale/gamefrag_lt_LT.ts \
+  qt/locale/gamefrag_nl.ts \
+  qt/locale/gamefrag_pl.ts \
+  qt/locale/gamefrag_pt.ts \
+  qt/locale/gamefrag_pt_BR.ts \
+  qt/locale/gamefrag_ro_RO.ts \
+  qt/locale/gamefrag_ru.ts \
+  qt/locale/gamefrag_sk.ts \
+  qt/locale/gamefrag_sv.ts \
+  qt/locale/gamefrag_tr.ts \
+  qt/locale/gamefrag_uk.ts \
+  qt/locale/gamefrag_vi.ts \
+  qt/locale/gamefrag_zh_CN.ts \
+  qt/locale/gamefrag_zh_TW.ts
+
+QT_FORMS_UI = \
+  qt/forms/addressbookpage.ui \
+  qt/forms/askpassphrasedialog.ui \
+  qt/forms/coincontroldialog.ui \
+  qt/forms/blockexplorer.ui \
+  qt/forms/editaddressdialog.ui \
+  qt/forms/governancepage.ui \
+  qt/forms/helpmessagedialog.ui \
+  qt/forms/intro.ui \
+  qt/forms/openuridialog.ui \
+  qt/forms/optionsdialog.ui \
+  qt/forms/rpcconsole.ui \
+  qt/gamefrag/forms/loadingdialog.ui \
+  qt/forms/zfragcontroldialog.ui \
+  qt/gamefrag/forms/snackbar.ui \
+  qt/gamefrag/forms/navmenuwidget.ui \
+  qt/gamefrag/forms/lockunlock.ui \
+  qt/gamefrag/forms/expandablebutton.ui \
+  qt/gamefrag/forms/receivedialog.ui \
+  qt/gamefrag/forms/walletpassworddialog.ui \
+  qt/gamefrag/forms/topbar.ui \
+  qt/gamefrag/forms/txrow.ui \
+  qt/gamefrag/forms/dashboardwidget.ui \
+  qt/gamefrag/forms/coincontrolfragwidget.ui \
+  qt/gamefrag/forms/addresslabelrow.ui \
+  qt/gamefrag/forms/contactdropdownrow.ui \
+  qt/gamefrag/forms/mninfodialog.ui \
+  qt/gamefrag/forms/optionbutton.ui \
+  qt/gamefrag/forms/masternodewizarddialog.ui \
+  qt/gamefrag/forms/mnrow.ui \
+  qt/gamefrag/forms/masternodeswidget.ui \
+  qt/gamefrag/forms/myaddressrow.ui \
+  qt/gamefrag/forms/csrow.ui \
+  qt/gamefrag/forms/sendchangeaddressdialog.ui \
+  qt/gamefrag/forms/sendconfirmdialog.ui \
+  qt/gamefrag/forms/sendcustomfeedialog.ui \
+  qt/gamefrag/forms/sendchangeaddressdialog.ui \
+  qt/gamefrag/forms/sendmultirow.ui \
+  qt/gamefrag/forms/send.ui \
+  qt/gamefrag/forms/addnewaddressdialog.ui \
+  qt/gamefrag/forms/addnewcontactdialog.ui \
+  qt/gamefrag/forms/requestdialog.ui \
+  qt/gamefrag/forms/receivewidget.ui \
+  qt/gamefrag/forms/tooltipmenu.ui \
+  qt/gamefrag/forms/addresseswidget.ui \
+  qt/gamefrag/forms/defaultdialog.ui \
+  qt/gamefrag/forms/denomgenerationdialog.ui \
+  qt/gamefrag/forms/privacywidget.ui \
+  qt/gamefrag/forms/coldstakingwidget.ui \
+  qt/gamefrag/settings/forms/settingsbackupwallet.ui \
+  qt/gamefrag/settings/forms/settingsbittoolwidget.ui \
+  qt/gamefrag/settings/forms/settingsconsolewidget.ui \
+  qt/gamefrag/settings/forms/settingsdisplayoptionswidget.ui \
+  qt/gamefrag/settings/forms/settingsfaqwidget.ui \
+  qt/gamefrag/settings/forms/settingsinformationwidget.ui \
+  qt/gamefrag/settings/forms/settingsmainoptionswidget.ui \
+  qt/gamefrag/settings/forms/settingsmultisenddialog.ui \
+  qt/gamefrag/settings/forms/settingsmultisendwidget.ui \
+  qt/gamefrag/settings/forms/settingssignmessagewidgets.ui \
+  qt/gamefrag/settings/forms/settingswalletoptionswidget.ui \
+  qt/gamefrag/settings/forms/settingswalletrepairwidget.ui \
+  qt/gamefrag/settings/forms/settingswidget.ui \
+  qt/gamefrag/forms/welcomecontentwidget.ui \
+  qt/gamefrag/forms/splash.ui
+
+QT_MOC_CPP = \
+  qt/moc_addressbookpage.cpp \
+  qt/moc_addresstablemodel.cpp \
+  qt/moc_askpassphrasedialog.cpp \
+  qt/moc_bantablemodel.cpp \
+  qt/moc_bitcoinaddressvalidator.cpp \
+  qt/moc_bitcoinamountfield.cpp \
+  qt/gamefrag/moc_gamefraggui.cpp \
+  qt/moc_bitcoinunits.cpp \
+  qt/moc_blockexplorer.cpp \
+  qt/moc_clientmodel.cpp \
+  qt/moc_coincontroldialog.cpp \
+  qt/moc_coincontroltreewidget.cpp \
+  qt/moc_csvmodelwriter.cpp \
+  qt/moc_editaddressdialog.cpp \
+  qt/moc_governancepage.cpp \
+  qt/moc_guiutil.cpp \
+  qt/moc_intro.cpp \
+  qt/moc_macdockiconhandler.cpp \
+  qt/moc_macnotificationhandler.cpp \
+  qt/moc_notificator.cpp \
+  qt/moc_openuridialog.cpp \
+  qt/moc_optionsdialog.cpp \
+  qt/moc_optionsmodel.cpp \
+  qt/moc_peertablemodel.cpp \
+  qt/moc_paymentserver.cpp \
+  qt/moc_qvalidatedlineedit.cpp \
+  qt/moc_qvaluecombobox.cpp \
+  qt/moc_proposalframe.cpp \
+  qt/moc_recentrequeststablemodel.cpp \
+  qt/moc_rpcconsole.cpp \
+  qt/moc_splashscreen.cpp \
+  qt/moc_trafficgraphwidget.cpp \
+  qt/moc_transactiondesc.cpp \
+  qt/moc_transactionfilterproxy.cpp \
+  qt/moc_transactiontablemodel.cpp \
+  qt/moc_utilitydialog.cpp \
+  qt/moc_walletmodel.cpp \
+  qt/gamefrag/moc_loadingdialog.cpp \
+  qt/moc_zfragcontroldialog.cpp \
+  qt/gamefrag/moc_pwidget.cpp \
+  qt/gamefrag/moc_snackbar.cpp \
+  qt/gamefrag/moc_navmenuwidget.cpp \
+  qt/gamefrag/moc_lockunlock.cpp \
+  qt/gamefrag/moc_expandablebutton.cpp \
+  qt/gamefrag/moc_furabstractlistitemdelegate.cpp \
+  qt/gamefrag/moc_receivedialog.cpp \
+  qt/gamefrag/moc_walletpassworddialog.cpp \
+  qt/gamefrag/moc_pfborderimage.cpp \
+  qt/gamefrag/moc_topbar.cpp \
+  qt/gamefrag/moc_txrow.cpp \
+  qt/gamefrag/moc_dashboardwidget.cpp \
+  qt/gamefrag/moc_coincontrolfragwidget.cpp \
+  qt/gamefrag/moc_addresslabelrow.cpp \
+  qt/gamefrag/moc_contactdropdownrow.cpp \
+  qt/gamefrag/moc_mninfodialog.cpp \
+  qt/gamefrag/moc_optionbutton.cpp \
+  qt/gamefrag/moc_coldstakingmodel.cpp \
+  qt/gamefrag/moc_mnmodel.cpp \
+  qt/gamefrag/moc_masternodewizarddialog.cpp \
+  qt/gamefrag/moc_mnrow.cpp \
+  qt/gamefrag/moc_masternodeswidget.cpp \
+  qt/gamefrag/moc_myaddressrow.cpp \
+  qt/gamefrag/moc_csrow.cpp \
+  qt/gamefrag/moc_contactsdropdown.cpp \
+  qt/gamefrag/moc_sendchangeaddressdialog.cpp \
+  qt/gamefrag/moc_sendconfirmdialog.cpp \
+  qt/gamefrag/moc_sendcustomfeedialog.cpp \
+  qt/gamefrag/moc_sendchangeaddressdialog.cpp \
+  qt/gamefrag/moc_sendmultirow.cpp \
+  qt/gamefrag/moc_send.cpp \
+  qt/gamefrag/moc_addnewaddressdialog.cpp \
+  qt/gamefrag/moc_addnewcontactdialog.cpp \
+  qt/gamefrag/moc_requestdialog.cpp \
+  qt/gamefrag/moc_receivewidget.cpp \
+  qt/gamefrag/moc_tooltipmenu.cpp \
+  qt/gamefrag/moc_addresseswidget.cpp \
+  qt/gamefrag/moc_defaultdialog.cpp \
+  qt/gamefrag/moc_denomgenerationdialog.cpp \
+  qt/gamefrag/moc_privacywidget.cpp \
+  qt/gamefrag/moc_coldstakingwidget.cpp \
+  qt/gamefrag/settings/moc_settingsbackupwallet.cpp \
+  qt/gamefrag/settings/moc_settingsbittoolwidget.cpp \
+  qt/gamefrag/settings/moc_settingsconsolewidget.cpp \
+  qt/gamefrag/settings/moc_settingsdisplayoptionswidget.cpp \
+  qt/gamefrag/settings/moc_settingsfaqwidget.cpp \
+  qt/gamefrag/settings/moc_settingsinformationwidget.cpp \
+  qt/gamefrag/settings/moc_settingsmainoptionswidget.cpp \
+  qt/gamefrag/settings/moc_settingsmultisenddialog.cpp \
+  qt/gamefrag/settings/moc_settingsmultisendwidget.cpp \
+  qt/gamefrag/settings/moc_settingssignmessagewidgets.cpp \
+  qt/gamefrag/settings/moc_settingswalletoptionswidget.cpp \
+  qt/gamefrag/settings/moc_settingswalletrepairwidget.cpp \
+  qt/gamefrag/settings/moc_settingswidget.cpp \
+  qt/gamefrag/moc_welcomecontentwidget.cpp \
+  qt/gamefrag/moc_splash.cpp
+
+BITCOIN_MM = \
+  qt/macdockiconhandler.mm \
+  qt/macnotificationhandler.mm
+
+QT_MOC = \
+  qt/gamefrag.moc \
+  qt/bitcoinamountfield.moc \
+  qt/intro.moc \
+  qt/rpcconsole.moc \
+  qt/gamefrag/settings/moc_settingsconsolewidget.cpp
+
+QT_QRC_CPP = qt/qrc_gamefrag.cpp
+QT_QRC = qt/gamefrag.qrc
+QT_QRC_LOCALE_CPP = qt/qrc_gamefrag_locale.cpp
+QT_QRC_LOCALE = qt/gamefrag_locale.qrc
+
+PROTOBUF_CC = qt/paymentrequest.pb.cc
+PROTOBUF_H = qt/paymentrequest.pb.h
+PROTOBUF_PROTO = qt/paymentrequest.proto
+
+BITCOIN_QT_H = \
+  qt/addressbookpage.h \
+  qt/addresstablemodel.h \
+  qt/askpassphrasedialog.h \
+  qt/bantablemodel.h \
+  qt/bitcoinaddressvalidator.h \
+  qt/bitcoinamountfield.h \
+  qt/gamefrag/gamefraggui.h \
+  qt/bitcoinunits.h \
+  qt/blockexplorer.h \
+  qt/clientmodel.h \
+  qt/coincontroldialog.h \
+  qt/coincontroltreewidget.h \
+  qt/csvmodelwriter.h \
+  qt/editaddressdialog.h \
+  qt/governancepage.h \
+  qt/guiconstants.h \
+  qt/guiutil.h \
+  qt/intro.h \
+  qt/macdockiconhandler.h \
+  qt/macnotificationhandler.h \
+  qt/networkstyle.h \
+  qt/notificator.h \
+  qt/openuridialog.h \
+  qt/optionsdialog.h \
+  qt/optionsmodel.h \
+  qt/paymentrequestplus.h \
+  qt/paymentserver.h \
+  qt/peertablemodel.h \
+  qt/platformstyle.h \
+  qt/proposalframe.h \
+  qt/qvalidatedlineedit.h \
+  qt/qvaluecombobox.h \
+  qt/recentrequeststablemodel.h \
+  qt/rpcconsole.h \
+  qt/splashscreen.h \
+  qt/trafficgraphwidget.h \
+  qt/transactiondesc.h \
+  qt/transactionfilterproxy.h \
+  qt/transactionrecord.h \
+  qt/transactiontablemodel.h \
+  qt/utilitydialog.h \
+  qt/walletmodel.h \
+  qt/walletmodeltransaction.h \
+  qt/gamefrag/prunnable.h \
+  qt/gamefrag/pfborderimage.h \
+  qt/gamefrag/loadingdialog.h \
+  qt/winshutdownmonitor.h \
+  qt/zfragcontroldialog.h \
+  qt/gamefrag/pwidget.h \
+  qt/gamefrag/guitransactionsutils.h \
+  qt/gamefrag/snackbar.h \
+  qt/gamefrag/navmenuwidget.h \
+  qt/gamefrag/lockunlock.h \
+  qt/gamefrag/receivedialog.h \
+  qt/gamefrag/furlistrow.h \
+  qt/gamefrag/furabstractlistitemdelegate.h \
+  qt/gamefrag/txviewholder.h \
+  qt/gamefrag/qtutils.h \
+  qt/gamefrag/expandablebutton.h \
+  qt/gamefrag/walletpassworddialog.h \
+  qt/gamefrag/topbar.h \
+  qt/gamefrag/txrow.h \
+  qt/gamefrag/addressholder.h \
+  qt/gamefrag/addressfilterproxymodel.h \
+  qt/gamefrag/dashboardwidget.h \
+  qt/gamefrag/coincontrolfragwidget.h \
+  qt/gamefrag/addresslabelrow.h \
+  qt/gamefrag/contactdropdownrow.h \
+  qt/gamefrag/mninfodialog.h \
+  qt/gamefrag/optionbutton.h \
+  qt/gamefrag/coldstakingmodel.h \
+  qt/gamefrag/mnmodel.h \
+  qt/gamefrag/masternodewizarddialog.h \
+  qt/gamefrag/mnrow.h \
+  qt/gamefrag/masternodeswidget.h \
+  qt/gamefrag/myaddressrow.h \
+  qt/gamefrag/csrow.h \
+  qt/gamefrag/contactsdropdown.h \
+  qt/gamefrag/sendchangeaddressdialog.h \
+  qt/gamefrag/sendconfirmdialog.h \
+  qt/gamefrag/sendcustomfeedialog.h \
+  qt/gamefrag/sendchangeaddressdialog.h \
+  qt/gamefrag/sendmultirow.h \
+  qt/gamefrag/send.h \
+  qt/gamefrag/addnewaddressdialog.h \
+  qt/gamefrag/addnewcontactdialog.h \
+  qt/gamefrag/requestdialog.h \
+  qt/gamefrag/receivewidget.h \
+  qt/gamefrag/tooltipmenu.h \
+  qt/gamefrag/addresseswidget.h \
+  qt/gamefrag/defaultdialog.h \
+  qt/gamefrag/denomgenerationdialog.h \
+  qt/gamefrag/privacywidget.h \
+  qt/gamefrag/coldstakingwidget.h \
+  qt/gamefrag/settings/settingsbackupwallet.h \
+  qt/gamefrag/settings/settingsbittoolwidget.h \
+  qt/gamefrag/settings/settingsconsolewidget.h \
+  qt/gamefrag/settings/settingsdisplayoptionswidget.h \
+  qt/gamefrag/settings/settingsfaqwidget.h \
+  qt/gamefrag/settings/settingsinformationwidget.h \
+  qt/gamefrag/settings/settingsmainoptionswidget.h \
+  qt/gamefrag/settings/settingsmultisenddialog.h \
+  qt/gamefrag/settings/settingsmultisendwidget.h \
+  qt/gamefrag/settings/settingssignmessagewidgets.h \
+  qt/gamefrag/settings/settingswalletoptionswidget.h \
+  qt/gamefrag/settings/settingswalletrepairwidget.h \
+  qt/gamefrag/settings/settingswidget.h \
+  qt/gamefrag/welcomecontentwidget.h \
+  qt/gamefrag/splash.h
+
+RES_ICONS = \
+  qt/res/icons/add.png \
+  qt/res/icons/address-book.png \
+  qt/res/icons/automint_active.png \
+  qt/res/icons/automint_inactive.png \
+  qt/res/icons/bitcoin.ico \
+  qt/res/icons/bitcoin.png \
+  qt/res/icons/bitcoin_testnet.ico \
+  qt/res/icons/bitcoin_testnet.png \
+  qt/res/icons/bitcoin_regtest.png \
+  qt/res/icons/browse.png \
+  qt/res/icons/clock1.png \
+  qt/res/icons/clock2.png \
+  qt/res/icons/clock3.png \
+  qt/res/icons/clock4.png \
+  qt/res/icons/clock5.png \
+  qt/res/icons/configure.png \
+  qt/res/icons/connect0_16.png \
+  qt/res/icons/connect1_16.png \
+  qt/res/icons/connect2_16.png \
+  qt/res/icons/connect3_16.png \
+  qt/res/icons/connect4_16.png \
+  qt/res/icons/debugwindow.png \
+  qt/res/icons/edit.png \
+  qt/res/icons/editcopy.png \
+  qt/res/icons/editpaste.png \
+  qt/res/icons/explorer.png \
+  qt/res/icons/export.png \
+  qt/res/icons/eye.png \
+  qt/res/icons/eye_minus.png \
+  qt/res/icons/eye_plus.png \
+  qt/res/icons/filesave.png \
+  qt/res/icons/history.png \
+  qt/res/icons/key.png \
+  qt/res/icons/lock_closed.png \
+  qt/res/icons/lock_open.png \
+  qt/res/icons/masternodes.png \
+  qt/res/icons/onion.png \
+  qt/res/icons/overview.png \
+  qt/res/icons/qrcode.png \
+  qt/res/icons/quit.png \
+  qt/res/icons/receive.png \
+  qt/res/icons/receive_dark.png \
+  qt/res/icons/privacy.png \
+  qt/res/icons/remove.png \
+  qt/res/icons/send.png \
+  qt/res/icons/send_dark.png \
+  qt/res/icons/governance.png \
+  qt/res/icons/governance_dark.png \
+  qt/res/icons/staking_active.png \
+  qt/res/icons/staking_inactive.png \
+  qt/res/icons/synced.png \
+  qt/res/icons/trade.png \
+  qt/res/icons/transaction0.png \
+  qt/res/icons/transaction2.png \
+  qt/res/icons/transaction_conflicted.png \
+  qt/res/icons/tx_inout.png \
+  qt/res/icons/tx_input.png \
+  qt/res/icons/tx_output.png \
+  qt/res/icons/tx_mined.png \
+  qt/res/icons/ic-transaction-received.svg \
+  qt/res/icons/ic-transaction-mint.svg \
+  qt/res/icons/ic-transaction-sent.svg \
+  qt/res/icons/ic-transaction-staked.svg \
+  qt/res/icons/unit_gamefrag.png \
+  qt/res/icons/unit_mgamefrag.png \
+  qt/res/icons/unit_ugamefrag.png \
+  qt/res/icons/unit_tgamefrag.png \
+  qt/res/icons/unit_tmgamefrag.png \
+  qt/res/icons/unit_tugamefrag.png \
+  qt/res/icons/yesvote.png \
+  qt/res/icons/novote.png \
+  qt/res/icons/abstainvote.png \
+  qt/gamefrag/res/img/bg-dashboard-banner.png \
+  qt/gamefrag/res/img/bg-multi-number-dark.svg \
+  qt/gamefrag/res/img/ic-check-locked.svg \
+  qt/gamefrag/res/img/ic-nav-address.svg \
+  qt/gamefrag/res/img/ic-update.svg \
+  qt/gamefrag/res/img/bg-multi-number.svg \
+  qt/gamefrag/res/img/ic-check-mint-off.svg \
+  qt/gamefrag/res/img/ic-nav-cold-staking.svg \
+  qt/gamefrag/res/img/ic-nav-cold-staking-active.svg \
+  qt/gamefrag/res/img/ic-nav-dashboard-active.svg \
+  qt/gamefrag/res/img/ic-wallet-status-locked.svg \
+  qt/gamefrag/res/img/bg-splash.svg \
+  qt/gamefrag/res/img/bg-splash.png \
+  qt/gamefrag/res/img/ic-check-mint.svg \
+  qt/gamefrag/res/img/ic-nav-dashboard-hover.svg \
+  qt/gamefrag/res/img/ic-wallet-status-staking.svg \
+  qt/gamefrag/res/img/ic-check-peers-off.svg \
+  qt/gamefrag/res/img/ic-nav-dashboard.svg \
+  qt/gamefrag/res/img/ic-wallet-status-unlocked.svg \
+  qt/gamefrag/res/img/ic-check-peers.svg \
+  qt/gamefrag/res/img/ic-nav-master-active.svg \
+  qt/gamefrag/res/img/ic-watch-password-white.svg \
+  qt/gamefrag/res/img/bg-welcome-container.jpg \
+  qt/gamefrag/res/img/bg-welcome-container.png \
+  qt/gamefrag/res/img/bg-welcome-container.svg \
+  qt/gamefrag/res/img/bg-welcome-container@2x.png \
+  qt/gamefrag/res/img/bg-welcome-container@3x.png \
+  qt/gamefrag/res/img/ic-check-staking-off.svg \
+  qt/gamefrag/res/img/ic-nav-master-hover.svg \
+  qt/gamefrag/res/img/ic-watch-password.svg \
+  qt/gamefrag/res/img/bg-welcome.jpg \
+  qt/gamefrag/res/img/bg-welcome.svg \
+  qt/gamefrag/res/img/bg-welcome@2x.jpg \
+  qt/gamefrag/res/img/bg-welcome@3x.jpg \
+  qt/gamefrag/res/img/bg-welcome.png \
+  qt/gamefrag/res/img/ic-check-staking.svg \
+  qt/gamefrag/res/img/ic-nav-master.svg \
+  qt/gamefrag/res/img/img-dashboard-banner.jpg \
+  qt/gamefrag/res/img/btn-radio-active.svg \
+  qt/gamefrag/res/img/ic-check-sync-off.svg \
+  qt/gamefrag/res/img/ic-nav-privacy-active.svg \
+  qt/gamefrag/res/img/img-empty-contacts.svg \
+  qt/gamefrag/res/img/btn-radio-off.svg \
+  qt/gamefrag/res/img/ic-check-sync.png \
+  qt/gamefrag/res/img/ic-nav-privacy-hover.svg \
+  qt/gamefrag/res/img/img-empty-dark-contacts.svg \
+  qt/gamefrag/res/img/ic-contact-arrow-down.svg \
+  qt/gamefrag/res/img/ic-contact-arrow-down-white.svg \
+  qt/gamefrag/res/img/ic-check-sync.svg \
+  qt/gamefrag/res/img/ic-check-faq.svg \
+  qt/gamefrag/res/img/ic-nav-privacy.svg \
+  qt/gamefrag/res/img/img-empty-dark-error.svg \
+  qt/gamefrag/res/img/ic-add-label.svg \
+  qt/gamefrag/res/img/ic-pending.svg \
+  qt/gamefrag/res/img/ic-check-theme-dark.svg \
+  qt/gamefrag/res/img/ic-nav-receive-active.svg \
+  qt/gamefrag/res/img/img-empty-dark-masternode.svg \
+  qt/gamefrag/res/img/ic-add-liliac.svg \
+  qt/gamefrag/res/img/ic-check-theme-light.svg \
+  qt/gamefrag/res/img/ic-nav-receive-hover.svg \
+  qt/gamefrag/res/img/img-empty-dark-multisend.svg \
+  qt/gamefrag/res/img/ic-add-purple.svg \
+  qt/gamefrag/res/img/ic-check-white.svg \
+  qt/gamefrag/res/img/ic-nav-receive.svg \
+  qt/gamefrag/res/img/img-empty-dark-peers.svg \
+  qt/gamefrag/res/img/ic-add.svg \
+  qt/gamefrag/res/img/ic-check.svg \
+  qt/gamefrag/res/img/ic-nav-send-active.svg \
+  qt/gamefrag/res/img/img-empty-dark-staking-off.svg \
+  qt/gamefrag/res/img/img-empty-dark-staking-on.svg \
+  qt/gamefrag/res/img/ic-address-book-grey.svg \
+  qt/gamefrag/res/img/ic-chevron-left.svg \
+  qt/gamefrag/res/img/ic-nav-send-hover.svg \
+  qt/gamefrag/res/img/img-empty-dark-transactions.svg \
+  qt/gamefrag/res/img/ic-address-book-white.svg \
+  qt/gamefrag/res/img/ic-chevron-right.svg \
+  qt/gamefrag/res/img/ic-nav-send.svg \
+  qt/gamefrag/res/img/img-empty-error.svg \
+  qt/gamefrag/res/img/ic-address-book.svg \
+  qt/gamefrag/res/img/ic-clear-liliac.svg \
+  qt/gamefrag/res/img/ic-nav-settings-active.svg \
+  qt/gamefrag/res/img/img-empty-masternode.svg \
+  qt/gamefrag/res/img/ic-address-send-white.svg \
+  qt/gamefrag/res/img/ic-clear-purple.svg \
+  qt/gamefrag/res/img/ic-nav-settings-hover.svg \
+  qt/gamefrag/res/img/img-empty-multisend.svg \
+  qt/gamefrag/res/img/ic-address-send.svg \
+  qt/gamefrag/res/img/ic-close-white.svg \
+  qt/gamefrag/res/img/ic-nav-settings.svg \
+  qt/gamefrag/res/img/img-empty-peers.svg \
+  qt/gamefrag/res/img/img-empty-privacy.svg \
+  qt/gamefrag/res/img/img-empty-privacy-dark.svg \
+  qt/gamefrag/res/img/ic-arrow-drop-down-white.svg \
+  qt/gamefrag/res/img/ic-close.svg \
+  qt/gamefrag/res/img/ic-radio-liliac-on.svg \
+  qt/gamefrag/res/img/img-empty-staking-off.svg \
+  qt/gamefrag/res/img/ic-arrow-drop-down.svg \
+  qt/gamefrag/res/img/ic-coin-frag.svg \
+  qt/gamefrag/res/img/ic-receive-off.svg \
+  qt/gamefrag/res/img/img-empty-staking-on.svg \
+  qt/gamefrag/res/img/ic-arrow-drop-up-white.svg \
+  qt/gamefrag/res/img/ic-coin-zfrag.png \
+  qt/gamefrag/res/img/ic-receive-on.svg \
+  qt/gamefrag/res/img/img-empty-transactions.svg \
+  qt/gamefrag/res/img/ic-arrow-drop-up.svg \
+  qt/gamefrag/res/img/ic-coin-zfrag.svg \
+  qt/gamefrag/res/img/ic-received.svg \
+  qt/gamefrag/res/img/img-logo-gamefrag.png \
+  qt/gamefrag/res/img/ic-arrow-drop-white-down.svg \
+  qt/gamefrag/res/img/ic-combo-box.svg \
+  qt/gamefrag/res/img/ic-send.svg \
+  qt/gamefrag/res/img/img-logo-gamefrag@2x.png \
+  qt/gamefrag/res/img/ic-arrow-purple-down.svg \
+  qt/gamefrag/res/img/ic-connect.svg \
+  qt/gamefrag/res/img/ic-submenu-lock.svg \
+  qt/gamefrag/res/img/img-logo-gamefrag@3x.png \
+  qt/gamefrag/res/img/img-logo-gamefrag.svg \
+  qt/gamefrag/res/img/ic-arrow-right-white.svg \
+  qt/gamefrag/res/img/ic-arrow-left-white.svg \
+  qt/gamefrag/res/img/ic-arrow-left.svg \
+  qt/gamefrag/res/img/ic-copy-liliac.svg \
+  qt/gamefrag/res/img/ic-submenu-staking.svg \
+  qt/gamefrag/res/img/img-nav-logo-gamefrag.png \
+  qt/gamefrag/res/img/ic-arrow-right.svg \
+  qt/gamefrag/res/img/ic-copy.svg \
+  qt/gamefrag/res/img/ic-copy-big.svg \
+  qt/gamefrag/res/img/ic-copy-big-white.svg \
+  qt/gamefrag/res/img/ic-submenu-unlock.svg \
+  qt/gamefrag/res/img/img-nav-logo.png \
+  qt/gamefrag/res/img/ic-arrow-white-left.svg \
+  qt/gamefrag/res/img/ic-exit.svg \
+  qt/gamefrag/res/img/ic-switch-liliac-on.svg \
+  qt/gamefrag/res/img/img-nav-logo.svg \
+  qt/gamefrag/res/img/ic-arrow-white-right.svg \
+  qt/gamefrag/res/img/ic-expand.svg \
+  qt/gamefrag/res/img/ic-switch-off.svg \
+  qt/gamefrag/res/img/img-qr-test-big.png \
+  qt/gamefrag/res/img/ic-check-active.svg \
+  qt/gamefrag/res/img/ic-folder.svg \
+  qt/gamefrag/res/img/ic-switch-on.svg \
+  qt/gamefrag/res/img/img-qr-test.png \
+  qt/gamefrag/res/img/ic-check-box.svg \
+  qt/gamefrag/res/img/ic-check-box-dark-active.svg \
+  qt/gamefrag/res/img/ic-check-box-indeterminate.svg \
+  qt/gamefrag/res/img/ic-check-box-liliac-indeterminate.svg \
+  qt/gamefrag/res/img/ic-label-liliac.svg \
+  qt/gamefrag/res/img/ic-transaction-warning.svg \
+  qt/gamefrag/res/img/ic-transaction-mint.svg \
+  qt/gamefrag/res/img/ic-transaction-mint-inactive.svg \
+  qt/gamefrag/res/img/ic-check-cold-staking.svg \
+  qt/gamefrag/res/img/ic-check-cold-staking-off.svg \
+  qt/gamefrag/res/img/ic-check-cold-staking-enabled.svg \
+  qt/gamefrag/res/img/dark/ic-transaction-cs-contract.svg \
+  qt/gamefrag/res/img/dark/ic-transaction-cs-contract-inactive.svg \
+  qt/gamefrag/res/img/img-qr.svg \
+  qt/gamefrag/res/img/ic-check-connect-off.svg \
+  qt/gamefrag/res/img/ic-label.svg \
+  qt/gamefrag/res/img/ic-transaction-received.svg \
+  qt/gamefrag/res/img/dark/ic-transaction-received.svg \
+  qt/gamefrag/res/img/dark/ic-transaction-warning.svg \
+  qt/gamefrag/res/img/dark/ic-transaction-mint.svg \
+  qt/gamefrag/res/img/dark/ic-transaction-mint-inactive.svg \
+  qt/gamefrag/res/img/ic-transaction-received-inactive.svg \
+  qt/gamefrag/res/img/dark/ic-transaction-received-inactive.svg \
+  qt/gamefrag/res/img/img-welcome-step1.png \
+  qt/gamefrag/res/img/ic-check-connect.svg \
+  qt/gamefrag/res/img/ic-menu-hover.svg \
+  qt/gamefrag/res/img/ic-transaction-sent.svg \
+  qt/gamefrag/res/img/ic-transaction-sent-inactive.svg \
+  qt/gamefrag/res/img/dark/ic-transaction-sent.svg \
+  qt/gamefrag/res/img/dark/ic-transaction-sent-inactive.svg \
+  qt/gamefrag/res/img/img-welcome-step2.png \
+  qt/gamefrag/res/img/ic-check-dark.svg \
+  qt/gamefrag/res/img/ic-mint.svg \
+  qt/gamefrag/res/img/ic-transaction-staked.svg \
+  qt/gamefrag/res/img/ic-transaction-staked-inactive.svg \
+  qt/gamefrag/res/img/dark/ic-transaction-staked.svg \
+  qt/gamefrag/res/img/dark/ic-transaction-staked-inactive.svg \
+  qt/gamefrag/res/img/img-welcome-step3.png \
+  qt/gamefrag/res/img/ic-check-liliac-on.svg \
+  qt/gamefrag/res/img/ic-nav-address-active.svg \
+  qt/gamefrag/res/img/ic-unlock-staking.svg \
+  qt/gamefrag/res/img/img-welcome-step4.png \
+  qt/gamefrag/res/img/ic-check-locked-off.svg \
+  qt/gamefrag/res/img/ic-nav-address-hover.svg \
+  qt/gamefrag/res/img/ic-update-liliac.svg \
+  qt/gamefrag/res/img/ic-arrow-drop-down-purple.svg \
+  qt/gamefrag/res/img/ic-arrow-drop-up-purple.svg \
+  qt/gamefrag/res/img/ic-check-liliac-indeterminate.svg \
+  qt/gamefrag/res/img/ic-check-box-liliac-indeterminate.svg \
+  qt/gamefrag/res/img/ic-transaction-stake-delegated.svg \
+  qt/gamefrag/res/img/ic-transaction-stake-delegated-inactive.svg \
+  qt/gamefrag/res/img/ic-transaction-stake-hot.svg \
+  qt/gamefrag/res/img/ic-transaction-stake-hot-inactive.svg \
+  qt/gamefrag/res/img/dark/ic-transaction-stake-hot.svg \
+  qt/gamefrag/res/img/dark/ic-transaction-stake-hot-inactive.svg \
+  qt/gamefrag/res/img/dark/ic-transaction-stake-delegated.svg \
+  qt/gamefrag/res/img/dark/ic-transaction-stake-delegated-inactive.svg \
+  qt/gamefrag/res/img/ic-transaction-cs-contract.svg \
+  qt/gamefrag/res/img/ic-transaction-cs-contract-inactive.svg \
+  qt/gamefrag/res/img/ic-check-box-indeterminate.svg \
+  qt/gamefrag/res/img/ani-loading-dark.gif \
+  qt/gamefrag/res/img/ani-loading.gif
+
+
+
+BITCOIN_QT_BASE_CPP = \
+  qt/bantablemodel.cpp \
+  qt/bitcoinaddressvalidator.cpp \
+  qt/bitcoinamountfield.cpp \
+  qt/gamefrag/gamefraggui.cpp \
+  qt/bitcoinunits.cpp \
+  qt/blockexplorer.cpp \
+  qt/clientmodel.cpp \
+  qt/csvmodelwriter.cpp \
+  qt/guiutil.cpp \
+  qt/intro.cpp \
+  qt/networkstyle.cpp \
+  qt/notificator.cpp \
+  qt/optionsdialog.cpp \
+  qt/optionsmodel.cpp \
+  qt/peertablemodel.cpp \
+  qt/platformstyle.cpp \
+  qt/qvalidatedlineedit.cpp \
+  qt/qvaluecombobox.cpp \
+  qt/rpcconsole.cpp \
+  qt/splashscreen.cpp \
+  qt/trafficgraphwidget.cpp \
+  qt/utilitydialog.cpp
+
+BITCOIN_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
+
+BITCOIN_QT_WALLET_CPP = \
+  qt/addressbookpage.cpp \
+  qt/addresstablemodel.cpp \
+  qt/askpassphrasedialog.cpp \
+  qt/blockexplorer.cpp \
+  qt/coincontroldialog.cpp \
+  qt/coincontroltreewidget.cpp \
+  qt/editaddressdialog.cpp \
+  qt/governancepage.cpp \
+  qt/openuridialog.cpp \
+  qt/paymentrequestplus.cpp \
+  qt/paymentserver.cpp \
+  qt/proposalframe.cpp \
+  qt/recentrequeststablemodel.cpp \
+  qt/transactiondesc.cpp \
+  qt/transactionfilterproxy.cpp \
+  qt/transactionrecord.cpp \
+  qt/transactiontablemodel.cpp \
+  qt/walletmodel.cpp \
+  qt/walletmodeltransaction.cpp \
+  qt/gamefrag/loadingdialog.cpp \
+  qt/zfragcontroldialog.cpp \
+  qt/gamefrag/pwidget.cpp \
+  qt/gamefrag/guitransactionsutils.cpp \
+  qt/gamefrag/snackbar.cpp \
+  qt/gamefrag/navmenuwidget.cpp \
+  qt/gamefrag/lockunlock.cpp \
+  qt/gamefrag/receivedialog.cpp \
+  qt/gamefrag/furabstractlistitemdelegate.cpp \
+  qt/gamefrag/txviewholder.cpp \
+  qt/gamefrag/qtutils.cpp \
+  qt/gamefrag/expandablebutton.cpp \
+  qt/gamefrag/walletpassworddialog.cpp \
+  qt/gamefrag/topbar.cpp \
+  qt/gamefrag/txrow.cpp \
+  qt/gamefrag/addressholder.cpp \
+  qt/gamefrag/addressfilterproxymodel.cpp \
+  qt/gamefrag/dashboardwidget.cpp \
+  qt/gamefrag/coincontrolfragwidget.cpp \
+  qt/gamefrag/addresslabelrow.cpp \
+  qt/gamefrag/contactdropdownrow.cpp \
+  qt/gamefrag/contactsdropdown.cpp \
+  qt/gamefrag/optionbutton.cpp \
+  qt/gamefrag/mninfodialog.cpp \
+  qt/gamefrag/coldstakingmodel.cpp \
+  qt/gamefrag/mnmodel.cpp \
+  qt/gamefrag/masternodewizarddialog.cpp \
+  qt/gamefrag/mnrow.cpp \
+  qt/gamefrag/masternodeswidget.cpp \
+  qt/gamefrag/myaddressrow.cpp \
+  qt/gamefrag/csrow.cpp \
+  qt/gamefrag/sendchangeaddressdialog.cpp \
+  qt/gamefrag/sendconfirmdialog.cpp \
+  qt/gamefrag/sendcustomfeedialog.cpp \
+  qt/gamefrag/sendchangeaddressdialog.cpp \
+  qt/gamefrag/sendmultirow.cpp \
+  qt/gamefrag/send.cpp \
+  qt/gamefrag/addnewaddressdialog.cpp \
+  qt/gamefrag/addnewcontactdialog.cpp \
+  qt/gamefrag/requestdialog.cpp \
+  qt/gamefrag/receivewidget.cpp \
+  qt/gamefrag/tooltipmenu.cpp \
+  qt/gamefrag/addresseswidget.cpp \
+  qt/gamefrag/defaultdialog.cpp \
+  qt/gamefrag/denomgenerationdialog.cpp \
+  qt/gamefrag/privacywidget.cpp \
+  qt/gamefrag/coldstakingwidget.cpp \
+  qt/gamefrag/settings/settingsbackupwallet.cpp \
+  qt/gamefrag/settings/settingsbittoolwidget.cpp \
+  qt/gamefrag/settings/settingsconsolewidget.cpp \
+  qt/gamefrag/settings/settingsdisplayoptionswidget.cpp \
+  qt/gamefrag/settings/settingsfaqwidget.cpp \
+  qt/gamefrag/settings/settingsinformationwidget.cpp \
+  qt/gamefrag/settings/settingsmainoptionswidget.cpp \
+  qt/gamefrag/settings/settingsmultisenddialog.cpp \
+  qt/gamefrag/settings/settingsmultisendwidget.cpp \
+  qt/gamefrag/settings/settingssignmessagewidgets.cpp \
+  qt/gamefrag/settings/settingswalletoptionswidget.cpp \
+  qt/gamefrag/settings/settingswalletrepairwidget.cpp \
+  qt/gamefrag/settings/settingswidget.cpp \
+  qt/gamefrag/welcomecontentwidget.cpp \
+  qt/gamefrag/splash.cpp
+
+
+BITCOIN_QT_CPP = $(BITCOIN_QT_BASE_CPP)
+if TARGET_WINDOWS
+BITCOIN_QT_CPP += $(BITCOIN_QT_WINDOWS_CPP)
+endif
+if ENABLE_WALLET
+BITCOIN_QT_CPP += $(BITCOIN_QT_WALLET_CPP)
+endif
+
+RES_IMAGES = \
+  qt/res/images/about.png \
+  qt/res/images/splash.png \
+  qt/res/images/splash_testnet.png \
+  qt/res/images/splash_regtest.png \
+  qt/res/images/gamefrag_logo_horizontal.png \
+  qt/res/images/downArrow_dark.png \
+  qt/res/images/downArrow_small_dark.png \
+  qt/res/images/downArrow_small.png \
+  qt/res/images/upArrow_small_dark.png \
+  qt/res/images/upArrow_small.png \
+  qt/res/images/leftArrow_small_dark.png \
+  qt/res/images/rightArrow_small_dark.png \
+  qt/res/images/qtreeview_selected.png
+
+RES_CSS = \
+  qt/res/css/default.css \
+  qt/gamefrag/res/css/style_dark.css \
+  qt/gamefrag/res/css/style_light.css
+
+RES_MOVIES = $(wildcard $(srcdir)/qt/res/movies/spinner-*.png)
+
+BITCOIN_RC = qt/res/gamefrag-qt-res.rc
+
+BITCOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
+  -I$(builddir)/qt/forms
+
+qt_libbitcoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_libbitcoinqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+qt_libbitcoinqt_a_OBJCXXFLAGS = $(AM_OBJCXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_libbitcoinqt_a_SOURCES = $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(QT_FORMS_UI) \
+  $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(RES_MOVIES)
+
+nodist_qt_libbitcoinqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
+  $(PROTOBUF_H) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
+
+# forms/foo.h -> forms/ui_foo.h
+QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:.ui=.h))))
+
+# Most files will depend on the forms and moc files as includes. Generate them
+# before anything else.
+$(QT_MOC): $(QT_FORMS_H)
+$(qt_libbitcoinqt_a_OBJECTS) $(qt_gamefrag_qt_OBJECTS) : | $(QT_MOC)
+
+#Generating these with a half-written protobuf header leads to wacky results.
+#This makes sure it's done.
+$(QT_MOC): $(PROTOBUF_H)
+$(QT_MOC_CPP): $(PROTOBUF_H)
+
+# gamefrag-qt binary #
+qt_gamefrag_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_gamefrag_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_gamefrag_qt_SOURCES = qt/gamefrag.cpp
+if TARGET_DARWIN
+  qt_gamefrag_qt_SOURCES += $(BITCOIN_MM)
+endif
+if TARGET_WINDOWS
+  qt_gamefrag_qt_SOURCES += $(BITCOIN_RC)
+endif
+qt_gamefrag_qt_LDADD = qt/libbitcoinqt.a $(LIBBITCOIN_SERVER)
+if ENABLE_WALLET
+qt_gamefrag_qt_LDADD += $(LIBBITCOIN_UTIL) $(LIBBITCOIN_WALLET)
+endif
+if ENABLE_ZMQ
+qt_gamefrag_qt_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+endif
+qt_gamefrag_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBBITCOIN_ZEROCOIN) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
+  $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(SVG_LIBS) $(CHARTS_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
+  $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
+qt_gamefrag_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+qt_gamefrag_qt_LIBTOOLFLAGS = $(AM_LIBTOOLFLAGS) --tag CXX
+
+#locale/foo.ts -> locale/foo.qm
+QT_QM=$(QT_TS:.ts=.qm)
+
+SECONDARY: $(QT_QM)
+
+$(srcdir)/qt/gamefragstrings.cpp: $(libbitcoin_server_a_SOURCES) $(libbitcoin_wallet_a_SOURCES) $(libbitcoin_common_a_SOURCES) $(libbitcoin_zmq_a_SOURCES) $(libbitcoin_util_a_SOURCES)
+	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
+	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) PACKAGE_NAME="$(PACKAGE_NAME)" $(PYTHON) ../share/qt/extract_strings_qt.py $^
+
+translate: $(srcdir)/qt/gamefragstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_BASE_CPP) qt/gamefrag.cpp $(BITCOIN_QT_WINDOWS_CPP) $(BITCOIN_QT_WALLET_CPP) $(BITCOIN_QT_H) $(BITCOIN_MM)
+	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts $(srcdir)/qt/locale/gamefrag_en.ts
+
+$(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
+	@test -f $(RCC)
+	@cp -f $< $(@D)/temp_$(<F)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name gamefrag_locale $(@D)/temp_$(<F) | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+	@rm $(@D)/temp_$(<F)
+
+$(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(RES_MOVIES) $(PROTOBUF_H)
+	@test -f $(RCC)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name gamefrag $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno qt/temp_gamefrag_locale.qrc
+
+CLEANFILES += $(CLEAN_QT)
+
+gamefrag_qt_clean: FORCE
+	rm -f $(CLEAN_QT) $(qt_libbitcoinqt_a_OBJECTS) $(qt_gamefrag_qt_OBJECTS) qt/gamefrag-qt$(EXEEXT) $(LIBBITCOINQT)
+
+gamefrag_qt : qt/gamefrag-qt$(EXEEXT)
+
+ui_%.h: %.ui
+	@test -f $(UIC)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(UIC) -o $@ $< || (echo "Error creating $@"; false)
+
+%.moc: %.cpp
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+moc_%.cpp: %.h
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+%.qm: %.ts
+	@test -f $(LRELEASE)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LRELEASE) -silent $< -qm $@

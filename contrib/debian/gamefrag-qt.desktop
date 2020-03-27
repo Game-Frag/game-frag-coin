@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=FRAG Core
+Comment=FRAG P2P Cryptocurrency
+Comment[fr]=FRAG, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=FRAG, eşten eşe kriptografik sanal para birimi
+Exec=gamefrag-qt %u
+Terminal=false
+Type=Application
+Icon=gamefrag128
+MimeType=x-scheme-handler/gamefrag;
+Categories=Office;Finance;
+StartupWMClass=Gamefrag-qt
