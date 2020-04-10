@@ -166,7 +166,8 @@ public:
         SetLastTip(nullptr);
         SetLastTime(0);
     }
-    bool IsActive() { return (timeLastStakeAttempt + 30) >= GetTime(); }
+    bool IsActive() { return true; //(timeLastStakeAttempt + 30) >= GetTime(); 
+	}
 };
 
 /**
