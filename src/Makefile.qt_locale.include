@@ -1,0 +1,15 @@
+QT_TS = \
+  qt/locale/gamefrag_de.ts \
+  qt/locale/gamefrag_en.ts \
+  qt/locale/gamefrag_en_US.ts \
+  qt/locale/gamefrag_es.ts \
+  qt/locale/gamefrag_es_ES.ts \
+  qt/locale/gamefrag_fr_FR.ts \
+  qt/locale/gamefrag_hr_HR.ts \
+  qt/locale/gamefrag_it.ts \
+  qt/locale/gamefrag_ko_KR.ts \
+  qt/locale/gamefrag_nl.ts \
+  qt/locale/gamefrag_pl.ts \
+  qt/locale/gamefrag_ru.ts \
+  qt/locale/gamefrag_tr.ts \
+  qt/locale/gamefrag_zh_CN.ts

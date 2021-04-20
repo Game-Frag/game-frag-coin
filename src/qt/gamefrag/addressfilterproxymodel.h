@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef GameFrag_CORE_NEW_GUI_ADDRESSFILTERPROXYMODEL_H
-#define GameFrag_CORE_NEW_GUI_ADDRESSFILTERPROXYMODEL_H
+#ifndef GAMEFRAG_CORE_NEW_GUI_ADDRESSFILTERPROXYMODEL_H
+#define GAMEFRAG_CORE_NEW_GUI_ADDRESSFILTERPROXYMODEL_H
 
 #include <QSortFilterProxyModel>
 #include "addresstablemodel.h"
@@ -44,4 +44,4 @@ private:
 };
 
 
-#endif //GameFrag_CORE_NEW_GUI_ADDRESSFILTERPROXYMODEL_H
+#endif //GAMEFRAG_CORE_NEW_GUI_ADDRESSFILTERPROXYMODEL_H

@@ -22,12 +22,16 @@ class SettingsMainOptionsWidget : public PWidget
     Q_OBJECT
 
 public:
-    explicit SettingsMainOptionsWidget(GameFragGUI* _window, QWidget *parent = nullptr);
+    explicit SettingsMainOptionsWidget(GAMEFRAGGUI* _window, QWidget *parent = nullptr);
     ~SettingsMainOptionsWidget();
 
     void setMapper(QDataWidgetMapper *mapper);
 
-public slots:
+Q_SIGNALS:
+    void saveSettings();
+    void discardSettings();
+
+public Q_SLOTS:
     void onResetClicked();
 
 private:

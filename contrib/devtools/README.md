@@ -25,7 +25,7 @@ git diff -U0 HEAD~1.. | ./contrib/devtools/clang-format-diff.py -p1 -i -v
 copyright\_header.py
 ====================
 
-Provides utilities for managing copyright headers of `The PIVX
+Provides utilities for managing copyright headers of `The GAMEFRAG
 developers` in repository source files. It has three subcommands:
 
 ```
@@ -105,7 +105,7 @@ For example:
   ./github-merge.py 3077
 
 (in any git repository) will help you merge pull request #3077 for the
-GameFrag-Project/GameFrag repository.
+Game-Frag/game-frag-coin repository.
 
 What it does:
 * Fetch master and the pull request.
@@ -123,9 +123,9 @@ couldn't mess with the sources.
 
 Setup
 ---------
-Configuring the github-merge tool for the GameFrag repository is done in the following way:
+Configuring the github-merge tool for the GAMEFRAG repository is done in the following way:
 
-    git config githubmerge.repository GameFrag-Project/GameFrag
+    git config githubmerge.repository Game-Frag/game-frag-coin
     git config githubmerge.testcmd "make -j4 check" (adapt to whatever you want to use for testing)
     git config --global user.signingkey mykeyid
 
@@ -158,7 +158,7 @@ for further details.
 optimize-pngs.py
 ================
 
-A script to optimize png files in the GameFrag
+A script to optimize png files in the GAMEFRAG
 repository (requires pngcrush).
 
 security-check.py and test-security-check.py

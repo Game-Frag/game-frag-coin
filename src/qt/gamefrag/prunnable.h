@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef GameFrag_CORE_NEW_GUI_PRUNNABLE_H
-#define GameFrag_CORE_NEW_GUI_PRUNNABLE_H
+#ifndef GAMEFRAG_CORE_NEW_GUI_PRUNNABLE_H
+#define GAMEFRAG_CORE_NEW_GUI_PRUNNABLE_H
 
 class Runnable {
 public:
@@ -11,4 +11,4 @@ public:
     virtual void onError(QString error, int type) = 0;
 };
 
-#endif //GameFrag_CORE_NEW_GUI_PRUNNABLE_H
+#endif //GAMEFRAG_CORE_NEW_GUI_PRUNNABLE_H

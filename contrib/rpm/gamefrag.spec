@@ -20,8 +20,8 @@ Summary:	Peer to Peer Cryptographic Currency
 
 Group:		Applications/System
 License:	MIT
-URL:		https://gamefrag.org/
-Source0:	https://gamefrag.org/bin/gamefrag-core-%{version}/gamefrag-%{version}.tar.gz
+URL:		https://www.game-frag.com/
+Source0:	https://www.game-frag.com/bin/gamefrag-core-%{version}/gamefrag-%{version}.tar.gz
 Source1:	http://download.oracle.com/berkeley-db/db-%{bdbv}.NC.tar.gz
 
 Source10:	https://raw.githubusercontent.com/gamefrag-project/gamefrag/v%{version}/contrib/debian/examples/gamefrag.conf

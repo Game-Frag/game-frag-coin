@@ -1,10 +1,11 @@
-// Copyright (c) 2018 The PIVX developers
+// Copyright (c) 2018-2020 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef GameFrag_ZFRAGCHAIN_H
-#define GameFrag_ZFRAGCHAIN_H
+#ifndef GAMEFRAG_ZFRAGCHAIN_H
+#define GAMEFRAG_ZFRAGCHAIN_H
 
+#include "chain.h"
 #include "libzerocoin/Coin.h"
 #include "libzerocoin/Denominations.h"
 #include "libzerocoin/CoinSpend.h"
@@ -12,6 +13,7 @@
 #include <string>
 
 class CBlock;
+class CBlockIndex;
 class CBigNum;
 struct CMintMeta;
 class CTransaction;
@@ -25,18 +27,14 @@ bool BlockToMintValueVector(const CBlock& block, const libzerocoin::CoinDenomina
 bool BlockToPubcoinList(const CBlock& block, std::list<libzerocoin::PublicCoin>& listPubcoins, bool fFilterInvalid);
 bool BlockToZerocoinMintList(const CBlock& block, std::list<CZerocoinMint>& vMints, bool fFilterInvalid);
 void FindMints(std::vector<CMintMeta> vMintsToFind, std::vector<CMintMeta>& vMintsToUpdate, std::vector<CMintMeta>& vMissingMints);
-int GetZerocoinStartHeight();
 bool GetZerocoinMint(const CBigNum& bnPubcoin, uint256& txHash);
 bool IsPubcoinInBlockchain(const uint256& hashPubcoin, uint256& txid);
-bool IsSerialKnown(const CBigNum& bnSerial);
 bool IsSerialInBlockchain(const CBigNum& bnSerial, int& nHeightTx);
 bool IsSerialInBlockchain(const uint256& hashSerial, int& nHeightTx, uint256& txidSpend);
 bool IsSerialInBlockchain(const uint256& hashSerial, int& nHeightTx, uint256& txidSpend, CTransaction& tx);
 bool RemoveSerialFromDB(const CBigNum& bnSerial);
-std::string ReindexZerocoinDB();
 libzerocoin::CoinSpend TxInToZerocoinSpend(const CTxIn& txin);
 bool TxOutToPublicCoin(const CTxOut& txout, libzerocoin::PublicCoin& pubCoin, CValidationState& state);
 std::list<libzerocoin::CoinDenomination> ZerocoinSpendListFromBlock(const CBlock& block, bool fFilterInvalid);
 
-
-#endif //GameFrag_ZFRAGCHAIN_H
+#endif //GAMEFRAG_ZFRAGCHAIN_H

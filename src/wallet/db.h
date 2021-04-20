@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2019 The PIVX developers
+// Copyright (c) 2019-2020 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,6 +8,7 @@
 #define BITCOIN_DB_H
 
 #include "clientversion.h"
+#include "fs.h"
 #include "serialize.h"
 #include "streams.h"
 #include "sync.h"
@@ -17,33 +18,24 @@
 #include <string>
 #include <vector>
 
-#include <boost/filesystem/path.hpp>
-
 #include <db_cxx.h>
 
-class CDiskBlockIndex;
-class COutPoint;
-
-struct CBlockLocator;
-
-extern unsigned int nWalletDBUpdated;
-
-void ThreadFlushWalletDB(const std::string& strWalletFile);
-
+static const unsigned int DEFAULT_WALLET_DBLOGSIZE = 100;
+static const bool DEFAULT_WALLET_PRIVDB = true;
 
 class CDBEnv
 {
 private:
     bool fDbEnvInit;
     bool fMockDb;
-    // Don't change into boost::filesystem::path, as that can result in
+    // Don't change into fs::path, as that can result in
     // shutdown problems/crashes caused by a static initialized internal pointer.
     std::string strPath;
 
     void EnvShutdown();
 
 public:
-    mutable CCriticalSection cs_db;
+    mutable RecursiveMutex cs_db;
     DbEnv *dbenv;
     std::map<std::string, int> mapFileUseCount;
     std::map<std::string, Db*> mapDb;
@@ -64,7 +56,7 @@ public:
     enum VerifyResult { VERIFY_OK,
         RECOVER_OK,
         RECOVER_FAIL };
-    VerifyResult Verify(std::string strFile, bool (*recoverFunc)(CDBEnv& dbenv, std::string strFile));
+    VerifyResult Verify(const std::string& strFile, bool (*recoverFunc)(const std::string& strFile));
     /**
      * Salvage data from a file that Verify says is bad.
      * fAggressive sets the DB_AGGRESSIVE flag (see berkeley DB->verify() method documentation).
@@ -73,9 +65,9 @@ public:
      * for huge databases.
      */
     typedef std::pair<std::vector<unsigned char>, std::vector<unsigned char> > KeyValPair;
-    bool Salvage(std::string strFile, bool fAggressive, std::vector<KeyValPair>& vResult);
+    bool Salvage(const std::string& strFile, bool fAggressive, std::vector<KeyValPair>& vResult);
 
-    bool Open(const boost::filesystem::path& path);
+    bool Open(const fs::path& path);
     void Close();
     void Flush(bool fShutdown);
     void CheckpointLSN(const std::string& strFile);
@@ -112,6 +104,15 @@ protected:
 public:
     void Flush();
     void Close();
+    static bool Recover(const std::string& filename, void *callbackDataIn, bool (*recoverKVcallback)(void* callbackData, CDataStream ssKey, CDataStream ssValue));
+
+    /* flush the wallet passively (TRY_LOCK)
+       ideal to be called periodically */
+    static bool PeriodicFlush(const std::string& strFile);
+    /* verifies the database environment */
+    static bool VerifyEnvironment(const std::string& walletFile, const fs::path& dataDir, std::string& errorStr);
+    /* verifies the database file */
+    static bool VerifyDatabaseFile(const std::string& walletFile, const fs::path& dataDir, std::string& warningStr, std::string& errorStr, bool (*recoverFunc)(const std::string& strFile));
 
 private:
     CDB(const CDB&);
@@ -128,28 +129,29 @@ protected:
         CDataStream ssKey(SER_DISK, CLIENT_VERSION);
         ssKey.reserve(1000);
         ssKey << key;
-        Dbt datKey(&ssKey[0], ssKey.size());
+        Dbt datKey(ssKey.data(), ssKey.size());
 
         // Read
         Dbt datValue;
         datValue.set_flags(DB_DBT_MALLOC);
         int ret = pdb->get(activeTxn, &datKey, &datValue, 0);
-        memset(datKey.get_data(), 0, datKey.get_size());
-        if (datValue.get_data() == NULL)
-            return false;
+        memory_cleanse(datKey.get_data(), datKey.get_size());
+        bool success = false;
+        if (datValue.get_data() != NULL) {
+            // Unserialize value
+            try {
+                CDataStream ssValue((char*)datValue.get_data(), (char*)datValue.get_data() + datValue.get_size(), SER_DISK, CLIENT_VERSION);
+                ssValue >> value;
+                success = true;
+            } catch (const std::exception&) {
+                // In this case success remains 'false'
+            }
 
-        // Unserialize value
-        try {
-            CDataStream ssValue((char*)datValue.get_data(), (char*)datValue.get_data() + datValue.get_size(), SER_DISK, CLIENT_VERSION);
-            ssValue >> value;
-        } catch (const std::exception&) {
-            return false;
+            // Clear and free memory
+            memory_cleanse(datValue.get_data(), datValue.get_size());
+            free(datValue.get_data());
         }
-
-        // Clear and free memory
-        memset(datValue.get_data(), 0, datValue.get_size());
-        free(datValue.get_data());
-        return (ret == 0);
+        return ret == 0 && success;
     }
 
     template <typename K, typename T>
@@ -164,20 +166,20 @@ protected:
         CDataStream ssKey(SER_DISK, CLIENT_VERSION);
         ssKey.reserve(1000);
         ssKey << key;
-        Dbt datKey(&ssKey[0], ssKey.size());
+        Dbt datKey(ssKey.data(), ssKey.size());
 
         // Value
         CDataStream ssValue(SER_DISK, CLIENT_VERSION);
         ssValue.reserve(10000);
         ssValue << value;
-        Dbt datValue(&ssValue[0], ssValue.size());
+        Dbt datValue(ssValue.data(), ssValue.size());
 
         // Write
         int ret = pdb->put(activeTxn, &datKey, &datValue, (fOverwrite ? 0 : DB_NOOVERWRITE));
 
         // Clear memory in case it was a private key
-        memset(datKey.get_data(), 0, datKey.get_size());
-        memset(datValue.get_data(), 0, datValue.get_size());
+        memory_cleanse(datKey.get_data(), datKey.get_size());
+        memory_cleanse(datValue.get_data(), datValue.get_size());
         return (ret == 0);
     }
 
@@ -193,13 +195,13 @@ protected:
         CDataStream ssKey(SER_DISK, CLIENT_VERSION);
         ssKey.reserve(1000);
         ssKey << key;
-        Dbt datKey(&ssKey[0], ssKey.size());
+        Dbt datKey(ssKey.data(), ssKey.size());
 
         // Erase
         int ret = pdb->del(activeTxn, &datKey, 0);
 
         // Clear memory
-        memset(datKey.get_data(), 0, datKey.get_size());
+        memory_cleanse(datKey.get_data(), datKey.get_size());
         return (ret == 0 || ret == DB_NOTFOUND);
     }
 
@@ -213,13 +215,13 @@ protected:
         CDataStream ssKey(SER_DISK, CLIENT_VERSION);
         ssKey.reserve(1000);
         ssKey << key;
-        Dbt datKey(&ssKey[0], ssKey.size());
+        Dbt datKey(ssKey.data(), ssKey.size());
 
         // Exists
         int ret = pdb->exists(activeTxn, &datKey, 0);
 
         // Clear memory
-        memset(datKey.get_data(), 0, datKey.get_size());
+        memory_cleanse(datKey.get_data(), datKey.get_size());
         return (ret == 0);
     }
 
@@ -234,19 +236,17 @@ protected:
         return pcursor;
     }
 
-    int ReadAtCursor(Dbc* pcursor, CDataStream& ssKey, CDataStream& ssValue, unsigned int fFlags = DB_NEXT)
+    int ReadAtCursor(Dbc* pcursor, CDataStream& ssKey, CDataStream& ssValue, bool setRange = false)
     {
         // Read at cursor
         Dbt datKey;
-        if (fFlags == DB_SET || fFlags == DB_SET_RANGE || fFlags == DB_GET_BOTH || fFlags == DB_GET_BOTH_RANGE) {
-            datKey.set_data(&ssKey[0]);
+        unsigned int fFlags = DB_NEXT;
+        if (setRange) {
+            datKey.set_data(ssKey.data());
             datKey.set_size(ssKey.size());
+            fFlags = DB_SET_RANGE;
         }
         Dbt datValue;
-        if (fFlags == DB_GET_BOTH || fFlags == DB_GET_BOTH_RANGE) {
-            datValue.set_data(&ssValue[0]);
-            datValue.set_size(ssValue.size());
-        }
         datKey.set_flags(DB_DBT_MALLOC);
         datValue.set_flags(DB_DBT_MALLOC);
         int ret = pcursor->get(&datKey, &datValue, fFlags);
@@ -264,8 +264,8 @@ protected:
         ssValue.write((char*)datValue.get_data(), datValue.get_size());
 
         // Clear and free memory
-        memset(datKey.get_data(), 0, datKey.get_size());
-        memset(datValue.get_data(), 0, datValue.get_size());
+        memory_cleanse(datKey.get_data(), datKey.get_size());
+        memory_cleanse(datValue.get_data(), datValue.get_size());
         free(datKey.get_data());
         free(datValue.get_data());
         return 0;

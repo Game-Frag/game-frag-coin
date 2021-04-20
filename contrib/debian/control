@@ -28,22 +28,22 @@ Build-Depends: debhelper,
  libzmq3-dev,
  dh-systemd
 Standards-Version: 3.9.2
-Homepage: http://www.gamefrag.me
-Vcs-Git: git://github.com/FRAG-Project/FRAG.git
-Vcs-Browser: http://github.com/FRAG-Project/FRAG
+Homepage: http://www.gamefrag.org
+Vcs-Git: git://github.com/Game-Frag/game-frag-coin.git
+Vcs-Browser: http://github.com/Game-Frag/game-frag-coin
 
 Package: gamefragd
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: peer-to-peer network based digital currency - daemon
- FRAG is a free open source peer-to-peer electronic cash system that
+ GAMEFRAG is a free, open source peer-to-peer electronic cash system that
  is completely decentralized, without the need for a central server or
  trusted parties.  Users hold the crypto keys to their own money and
  transact directly with each other, with the help of a P2P network to
  check for double-spending.
  .
  Full transaction history is stored locally at each client.  This
- requires 10+ GB of space, slowly growing.
+ requires 18.5+ GB of space, slowly growing.
  .
  This package provides the daemon, gamefragd, and the CLI tool
  gamefrag-cli to interact with the daemon.
@@ -52,13 +52,13 @@ Package: gamefrag-qt
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: peer-to-peer network based digital currency - Qt GUI
- FRAG is a free open source peer-to-peer electronic cash system that
+ GAMEFRAG is a free, open source peer-to-peer electronic cash system that
  is completely decentralized, without the need for a central server or
  trusted parties.  Users hold the crypto keys to their own money and
  transact directly with each other, with the help of a P2P network to
  check for double-spending.
  .
  Full transaction history is stored locally at each client.  This
- requires 10+ GB of space, slowly growing.
+ requires 18.5+ GB of space, slowly growing.
  .
- This package provides Gamefrag-Qt, a GUI for FRAG based on Qt.
+ This package provides Gamefrag-Qt, a GUI for GAMEFRAG based on Qt.

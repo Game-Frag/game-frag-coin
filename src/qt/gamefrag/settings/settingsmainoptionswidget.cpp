@@ -16,7 +16,6 @@
 #include "clientmodel.h"
 #include "qt/gamefrag/qtutils.h"
 
-#include "main.h" // for MAX_SCRIPTCHECK_THREADS
 #include "netbase.h"
 #include "txdb.h" // for -dbcache defaults
 
@@ -24,15 +23,13 @@
 #include "wallet/wallet.h" // for CWallet::minTxFee
 #endif
 
-#include <boost/thread.hpp>
-
 #include <QDataWidgetMapper>
 #include <QIntValidator>
 #include <QLocale>
 #include <QTimer>
 
 
-SettingsMainOptionsWidget::SettingsMainOptionsWidget(GameFragGUI* _window, QWidget *parent) :
+SettingsMainOptionsWidget::SettingsMainOptionsWidget(GAMEFRAGGUI* _window, QWidget *parent) :
     PWidget(_window, parent),
     ui(new Ui::SettingsMainOptionsWidget)
 {
@@ -45,23 +42,16 @@ SettingsMainOptionsWidget::SettingsMainOptionsWidget(GameFragGUI* _window, QWidg
     ui->left->setContentsMargins(10,10,10,10);
     ui->labelDivider->setProperty("cssClass", "container-divider");
 
-    // Title
-    ui->labelTitle->setText(tr("Main"));
-    ui->labelSubtitle1->setText("Customize the main application options");
-
+    // Title - Subtitle
     setCssTitleScreen(ui->labelTitle);
     setCssSubtitleScreen(ui->labelSubtitle1);
     setCssTitleScreen(ui->labelTitleDown);
     setCssSubtitleScreen(ui->labelSubtitleDown);
 
-    ui->labelTitleSizeDb->setText(tr("Size of database cache"));
-    ui->labelTitleSizeDb->setProperty("cssClass", "text-main-settings");
-
-    ui->labelTitleThreads->setText(tr("Number of script verification threads"));
-    ui->labelTitleThreads->setProperty("cssClass", "text-main-settings");
+    setCssProperty({ui->labelTitleSizeDb, ui->labelTitleThreads}, "text-main-settings");
 
     // Switch
-    ui->pushSwitchStart->setText(tr("Start GameFrag on system login"));
+    ui->pushSwitchStart->setText(tr("Start GAMEFRAG on system login"));
     ui->pushSwitchStart->setProperty("cssClass", "btn-switch");
 
     // Combobox
@@ -72,13 +62,7 @@ SettingsMainOptionsWidget::SettingsMainOptionsWidget(GameFragGUI* _window, QWidg
     ui->threadsScriptVerif->setAttribute(Qt::WA_MacShowFocusRect, 0);
     setShadow(ui->threadsScriptVerif);
 
-    // CheckBox
-    ui->checkBoxMinTaskbar->setText(tr("Minimize to the tray instead of the taskbar"));
-    ui->checkBoxMinClose->setText(tr("Minimize on close"));
-
     // Buttons
-    ui->pushButtonSave->setText(tr("SAVE"));
-    ui->pushButtonReset->setText(tr("Reset to default"));
     setCssBtnPrimary(ui->pushButtonSave);
     setCssBtnSecondary(ui->pushButtonReset);
     setCssBtnSecondary(ui->pushButtonClean);
@@ -86,16 +70,17 @@ SettingsMainOptionsWidget::SettingsMainOptionsWidget(GameFragGUI* _window, QWidg
     /* Main elements init */
     ui->databaseCache->setMinimum(nMinDbCache);
     ui->databaseCache->setMaximum(nMaxDbCache);
-    ui->threadsScriptVerif->setMinimum(-(int)boost::thread::hardware_concurrency());
+    ui->threadsScriptVerif->setMinimum(-GetNumCores());
     ui->threadsScriptVerif->setMaximum(MAX_SCRIPTCHECK_THREADS);
 
-    connect(ui->pushButtonSave, SIGNAL(clicked()), parent, SLOT(onSaveOptionsClicked()));
-    connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(onResetClicked()));
-    connect(ui->pushButtonClean, SIGNAL(clicked()), parent, SLOT(onDiscardChanges()));
+    connect(ui->pushButtonSave, &QPushButton::clicked, [this] { Q_EMIT saveSettings(); });
+    connect(ui->pushButtonReset, &QPushButton::clicked, this, &SettingsMainOptionsWidget::onResetClicked);
+    connect(ui->pushButtonClean, &QPushButton::clicked, [this] { Q_EMIT discardSettings(); });
 }
 
-void SettingsMainOptionsWidget::onResetClicked(){
-    if(clientModel) {
+void SettingsMainOptionsWidget::onResetClicked()
+{
+    if (clientModel) {
         if (!ask(tr("Reset Options"), tr("You are just about to reset the app\'s options to the default values.\n\nAre you sure?\n")))
             return;
         OptionsModel *optionsModel = clientModel->getOptionsModel();
@@ -109,7 +94,8 @@ void SettingsMainOptionsWidget::onResetClicked(){
     }
 }
 
-void SettingsMainOptionsWidget::setMapper(QDataWidgetMapper *mapper){
+void SettingsMainOptionsWidget::setMapper(QDataWidgetMapper *mapper)
+{
     mapper->addMapping(ui->pushSwitchStart, OptionsModel::StartAtStartup);
     mapper->addMapping(ui->threadsScriptVerif, OptionsModel::ThreadsScriptVerif);
     mapper->addMapping(ui->databaseCache, OptionsModel::DatabaseCache);
@@ -120,6 +106,7 @@ void SettingsMainOptionsWidget::setMapper(QDataWidgetMapper *mapper){
 #endif
 }
 
-SettingsMainOptionsWidget::~SettingsMainOptionsWidget(){
+SettingsMainOptionsWidget::~SettingsMainOptionsWidget()
+{
     delete ui;
 }

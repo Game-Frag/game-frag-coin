@@ -17,12 +17,17 @@ class SettingsWalletOptionsWidget : public PWidget
     Q_OBJECT
 
 public:
-    explicit SettingsWalletOptionsWidget(GameFragGUI* _window, QWidget *parent = nullptr);
+    explicit SettingsWalletOptionsWidget(GAMEFRAGGUI* _window, QWidget *parent = nullptr);
     ~SettingsWalletOptionsWidget();
 
     void setMapper(QDataWidgetMapper *mapper);
+    void setSpinBoxStakeSplitThreshold(double val);
 
-public slots:
+Q_SIGNALS:
+    void saveSettings();
+    void discardSettings();
+
+public Q_SLOTS:
     void onResetClicked();
 
 private:

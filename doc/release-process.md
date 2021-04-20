@@ -5,7 +5,7 @@ Release Process
 
 ### Before every release candidate
 
-* Update translations (ping Fuzzbawls on Discord) see [translation_process.md](https://github.com/GameFrag-Project/GameFrag/blob/master/doc/translation_process.md#synchronising-translations).
+* Update translations (ping Fuzzbawls on Discord) see [translation_process.md](https://github.com/Game-Frag/game-frag-coin/blob/master/doc/translation_process.md#synchronising-translations).
 * Update manpages, see [gen-manpages.sh](https://github.com/gamefrag-project/gamefrag/blob/master/contrib/devtools/README.md#gen-manpagessh).
 * Update release candidate version in `configure.ac` (`CLIENT_VERSION_RC`)
 
@@ -54,7 +54,7 @@ Check out the source code in the following directory hierarchy.
     git clone https://github.com/devrandom/gitian-builder.git
     git clone https://github.com/gamefrag-project/gamefrag.git
 
-### GameFrag maintainers/release engineers, suggestion for writing release notes
+### GAMEFRAG maintainers/release engineers, suggestion for writing release notes
 
 Write release notes. git shortlog helps a lot, for example:
 
@@ -124,7 +124,7 @@ NOTE: Offline builds must use the --url flag to ensure Gitian fetches only from 
 
 The gbuild invocations below <b>DO NOT DO THIS</b> by default.
 
-### Build and sign GameFrag Core for Linux, Windows, and macOS:
+### Build and sign GAMEFRAG Core for Linux, Windows, and macOS:
 
     pushd ./gitian-builder
     ./bin/gbuild --num-make 2 --memory 3000 --commit gamefrag=v${VERSION} ../gamefrag/contrib/gitian-descriptors/gitian-linux.yml
@@ -229,7 +229,6 @@ Create (and optionally verify) the signed Windows binaries:
     ./bin/gsign --signer "$SIGNER" --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../gamefrag/contrib/gitian-descriptors/gitian-win-signer.yml
     ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-signed ../gamefrag/contrib/gitian-descriptors/gitian-win-signer.yml
     mv build/out/gamefrag-*win64-setup.exe ../gamefrag-${VERSION}-win64-setup.exe
-    mv build/out/gamefrag-*win32-setup.exe ../gamefrag-${VERSION}-win32-setup.exe
     popd
 
 Commit your signature for the signed macOS/Windows binaries:
@@ -259,8 +258,6 @@ gamefrag-${VERSION}-x86_64-linux-gnu.tar.gz
 gamefrag-${VERSION}-osx64.tar.gz
 gamefrag-${VERSION}-osx.dmg
 gamefrag-${VERSION}.tar.gz
-gamefrag-${VERSION}-win32-setup.exe
-gamefrag-${VERSION}-win32.zip
 gamefrag-${VERSION}-win64-setup.exe
 gamefrag-${VERSION}-win64.zip
 ```
@@ -288,6 +285,6 @@ Note: check that SHA256SUMS itself doesn't end up in SHA256SUMS, which is a spur
 
   - Archive release notes for the new version to `doc/release-notes/` (branch `master` and branch of the release)
 
-  - Create a [new GitHub release](https://github.com/GameFrag-Project/GameFrag/releases/new) with a link to the archived release notes.
+  - Create a [new GitHub release](https://github.com/Game-Frag/game-frag-coin/releases/new) with a link to the archived release notes.
 
   - Celebrate

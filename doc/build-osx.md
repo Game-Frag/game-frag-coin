@@ -16,7 +16,7 @@ Then install [Homebrew](https://brew.sh).
 Dependencies
 ----------------------
 
-    brew install autoconf automake berkeley-db4 libtool boost miniupnpc openssl pkg-config protobuf python3 qt5 zmq libevent qrencode gmp
+    brew install autoconf automake berkeley-db4 libtool boost miniupnpc openssl pkg-config protobuf python3 qt5 zmq libevent qrencode gmp libsodium rust
 
 See [dependencies.md](dependencies.md) for a complete overview.
 
@@ -38,10 +38,10 @@ from the root of the repository.
 
 **Note**: You only need Berkeley DB if the wallet is enabled (see [*Disable-wallet mode*](/doc/build-osx.md#disable-wallet-mode)).
 
-Build GameFrag Core
+Build GAMEFRAG Core
 ------------------------
 
-1. Clone the GameFrag Core source code:
+1. Clone the GAMEFRAG Core source code:
 
         git clone https://github.com/gamefrag-project/gamefrag
         cd gamefrag
@@ -51,7 +51,7 @@ Build GameFrag Core
         export LDFLAGS+=-L/usr/local/opt/openssl/lib
         export CPPFLAGS+=-I/usr/local/opt/openssl/include
 
-3.  Build GameFrag Core:
+3.  Build GAMEFRAG Core:
 
         ./autogen.sh
         ./configure
@@ -69,7 +69,7 @@ Disable-wallet mode
 --------------------
 **Note:** This functionality is not yet completely implemented, and compilation using the below option will currently fail.
 
-When the intention is to run only a P2P node without a wallet, GameFrag Core may be compiled in
+When the intention is to run only a P2P node without a wallet, GAMEFRAG Core may be compiled in
 disable-wallet mode with:
 
     ./configure --disable-wallet
@@ -79,21 +79,21 @@ In this case there is no dependency on Berkeley DB 4.8.
 Running
 -------
 
-GameFrag Core is now available at `./src/gamefragd`
+GAMEFRAG Core is now available at `./src/gamefragd`
 
 Before running, you may create an empty configuration file:
 
-    mkdir -p "/Users/${USER}/Library/Application Support/GameFrag"
+    mkdir -p "/Users/${USER}/Library/Application Support/GAMEFRAG"
 
-    touch "/Users/${USER}/Library/Application Support/GameFrag/gamefrag.conf"
+    touch "/Users/${USER}/Library/Application Support/GAMEFRAG/gamefrag.conf"
 
-    chmod 600 "/Users/${USER}/Library/Application Support/GameFrag/gamefrag.conf"
+    chmod 600 "/Users/${USER}/Library/Application Support/GAMEFRAG/gamefrag.conf"
 
 The first time you run gamefragd, it will start downloading the blockchain. This process could take many hours, or even days on slower than average systems.
 
 You can monitor the download process by looking at the debug.log file:
 
-    tail -f $HOME/Library/Application\ Support/GameFrag/debug.log
+    tail -f $HOME/Library/Application\ Support/GAMEFRAG/debug.log
 
 Other commands:
 -------

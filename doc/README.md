@@ -1,13 +1,13 @@
-GameFrag Core
+GAMEFRAG Core
 =============
 
 Setup
 ---------------------
-[GameFrag Core](http://gamefrag.org/wallet) is the original GameFrag client and it builds the backbone of the network. However, it downloads and stores the entire history of GameFrag transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
+[GAMEFRAG Core](http://gamefrag.org/wallet) is the original GAMEFRAG client and it builds the backbone of the network. However, it downloads and stores the entire history of GAMEFRAG transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
 
 Running
 ---------------------
-The following are some helpful notes on how to run GameFrag Core on your native platform.
+The following are some helpful notes on how to run GAMEFRAG Core on your native platform.
 
 ### Unix
 
@@ -16,24 +16,26 @@ Unpack the files into a directory and run:
 - `bin/gamefrag-qt` (GUI) or
 - `bin/gamefragd` (headless)
 
+If this is the first time running GAMEFRAG Core (since v5.0.0), you'll need to install the sapling params by running the included `install-params.sh` script, which copies the two params files to `$HOME/.gamefrag-params`
+
 ### Windows
 
 Unpack the files into a directory, and then run gamefrag-qt.exe.
 
 ### macOS
 
-Drag GameFrag-Qt to your applications folder, and then run GameFrag-Qt.
+Drag GAMEFRAG-Qt to your applications folder, and then run GAMEFRAG-Qt.
 
 ### Need Help?
 
-* See the documentation at the [GameFrag Wiki](https://github.com/GameFrag-Project/GameFrag/wiki)
+* See the documentation at the [GAMEFRAG Wiki](https://github.com/Game-Frag/game-frag-coin/wiki)
 for help and more information.
-* Ask for help on [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or on the [GameFrag Forum](http://forum.gamefrag.org/).
-* Join our Discord server [Discord Server](https://discord.gamefrag.org)
+* Ask for help on [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or on the [GAMEFRAG Forum](http://forum.gamefrag.org/).
+* Join our Discord server [Discord Server](https://discord.game-frag.com)
 
 Building
 ---------------------
-The following are developer notes on how to build GameFrag Core on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
+The following are developer notes on how to build GAMEFRAG Core on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
 
 - [Dependencies](dependencies.md)
 - [macOS Build Notes](build-osx.md)
@@ -43,21 +45,21 @@ The following are developer notes on how to build GameFrag Core on your native p
 
 Development
 ---------------------
-The GameFrag repo's [root README](/README.md) contains relevant information on the development process and automated testing.
+The GAMEFRAG repo's [root README](/README.md) contains relevant information on the development process and automated testing.
 
 - [Developer Notes](developer-notes.md)
 - [Multiwallet Qt Development](multiwallet-qt.md)
 - [Release Notes](release-notes.md)
 - [Release Process](release-process.md)
-- [Source Code Documentation (External Link)](https://www.fuzzbawls.pw/gamefrag/doxygen/)
+- [Source Code Documentation (External Link)](https://www.game-frag.com/gamefrag/doxygen/)
 - [Translation Process](translation_process.md)
 - [Unit Tests](unit-tests.md)
 - [Unauthenticated REST Interface](REST-interface.md)
 - [Dnsseed Policy](dnsseed-policy.md)
 
 ### Resources
-* Discuss on the [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or the [GameFrag](http://forum.gamefrag.org/) forum.
-* Join the [GameFrag Discord](https://discord.gamefrag.org).
+* Discuss on the [BitcoinTalk](https://bitcointalk.org/index.php?topic=1262920.0) or the [GAMEFRAG](http://forum.gamefrag.org/) forum.
+* Join the [GAMEFRAG Discord](https://discord.game-frag.com).
 
 ### Miscellaneous
 - [Assets Attribution](assets-attribution.md)

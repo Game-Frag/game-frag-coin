@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef GameFrag_DETERMINISTICMINT_H
-#define GameFrag_DETERMINISTICMINT_H
+#ifndef GAMEFRAG_DETERMINISTICMINT_H
+#define GAMEFRAG_DETERMINISTICMINT_H
 
 #include <libzerocoin/Denominations.h>
 #include <uint256.h>
@@ -49,9 +49,9 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    inline void SerializationOp(Stream& s, Operation ser_action)
     {
-        READWRITE(this->nVersion);
+        READWRITE(nVersion);
         READWRITE(nCount);
         READWRITE(hashSeed);
         READWRITE(hashSerial);
@@ -64,4 +64,4 @@ public:
     };
 };
 
-#endif //GameFrag_DETERMINISTICMINT_H
+#endif //GAMEFRAG_DETERMINISTICMINT_H

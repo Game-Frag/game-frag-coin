@@ -16,8 +16,8 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "GameFrag"
-            VALUE "FileDescription",    "gamefrag-tx (CLI GameFrag transaction editor utility)"
+            VALUE "CompanyName",        "GAMEFRAG"
+            VALUE "FileDescription",    "gamefrag-tx (CLI GAMEFRAG transaction editor utility)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
             VALUE "InternalName",       "gamefrag-tx"
             VALUE "LegalCopyright",     COPYRIGHT_STR

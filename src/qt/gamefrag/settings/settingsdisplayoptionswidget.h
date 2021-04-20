@@ -18,15 +18,19 @@ class SettingsDisplayOptionsWidget : public PWidget
     Q_OBJECT
 
 public:
-    explicit SettingsDisplayOptionsWidget(GameFragGUI* _window = nullptr, QWidget *parent = nullptr);
+    explicit SettingsDisplayOptionsWidget(GAMEFRAGGUI* _window = nullptr, QWidget *parent = nullptr);
     ~SettingsDisplayOptionsWidget();
 
     void setMapper(QDataWidgetMapper *mapper);
     void initLanguages();
     void loadClientModel() override;
 
-public slots:
+public Q_SLOTS:
     void onResetClicked();
+
+Q_SIGNALS:
+    void saveSettings();
+    void discardSettings();
 
 private:
     Ui::SettingsDisplayOptionsWidget *ui;

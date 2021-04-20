@@ -1,9 +1,9 @@
 [Desktop Entry]
 Version=1.0
-Name=FRAG Core
-Comment=FRAG P2P Cryptocurrency
-Comment[fr]=FRAG, monnaie virtuelle cryptographique pair à pair
-Comment[tr]=FRAG, eşten eşe kriptografik sanal para birimi
+Name=GAMEFRAG Core
+Comment=GAMEFRAG P2P Cryptocurrency
+Comment[fr]=GAMEFRAG, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=GAMEFRAG, eşten eşe kriptografik sanal para birimi
 Exec=gamefrag-qt %u
 Terminal=false
 Type=Application

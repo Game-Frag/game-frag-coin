@@ -48,8 +48,6 @@ public:
         WatchonlyRole,
         /** Watch-only icon */
         WatchonlyDecorationRole,
-        /** Long description (HTML format) */
-        LongDescriptionRole,
         /** Address of transaction */
         AddressRole,
         /** Label of address related to transaction */
@@ -66,6 +64,8 @@ public:
         FormattedAmountRole,
         /** Transaction status (TransactionRecord::Status) */
         StatusRole,
+        /** Credit amount of transaction */
+        ShieldedCreditAmountRole,
         /** Transaction size in bytes */
         SizeRole
     };
@@ -79,7 +79,7 @@ public:
     QModelIndex index(int row, int column, const QModelIndex& parent = QModelIndex()) const;
     bool processingQueuedTransactions() { return fProcessingQueuedTransactions; }
 
-signals:
+Q_SIGNALS:
     void txArrived(const QString& hash, const bool& isCoinStake, const bool& isCSAnyType);
 
 private:
@@ -104,7 +104,7 @@ private:
     QVariant txWatchonlyDecoration(const TransactionRecord* wtx) const;
     QVariant txAddressDecoration(const TransactionRecord* wtx) const;
 
-public slots:
+public Q_SLOTS:
     /* New transaction, or transaction changed status */
     void updateTransaction(const QString& hash, int status, bool showTransaction);
     void updateConfirmations();

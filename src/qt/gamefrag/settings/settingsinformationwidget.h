@@ -18,16 +18,23 @@ class SettingsInformationWidget : public PWidget
     Q_OBJECT
 
 public:
-    explicit SettingsInformationWidget(GameFragGUI* _window, QWidget *parent = nullptr);
-    ~SettingsInformationWidget();
+    explicit SettingsInformationWidget(GAMEFRAGGUI* _window, QWidget *parent = nullptr);
+    ~SettingsInformationWidget() override;
 
     void loadClientModel() override;
 
-private slots:
+    void run(int type) override;
+    void onError(QString error, int type) override;
+
+private Q_SLOTS:
     void setNumConnections(int count);
-    void setMasternodeCount(const QString& strMasternodes);
     void setNumBlocks(int count);
+    void showEvent(QShowEvent* event) override;
+    void hideEvent(QHideEvent* event) override;
+
+public Q_SLOTS:
     void openNetworkMonitor();
+    void setMasternodeCount(const QString& strMasternodes);
 
 private:
     Ui::SettingsInformationWidget *ui;

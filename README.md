@@ -1,46 +1,55 @@
-GameFrag Core integration/staging repository
+GAMEFRAG Core integration/staging repository
 =====================================
 
-GameFrag is “Community Supported Agriculture Group!” Our cryptocurrency is geared towards the supporters of “Agriculture, Food, and Blockchain Industrys“. As growing fanatics, we are devoted to the continual expansion of the agriculture industry!
+[![master Actions Status](https://github.com/Game-Frag/game-frag-coin/workflows/CI%20Actions%20for%20GAMEFRAG/badge.svg)](https://github.com/Game-Frag/game-frag-coin/actions)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/GAMEFRAG-Project/gamefrag?color=%235c4b7d&cacheSeconds=3600)](https://github.com/Game-Frag/game-frag-coin/releases)
+[![GitHub Release Date](https://img.shields.io/github/release-date/GAMEFRAG-Project/gamefrag?color=%235c4b7d&cacheSeconds=3600)](https://github.com/Game-Frag/game-frag-coin/releases)
 
-With the emergence of blockchain technology, GameFrag has the opportunity to bridge the gap between cryptocurrency and agriculture industries and consumers. With this advancement, GameFrag’s mission is to deliver the ultimate experience to all “Agriculture Enthusiasts”.
+## What is GAMEFRAG?
 
-More information can be found at the official GameFrag website, https://www.gamefrag.me 
+GAMEFRAG is an open source community-driven cryptocurrency, focused on five main aspects:
 
-Visit our ANN thread at TO BE ANNOUNCED
+(1) User Data Protection: Through the use of SHIELD, a zk-SNARKs based privacy protocol.
 
-DOWNLOAD THE OFFICIAL GameFrag WALLET: https://github.com/pandagrows/gamefrag-frag-coin/releases
+(2) Low environmental footprint and network participation equality: Through the use of a highly developed Proof of Stake protocol.
 
-### Coin Specs
-<table>
-<tr><td>Algo</td><td>Quark</td></tr>
-<tr><td>Block Time</td><td>60 Seconds</td></tr>
-<tr><td>Difficulty Retargeting</td><td>Every Block</td></tr>
-<tr><td>Maximum Coin Supply</td><td>69,000,000,000 FRAG</td></tr>
-<tr><td>Premine</td><td>25,000,000 FRAG</td></tr>
-</table>
+(3) Decentralized Governance System: A DAO built on top of the tier two Masternodes network, enabling a monthly community treasury, proposals submission and decentralized voting.
 
-*Premine outlined in official white paper - https://media.gamefrag.me/docs/gamefrag-whitepaper-placeholder-2020.pdf
+(4) Fast Transactions: Through the use of fast block times and the tier two network, GAMEFRAG is committed to continue researching new and better instant transactions mechanisms.
 
-### Reward Distribution
+(5) Ease of Use: GAMEFRAG is determined to offer the best possible graphical interface for a core node/wallet. A full featured graphical product for new and advanced users.
 
-<table>
-<th colspan=4>Genesis Block</th>
-<tr><th>Block Height</th><th>Reward Amount</th><th>Notes</th></tr>
-<tr><td>1</td><td>25,000,000 FRAG</td><td>Initial pre-mine, non-staking (Please see above)</td></tr>
-</table>
+A lot more information and specs at [GAMEFRAG.org](https://www.gamefrag.org/). Join the community at [GAMEFRAG Discord](https://discordapp.com/invite/jzqVsJd).
 
+## License
+GAMEFRAG Core is released under the terms of the MIT license. See [COPYING](https://github.com/Game-Frag/game-frag-coin/blob/master/COPYING) for more information or see https://opensource.org/licenses/MIT.
 
-### PoS Rewards Breakdown
+## Development Process
 
-<table>
-<th>Phase</th><th>Block Height</th><th>Block Reward</th><th>Masternode</th><th>Staking</th><th>Budget</th>
-<tr><td>1</td><td>2,001-264,999</td><td>750 FRAG</td><td>39% (292.5 FRAG)</td><td>60% (450 FRAG)</td><td>1% (7.5 FRAG)</td></tr>
-<tr><td>2</td><td>265,000-527,998</td><td>1,000 FRAG</td><td>49% (490 FRAG)</td><td>50% (500 FRAG)</td><td>1% (10 FRAG)</td></tr>
-<tr><td>3</td><td>527,999-790,997</td><td>800 FRAG</td><td>54% (432 FRAG)</td><td>45% (360 FRAG)</td><td>1% (8 FRAG)</td></tr>
-<tr><td>4</td><td>790,998-1,053,996</td><td>600 FRAG</td><td>59% (354 FRAG)</td><td>40% (240 FRAG)</td><td>1% (6 FRAG)</td></tr>
-<tr><td>5</td><td>1,053,997-1,842,500</td><td>500 FRAG</td><td>64% (320 FRAG)</td><td>35% (175 FRAG)</td><td>1% (5 FRAG)</td></tr>
-<tr><td>6</td><td>1,842,501-2,631,004</td><td>250 FRAG</td><td>69% (172.5 FRAG)</td><td>30% (75 FRAG)</td><td>1% (2.5 FRAG)</td></tr>
-<tr><td>7</td><td>2,631,005-4,208,011</td><td>200 FRAG</td><td>79% (158 FRAG)</td><td>20% (40 FRAG)</td><td>1% (2 FRAG)</td></tr>
-<tr><td>8</td><td>4,208,012-∞</td><td>- FRAG</td><td>-% (- FRAG)</td><td>-% (- FRAG)</td><td>-% (- FRAG)</td></tr>
-</table>
+The master branch is regularly built (see doc/build-*.md for instructions) and tested, but it is not guaranteed to be completely stable. [Tags](https://github.com/Game-Frag/game-frag-coin/tags) are created regularly from release branches to indicate new official, stable release versions of GAMEFRAG Core.
+
+The contribution workflow is described in [CONTRIBUTING.md](https://github.com/Game-Frag/game-frag-coin/blob/master/CONTRIBUTING.md) and useful hints for developers can be found in [doc/developer-notes.md](https://github.com/Game-Frag/game-frag-coin/blob/master/doc/developer-notes.md).
+
+## Testing
+
+Testing and code review is the bottleneck for development; we get more pull requests than we can review and test on short notice. Please be patient and help out by testing other people's pull requests, and remember this is a security-critical project where any mistake might cost people a lot of money.
+
+## Automated Testing
+
+Developers are strongly encouraged to write [unit tests](https://github.com/Game-Frag/game-frag-coin/blob/master/src/test/README.md) for new code, and to submit new unit tests for old code. Unit tests can be compiled and run (assuming they weren't disabled in configure) with: make check. Further details on running and extending unit tests can be found in [/src/test/README.md](https://github.com/Game-Frag/game-frag-coin/blob/master/src/test/README.md).
+
+There are also regression and integration tests, written in Python. These tests can be run (if the test dependencies are installed) with: test/functional/test_runner.py`
+
+The CI (Continuous Integration) systems make sure that every pull request is built for Windows, Linux, and macOS, and that unit/sanity tests are run automatically.
+
+## Manual Quality Assurance (QA) Testing
+
+Changes should be tested by somebody other than the developer who wrote the code. This is especially important for large or high-risk changes. It is useful to add a test plan to the pull request description if testing the changes is not straightforward.
+
+## Translations
+
+Changes to translations as well as new translations can be submitted to GAMEFRAG Core's Transifex page.
+
+Translations are periodically pulled from Transifex and merged into the git repository. See the [translation process](https://github.com/Game-Frag/game-frag-coin/blob/master/doc/translation_process.md) for details on how this works.
+
+Important: We do not accept translation changes as GitHub pull requests because the next pull from Transifex would automatically overwrite them again.

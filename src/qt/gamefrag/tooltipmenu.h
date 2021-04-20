@@ -9,7 +9,7 @@
 #include <QWidget>
 #include <QModelIndex>
 
-class GameFragGUI;
+class GAMEFRAGGUI;
 class WalletModel;
 
 namespace Ui {
@@ -25,7 +25,7 @@ class TooltipMenu : public PWidget
     Q_OBJECT
 
 public:
-    explicit TooltipMenu(GameFragGUI* _window, QWidget *parent = nullptr);
+    explicit TooltipMenu(GAMEFRAGGUI* _window, QWidget *parent = nullptr);
     ~TooltipMenu() override;
 
     void setIndex(const QModelIndex &index);
@@ -40,13 +40,13 @@ public:
     void setEditBtnVisible(bool visible);
     void setLastBtnVisible(bool visible);
 
-signals:
+Q_SIGNALS:
     void onDeleteClicked();
     void onCopyClicked();
     void onEditClicked();
     void onLastClicked();
 
-private slots:
+private Q_SLOTS:
     void deleteClicked();
     void copyClicked();
     void editClicked();

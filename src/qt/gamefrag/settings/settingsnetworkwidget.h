@@ -18,13 +18,16 @@ class SettingsNetworkWidget : public PWidget
     Q_OBJECT
 
 public:
-    explicit SettingsNetworkWidget(GameFragGUI* _window, QWidget *parent = nullptr);
+    explicit SettingsNetworkWidget(GAMEFRAGGUI* _window, QWidget *parent = nullptr);
     ~SettingsNetworkWidget();
 
     void setMapper(QDataWidgetMapper *mapper);
 
 private:
     Ui::SettingsNetworkWidget *ui;
+
+Q_SIGNALS:
+    void saveSettings() {};
 };
 
 #endif // SETTINGSNETWORKWIDGET_H

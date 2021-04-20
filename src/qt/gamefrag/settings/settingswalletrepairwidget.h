@@ -17,17 +17,17 @@ class SettingsWalletRepairWidget : public PWidget
     Q_OBJECT
 
 public:
-    explicit SettingsWalletRepairWidget(GameFragGUI* _window, QWidget *parent = nullptr);
+    explicit SettingsWalletRepairWidget(GAMEFRAGGUI* _window, QWidget *parent = nullptr);
     ~SettingsWalletRepairWidget();
 
     /** Build parameter list for restart */
     void buildParameterlist(QString arg);
 
-signals:
+Q_SIGNALS:
     /** Get restart command-line parameters and handle restart */
     void handleRestart(QStringList args);
 
-public slots:
+public Q_SLOTS:
     void walletSalvage();
     void walletRescan();
     void walletZaptxes1();

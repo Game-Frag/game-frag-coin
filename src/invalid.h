@@ -2,10 +2,10 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef GameFrag_INVALID_H
-#define GameFrag_INVALID_H
+#ifndef GAMEFRAG_INVALID_H
+#define GAMEFRAG_INVALID_H
 
-#endif //GameFrag_INVALID_H
+#endif //GAMEFRAG_INVALID_H
 
 #include <libzerocoin/bignum.h>
 #include <univalue/include/univalue.h>

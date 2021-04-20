@@ -12,7 +12,8 @@
 #include <QTimer>
 #include <QProgressBar>
 
-class GameFragGUI;
+class BalanceBubble;
+class GAMEFRAGGUI;
 class WalletModel;
 class ClientModel;
 
@@ -25,7 +26,7 @@ class TopBar : public PWidget
     Q_OBJECT
 
 public:
-    explicit TopBar(GameFragGUI* _mainWindow, QWidget *parent = nullptr);
+    explicit TopBar(GAMEFRAGGUI* _mainWindow, QWidget *parent = nullptr);
     ~TopBar();
 
     void showTop();
@@ -34,29 +35,34 @@ public:
     void loadWalletModel() override;
     void loadClientModel() override;
 
+    void openPassPhraseDialog(AskPassphraseDialog::Mode mode, AskPassphraseDialog::Context ctx);
     void encryptWallet();
-public slots:
-    void updateBalances(const CAmount& balance, const CAmount& unconfirmedBalance, const CAmount& immatureBalance,
-                        const CAmount& zerocoinBalance, const CAmount& unconfirmedZerocoinBalance, const CAmount& immatureZerocoinBalance,
-                        const CAmount& watchOnlyBalance, const CAmount& watchUnconfBalance, const CAmount& watchImmatureBalance,
-                        const CAmount& delegatedBalance, const CAmount& coldStakedBalance);
+
+    void run(int type) override;
+    void onError(QString error, int type) override;
+    void unlockWallet();
+
+public Q_SLOTS:
+    void updateBalances(const interfaces::WalletBalances& newBalance);
     void updateDisplayUnit();
 
     void setNumConnections(int count);
     void setNumBlocks(int count);
-    void updateAutoMintStatus();
     void setStakingStatusActive(bool fActive);
     void updateStakingStatus();
+    void updateHDState(const bool& upgraded, const QString& upgradeError);
+    void showUpgradeDialog(const QString& message);
 
-signals:
+Q_SIGNALS:
     void themeChanged(bool isLight);
     void walletSynced(bool isSync);
     void onShowHideColdStakingChanged(bool show);
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
-private slots:
+private Q_SLOTS:
     void onBtnReceiveClicked();
+    void onBtnBalanceInfoClicked();
     void onThemeClicked();
     void onBtnLockClicked();
     void lockDropdownMouseLeave();
@@ -74,6 +80,12 @@ private:
     int nDisplayUnit = -1;
     QTimer* timerStakingIcon = nullptr;
     bool isInitializing = true;
+
+    // info popup
+    BalanceBubble* balanceBubble = nullptr;
+
+    void updateTorIcon();
+    void connectUpgradeBtnAndDialogTimer(const QString& message);
 };
 
 #endif // TOPBAR_H

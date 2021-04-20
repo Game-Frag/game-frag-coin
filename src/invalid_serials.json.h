@@ -4,8 +4,8 @@
 
 
 
-#ifndef GameFrag_INVALID_SERIALS_JSON_H
-#define GameFrag_INVALID_SERIALS_JSON_H
+#ifndef GAMEFRAG_INVALID_SERIALS_JSON_H
+#define GAMEFRAG_INVALID_SERIALS_JSON_H
 
 #include <string>
 
@@ -1189,4 +1189,4 @@ std::string LoadInvalidSerials()
     return str;
 }
 
-#endif //GameFrag_INVALID_SERIALS_JSON_H
+#endif //GAMEFRAG_INVALID_SERIALS_JSON_H

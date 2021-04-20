@@ -7,7 +7,7 @@
 #include "optionsmodel.h"
 #include "qt/gamefrag/qtutils.h"
 
-SettingsNetworkWidget::SettingsNetworkWidget(GameFragGUI* _window, QWidget *parent) :
+SettingsNetworkWidget::SettingsNetworkWidget(GAMEFRAGGUI* _window, QWidget *parent) :
     PWidget(_window, parent),
     ui(new Ui::SettingsNetworkWidget)
 {
@@ -25,7 +25,7 @@ SettingsNetworkWidget::SettingsNetworkWidget(GameFragGUI* _window, QWidget *pare
     setCssBtnPrimary(ui->pushButtonSave);
     setCssBtnSecondary(ui->pushButtonReset);
 
-    connect(ui->pushButtonSave, SIGNAL(clicked()), parent, SLOT(onSaveOptionsClicked()));
+    connect(ui->pushButtonSave, &QPushButton::clicked, [this] { Q_EMIT saveSettings(); });
 }
 
 void SettingsNetworkWidget::setMapper(QDataWidgetMapper *mapper){

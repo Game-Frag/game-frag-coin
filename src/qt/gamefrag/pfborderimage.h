@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef GameFrag_PFBorderImage_H
-#define GameFrag_PFBorderImage_H
+#ifndef GAMEFRAG_PFBorderImage_H
+#define GAMEFRAG_PFBorderImage_H
 
 #include <QPainter>
 #include <QPixmap>
@@ -52,4 +52,4 @@ protected:
 
 };
 
-#endif //GameFrag_PFBorderImage_H
+#endif //GAMEFRAG_PFBorderImage_H

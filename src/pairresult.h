@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef GameFrag_PAIRRESULT_H
-#define GameFrag_PAIRRESULT_H
+#ifndef GAMEFRAG_PAIRRESULT_H
+#define GAMEFRAG_PAIRRESULT_H
 
 
 class PairResult {
@@ -17,4 +17,4 @@ public:
 };
 
 
-#endif //GameFrag_PAIRRESULT_H
+#endif //GAMEFRAG_PAIRRESULT_H

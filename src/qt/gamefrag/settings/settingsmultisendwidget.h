@@ -10,7 +10,7 @@
 #include "qt/gamefrag/pwidget.h"
 #include "qt/gamefrag/furabstractlistitemdelegate.h"
 
-class GameFragGUI;
+class GAMEFRAGGUI;
 
 namespace Ui {
 class SettingsMultisendWidget;
@@ -48,7 +48,7 @@ public:
     void loadWalletModel() override;
     void changeTheme(bool isLightTheme, QString &theme) override;
 
-private slots:
+private Q_SLOTS:
     void onAddRecipientClicked();
     void clearAll();
     void checkBoxChanged();

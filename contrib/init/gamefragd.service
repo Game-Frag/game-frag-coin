@@ -8,7 +8,7 @@
 # /etc/gamefrag/gamefrag.conf
 
 [Unit]
-Description=GameFrag daemon
+Description=GAMEFRAG daemon
 After=network.target
 
 [Service]

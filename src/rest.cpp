@@ -7,17 +7,16 @@
 #include "chain.h"
 #include "primitives/block.h"
 #include "primitives/transaction.h"
-#include "main.h"
 #include "httpserver.h"
 #include "rpc/server.h"
 #include "streams.h"
 #include "sync.h"
 #include "txmempool.h"
 #include "utilstrencodings.h"
+#include "validation.h"
 #include "version.h"
 
 #include <boost/algorithm/string.hpp>
-#include <boost/dynamic_bitset.hpp>
 
 #include <univalue.h>
 
@@ -42,16 +41,19 @@ static const struct {
 };
 
 struct CCoin {
-    uint32_t nTxVer; // Don't call this nVersion, that name has a special meaning inside IMPLEMENT_SERIALIZE
     uint32_t nHeight;
     CTxOut out;
 
     ADD_SERIALIZE_METHODS;
 
+    CCoin() : nHeight(0) {}
+    CCoin(Coin&& in) : nHeight(in.nHeight), out(std::move(in.out)) {}
+
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    inline void SerializationOp(Stream& s, Operation ser_action)
     {
-        READWRITE(nTxVer);
+        uint32_t nTxVerDummy = 0;
+        READWRITE(nTxVerDummy);
         READWRITE(nHeight);
         READWRITE(out);
     }
@@ -264,6 +266,9 @@ static bool rest_block_notxdetails(HTTPRequest* req, const std::string& strURIPa
     return rest_block(req, strURIPart, false);
 }
 
+// A bit of a hack - dependency on a function defined in rpc/blockchain.cpp
+UniValue getblockchaininfo(const JSONRPCRequest& request);
+
 static bool rest_chaininfo(HTTPRequest* req, const std::string& strURIPart)
 {
     if (!CheckWarmup(req))
@@ -273,8 +278,9 @@ static bool rest_chaininfo(HTTPRequest* req, const std::string& strURIPart)
 
     switch (rf) {
     case RF_JSON: {
-        UniValue rpcParams(UniValue::VARR);
-        UniValue chainInfoObject = getblockchaininfo(rpcParams, false);
+        JSONRPCRequest jsonRequest;
+        jsonRequest.params = UniValue(UniValue::VARR);
+        UniValue chainInfoObject = getblockchaininfo(jsonRequest);
         std::string strJSON = chainInfoObject.write() + "\n";
         req->WriteHeader("Content-Type", "application/json");
         req->WriteReply(HTTP_OK, strJSON);
@@ -436,7 +442,7 @@ static bool rest_getutxos(HTTPRequest* req, const std::string& strURIPart)
                 return RESTERR(req, HTTP_INTERNAL_SERVER_ERROR, "Parse error");
 
             txid.SetHex(strTxid);
-            vOutPoints.push_back(COutPoint(txid, (uint32_t)nOutput));
+            vOutPoints.emplace_back(txid, (uint32_t)nOutput);
         }
 
         if (vOutPoints.size() > 0)
@@ -490,7 +496,8 @@ static bool rest_getutxos(HTTPRequest* req, const std::string& strURIPart)
     std::vector<unsigned char> bitmap;
     std::vector<CCoin> outs;
     std::string bitmapStringRepresentation;
-    boost::dynamic_bitset<unsigned char> hits(vOutPoints.size());
+    std::vector<bool> hits;
+    bitmap.resize((vOutPoints.size() + 7) / 8);
     {
         LOCK2(cs_main, mempool.cs);
 
@@ -504,27 +511,18 @@ static bool rest_getutxos(HTTPRequest* req, const std::string& strURIPart)
             view.SetBackend(viewMempool); // switch cache backend to db+mempool in case user likes to query mempool
 
         for (size_t i = 0; i < vOutPoints.size(); i++) {
-            CCoins coins;
-            uint256 hash = vOutPoints[i].hash;
-            if (view.GetCoins(hash, coins)) {
-                mempool.pruneSpent(hash, coins);
-                if (coins.IsAvailable(vOutPoints[i].n)) {
-                    hits[i] = true;
-                    // Safe to index into vout here because IsAvailable checked if it's off the end of the array, or if
-                    // n is valid but points to an already spent output (IsNull).
-                    CCoin coin;
-                    coin.nTxVer = coins.nVersion;
-                    coin.nHeight = coins.nHeight;
-                    coin.out = coins.vout.at(vOutPoints[i].n);
-                    assert(!coin.out.IsNull());
-                    outs.push_back(coin);
-                }
+            bool hit = false;
+            Coin coin;
+            if (view.GetCoin(vOutPoints[i], coin) && !mempool.isSpent(vOutPoints[i])) {
+                hit = true;
+                outs.emplace_back(std::move(coin));
             }
 
-            bitmapStringRepresentation.append(hits[i] ? "1" : "0"); // form a binary string representation (human-readable for json output)
+            hits.push_back(hit);
+            bitmapStringRepresentation.append(hit ? "1" : "0"); // form a binary string representation (human-readable for json output)
+            bitmap[i / 8] |= ((uint8_t)hit) << (i % 8);
         }
     }
-    boost::to_block_range(hits, std::back_inserter(bitmap));
 
     switch (rf) {
     case RF_BINARY: {
@@ -554,24 +552,23 @@ static bool rest_getutxos(HTTPRequest* req, const std::string& strURIPart)
 
         // pack in some essentials
         // use more or less the same output as mentioned in Bip64
-        objGetUTXOResponse.push_back(Pair("chainHeight", chainActive.Height()));
-        objGetUTXOResponse.push_back(Pair("chaintipHash", chainActive.Tip()->GetBlockHash().GetHex()));
-        objGetUTXOResponse.push_back(Pair("bitmap", bitmapStringRepresentation));
+        objGetUTXOResponse.pushKV("chainHeight", chainActive.Height());
+        objGetUTXOResponse.pushKV("chaintipHash", chainActive.Tip()->GetBlockHash().GetHex());
+        objGetUTXOResponse.pushKV("bitmap", bitmapStringRepresentation);
 
         UniValue utxos(UniValue::VARR);
         for (const CCoin& coin : outs) {
             UniValue utxo(UniValue::VOBJ);
-            utxo.push_back(Pair("txvers", (int32_t)coin.nTxVer));
-            utxo.push_back(Pair("height", (int32_t)coin.nHeight));
-            utxo.push_back(Pair("value", ValueFromAmount(coin.out.nValue)));
+            utxo.pushKV("height", (int32_t)coin.nHeight);
+            utxo.pushKV("value", ValueFromAmount(coin.out.nValue));
 
             // include the script in a json output
             UniValue o(UniValue::VOBJ);
             ScriptPubKeyToJSON(coin.out.scriptPubKey, o, true);
-            utxo.push_back(Pair("scriptPubKey", o));
+            utxo.pushKV("scriptPubKey", o);
             utxos.push_back(utxo);
         }
-        objGetUTXOResponse.push_back(Pair("utxos", utxos));
+        objGetUTXOResponse.pushKV("utxos", utxos);
 
         // return json string
         std::string strJSON = objGetUTXOResponse.write() + "\n";

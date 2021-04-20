@@ -8,7 +8,7 @@
 #include <QWidget>
 #include "qt/gamefrag/pwidget.h"
 
-class GameFragGUI;
+class GAMEFRAGGUI;
 
 namespace Ui {
 class NavMenuWidget;
@@ -19,20 +19,19 @@ class NavMenuWidget : public PWidget
     Q_OBJECT
 
 public:
-    explicit NavMenuWidget(GameFragGUI* mainWindow, QWidget *parent = nullptr);
+    explicit NavMenuWidget(GAMEFRAGGUI* mainWindow, QWidget *parent = nullptr);
     ~NavMenuWidget();
 
     void loadWalletModel() override;
     virtual void showEvent(QShowEvent *event) override;
 
-public slots:
+public Q_SLOTS:
     void selectSettings();
     void onShowHideColdStakingChanged(bool show);
 
-private slots:
+private Q_SLOTS:
     void onSendClicked();
     void onDashboardClicked();
-    void onPrivacyClicked();
     void onAddressClicked();
     void onMasterNodesClicked();
     void onColdStakingClicked();

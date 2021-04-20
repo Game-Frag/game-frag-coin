@@ -84,9 +84,9 @@ OpenRC).
 ### macOS
 
 Binary:              `/usr/local/bin/gamefragd`
-Configuration file:  `~/Library/Application Support/GameFrag/gamefrag.conf`
-Data directory:      `~/Library/Application Support/GameFrag`
-Lock file:           `~/Library/Application Support/GameFrag/.lock`
+Configuration file:  `~/Library/Application Support/GAMEFRAG/gamefrag.conf`
+Data directory:      `~/Library/Application Support/GAMEFRAG`
+Lock file:           `~/Library/Application Support/GAMEFRAG/.lock`
 
 Installing Service Configuration
 -----------------------------------
@@ -124,7 +124,7 @@ use old versions of Upstart and do not supply the start-stop-daemon utility.
 Copy gamefragd.init to /etc/init.d/gamefragd. Test by running `service gamefragd start`.
 
 Using this script, you can adjust the path and flags to the gamefragd program by
-setting the GameFragD and FLAGS environment variables in the file
+setting the GAMEFRAGD and FLAGS environment variables in the file
 /etc/sysconfig/gamefragd. You can also use the DAEMONOPTS environment variable here.
 
 ### macOS

@@ -5,15 +5,18 @@
 #ifndef MASTERNODESWIDGET_H
 #define MASTERNODESWIDGET_H
 
-#include <QWidget>
 #include "qt/gamefrag/pwidget.h"
 #include "qt/gamefrag/furabstractlistitemdelegate.h"
 #include "qt/gamefrag/mnmodel.h"
 #include "qt/gamefrag/tooltipmenu.h"
-#include <QTimer>
+#include "walletmodel.h"
+
 #include <atomic>
 
-class GameFragGUI;
+#include <QTimer>
+#include <QWidget>
+
+class GAMEFRAGGUI;
 
 namespace Ui {
 class MasterNodesWidget;
@@ -29,7 +32,7 @@ class MasterNodesWidget : public PWidget
 
 public:
 
-    explicit MasterNodesWidget(GameFragGUI *parent = nullptr);
+    explicit MasterNodesWidget(GAMEFRAGGUI *parent = nullptr);
     ~MasterNodesWidget();
 
     void loadWalletModel() override;
@@ -40,7 +43,7 @@ public:
     void showEvent(QShowEvent *event) override;
     void hideEvent(QHideEvent *event) override;
 
-private slots:
+private Q_SLOTS:
     void onCreateMNClicked();
     void onStartAllClicked(int type);
     void changeTheme(bool isLightTheme, QString &theme) override;

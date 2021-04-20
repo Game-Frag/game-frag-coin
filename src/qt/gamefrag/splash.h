@@ -18,10 +18,10 @@ class Splash : public QWidget
     Q_OBJECT
 
 public:
-    explicit Splash(Qt::WindowFlags f, const NetworkStyle* networkStyle);
+    explicit Splash(const NetworkStyle* networkStyle);
     ~Splash();
 
-public slots:
+public Q_SLOTS:
     /** Slot to call finish() method as it's not defined as slot */
     void slotFinish(QWidget* mainWin);
 

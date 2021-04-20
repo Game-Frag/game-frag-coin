@@ -1,4 +1,4 @@
-// Copyright (c) 2019 The PIVX developers
+// Copyright (c) 2019-2020 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,8 +9,9 @@
 #include <QWidget>
 #include <QString>
 #include "qt/gamefrag/prunnable.h"
+#include "walletmodel.h"
 
-class GameFragGUI;
+class GAMEFRAGGUI;
 class ClientModel;
 class WalletModel;
 class WorkerTask;
@@ -29,13 +30,13 @@ class PWidget : public QWidget, public Runnable, public Translator
 {
     Q_OBJECT
 public:
-    explicit PWidget(GameFragGUI* _window = nullptr, QWidget *parent = nullptr);
+    explicit PWidget(GAMEFRAGGUI* _window = nullptr, QWidget *parent = nullptr);
     explicit PWidget(PWidget *parent = nullptr);
 
     void setClientModel(ClientModel* model);
     void setWalletModel(WalletModel* model);
 
-    GameFragGUI* getWindow() { return this->window; }
+    GAMEFRAGGUI* getWindow() { return this->window; }
 
     void run(int type) override;
     void onError(QString error, int type) override;
@@ -45,17 +46,17 @@ public:
 
     QString translate(const char *msg) override { return tr(msg); }
 
-signals:
+Q_SIGNALS:
     void message(const QString& title, const QString& body, unsigned int style, bool* ret = nullptr);
     void showHide(bool show);
     bool execDialog(QDialog *dialog, int xDiv = 3, int yDiv = 5);
 
-protected slots:
+protected Q_SLOTS:
     virtual void changeTheme(bool isLightTheme, QString &theme);
     void onChangeTheme(bool isLightTheme, QString &theme);
 
 protected:
-    GameFragGUI* window = nullptr;
+    GAMEFRAGGUI* window = nullptr;
     ClientModel* clientModel = nullptr;
     WalletModel* walletModel = nullptr;
 
@@ -63,18 +64,16 @@ protected:
     virtual void loadWalletModel();
 
     void showHideOp(bool show);
-    bool execute(int type);
+    bool execute(int type, std::unique_ptr<WalletModel::UnlockContext> pctx = nullptr);
     void warn(const QString& title, const QString& message);
     bool ask(const QString& title, const QString& message);
     void showDialog(QDialog *dialog, int xDiv = 3, int yDiv = 5);
-
-    bool verifyWalletUnlocked();
 
 private:
     QSharedPointer<WorkerTask> task;
 
     void init();
-private slots:
+private Q_SLOTS:
     void errorString(QString, int);
 
 };

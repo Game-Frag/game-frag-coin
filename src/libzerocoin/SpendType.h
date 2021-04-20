@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef GameFrag_SPENDTYPE_H
-#define GameFrag_SPENDTYPE_H
+#ifndef GAMEFRAG_SPENDTYPE_H
+#define GAMEFRAG_SPENDTYPE_H
 
 #include <cstdint>
 
@@ -16,4 +16,4 @@ namespace libzerocoin {
     };
 }
 
-#endif //GameFrag_SPENDTYPE_H
+#endif //GAMEFRAG_SPENDTYPE_H

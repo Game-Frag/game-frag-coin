@@ -57,7 +57,7 @@ public:
             if (it == histogram.end()) // Newly locked page
             {
                 locker.Lock(reinterpret_cast<void*>(page), page_size);
-                histogram.insert(std::make_pair(page, 1));
+                histogram.emplace(page, 1);
             } else // Page was already locked; increase counter
             {
                 it->second += 1;
@@ -159,23 +159,6 @@ private:
     static LockedPageManager* _instance;
     static boost::once_flag init_flag;
 };
-
-//
-// Functions for directly locking/unlocking memory objects.
-// Intended for non-dynamically allocated structures.
-//
-template <typename T>
-void LockObject(const T& t)
-{
-    LockedPageManager::Instance().LockRange((void*)(&t), sizeof(T));
-}
-
-template <typename T>
-void UnlockObject(const T& t)
-{
-    memory_cleanse((void*)(&t), sizeof(T));
-    LockedPageManager::Instance().UnlockRange((void*)(&t), sizeof(T));
-}
 
 //
 // Allocator that locks its contents from being paged

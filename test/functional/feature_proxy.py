@@ -11,7 +11,7 @@ Test plan:
 - Proxy configurations to test on gamefragd side:
     - `-proxy` (proxy everything)
     - `-onion` (proxy just onions)
-    - `-proxyrandomize` Gamefrag randomization
+    - `-proxyrandomize` Circuit randomization
 - Proxy configurations to test on proxy side,
     - support no authentication (other proxy)
     - support no authentication + user/pass authentication (Tor)

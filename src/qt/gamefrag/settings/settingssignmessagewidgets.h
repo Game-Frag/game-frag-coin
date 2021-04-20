@@ -18,14 +18,14 @@ class SettingsSignMessageWidgets : public PWidget
     Q_OBJECT
 
 public:
-    explicit SettingsSignMessageWidgets(GameFragGUI* _window, QWidget *parent = nullptr);
+    explicit SettingsSignMessageWidgets(GAMEFRAGGUI* _window, QWidget *parent = nullptr);
     ~SettingsSignMessageWidgets();
 
     void setAddress_SM(const QString& address);
     void showEvent(QShowEvent *event) override;
 protected:
     void resizeEvent(QResizeEvent *event) override;
-public slots:
+public Q_SLOTS:
     void onSignMessageButtonSMClicked();
     void onVerifyMessage();
     void onPasteButtonSMClicked();

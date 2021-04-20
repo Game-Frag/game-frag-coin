@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef GameFrag_MINTPOOL_H
-#define GameFrag_MINTPOOL_H
+#ifndef GAMEFRAG_MINTPOOL_H
+#define GAMEFRAG_MINTPOOL_H
 
 #include <map>
 #include <list>
@@ -50,4 +50,4 @@ public:
 };
 
 
-#endif //GameFrag_MINTPOOL_H
+#endif //GAMEFRAG_MINTPOOL_H

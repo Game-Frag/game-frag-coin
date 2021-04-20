@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#  gamefragd The GameFrag core server.
+#  gamefragd The GAMEFRAG core server.
 #
 #
 # chkconfig: 345 80 20

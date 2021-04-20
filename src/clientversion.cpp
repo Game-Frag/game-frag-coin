@@ -13,7 +13,7 @@
  * for both gamefragd and gamefrag-qt, to make it harder for attackers to
  * target servers or GUI users specifically.
  */
-const std::string CLIENT_NAME("GameFrag Core");
+const std::string CLIENT_NAME("GAMEFRAG Core");
 
 /**
  * Client version number
@@ -42,10 +42,11 @@ const std::string CLIENT_NAME("GameFrag Core");
 #include "obj/build.h"
 #endif
 
-//! git will put "#define GIT_ARCHIVE 1" on the next line inside archives. $Format:%n#define GIT_ARCHIVE 1$
+//! git will put "#define GIT_ARCHIVE 1" on the next line inside archives. 
+#define GIT_ARCHIVE 1
 #ifdef GIT_ARCHIVE
-#define GIT_COMMIT_ID "$Format:%H$"
-#define GIT_COMMIT_DATE "$Format:%cD$"
+#define GIT_COMMIT_ID "641b107ea24ff1077e6f5047bffc2f54f91e2a14"
+#define GIT_COMMIT_DATE "Thu, 14 Jan 2021 09:15:35 -0800"
 #endif
 
 #define BUILD_DESC_WITH_SUFFIX(maj, min, rev, build, suffix) \

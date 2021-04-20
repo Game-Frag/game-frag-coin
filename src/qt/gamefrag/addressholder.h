@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef GameFrag_ADDRESSHOLDER_H
-#define GameFrag_ADDRESSHOLDER_H
+#ifndef GAMEFRAG_ADDRESSHOLDER_H
+#define GAMEFRAG_ADDRESSHOLDER_H
 
 #include <QWidget>
 #include <QColor>
@@ -38,4 +38,4 @@ public:
 };
 
 
-#endif //GameFrag_ADDRESSHOLDER_H
+#endif //GAMEFRAG_ADDRESSHOLDER_H

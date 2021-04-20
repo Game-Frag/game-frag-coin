@@ -1,10 +1,10 @@
 UNIX BUILD NOTES
 ====================
-Some notes on how to build GameFrag Core in Unix.
+Some notes on how to build GAMEFRAG Core in Unix.
 
 Note
 ---------------------
-Always use absolute paths to configure and compile GameFrag Core and the dependencies,
+Always use absolute paths to configure and compile GAMEFRAG Core and the dependencies,
 For example, when specifying the path of the dependency:
 
 	../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$BDB_PREFIX
@@ -35,6 +35,7 @@ These dependencies are required:
  libboost    | Utility            | Library for threading, data structures, etc
  libevent    | Networking         | OS independent asynchronous networking
  libgmp      | Bignum Arithmetic  | Precision arithmetic
+ libsodium   | Sapling Crypto     | A modern, portable, easy to use crypto library
 
 Optional dependencies:
 
@@ -53,7 +54,7 @@ Memory Requirements
 --------------------
 
 C++ compilers are memory-hungry. It is recommended to have at least 1.5 GB of
-memory available when compiling GameFrag Core. On systems with less, gcc can be
+memory available when compiling GAMEFRAG Core. On systems with less, gcc can be
 tuned to conserve memory with additional CXXFLAGS:
 
 
@@ -72,19 +73,15 @@ Build requirements:
 
 Now, you can either build from self-compiled [depends](/depends/README.md) or install the required dependencies:
 
-    sudo apt-get install libssl-dev libgmp-dev libevent-dev libboost-all-dev
-
-**Note:** For Ubuntu versions starting with Bionic (18.04), or Debian versions starting with Stretch, use `libssl1.0-dev`
-above instead of `libssl-dev`. GameFrag Core does not support the use of OpenSSL 1.1, though compilation is still possible
-by passing `--with-incompatible-ssl` to configure (NOT RECOMMENDED!).
+    sudo apt-get install libssl-dev libgmp-dev libevent-dev libboost-all-dev libsodium-dev cargo
 
 BerkeleyDB is required for the wallet.
 
- **For Ubuntu only:** db4.8 packages are available [here](https://launchpad.net/~bitcoin/+archive/bitcoin).
+ **For Ubuntu only:** db4.8 packages are available [here](https://launchpad.net/~gamefrag/+archive/gamefrag).
  You can add the repository using the following command:
 
     sudo apt-get install software-properties-common
-    sudo add-apt-repository ppa:bitcoin/bitcoin
+    sudo add-apt-repository ppa:gamefrag/gamefrag
     sudo apt-get update
     sudo apt-get install libdb4.8-dev libdb4.8++-dev
 
@@ -95,7 +92,7 @@ pass `--with-incompatible-bdb` to configure.
 
 Otherwise, you can build from self-compiled `depends` (see above).
 
-To build GameFrag Core without wallet, see [*Disable-wallet mode*](/doc/build-unix.md#disable-wallet-mode)
+To build GAMEFRAG Core without wallet, see [*Disable-wallet mode*](/doc/build-unix.md#disable-wallet-mode)
 
 
 Optional (see --with-miniupnpc and --enable-upnp-default):
@@ -116,6 +113,8 @@ To build with Qt 5 you need the following:
 
     sudo apt-get install libqt5gui5 libqt5core5a libqt5dbus5 libqt5svg5-dev libqt5charts5-dev qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler libqrencode-dev
 
+**Note:** Ubuntu versions prior to Bionic (18.04), and Debian version prior to Buster, do not have the `libqt5charts5-dev` package. If you are compiling on one of these older versions, you will need to omit `libqt5charts5-dev` from the above command.
+
 Once these are installed, they will be found by configure and a gamefrag-qt executable will be
 built by default.
 
@@ -126,7 +125,7 @@ built by default.
 
 Build requirements:
 
-    sudo dnf install which gcc-c++ libtool make autoconf automake compat-openssl10-devel libevent-devel boost-devel libdb4-devel libdb4-cxx-devel gmp-devel python3
+    sudo dnf install which gcc-c++ libtool make autoconf automake compat-openssl10-devel libevent-devel boost-devel libdb4-devel libdb4-cxx-devel gmp-devel libsodium-devel cargo python3
 
 Optional:
 
@@ -134,7 +133,7 @@ Optional:
 
 To build with Qt 5 you need the following:
 
-    sudo dnf install qt5-qttools-devel qt5-qtbase-devel protobuf-devel qrencode-devel
+    sudo dnf install qt5-qttools-devel qt5-qtbase-devel qt5-qtsvg-devel qt5-qtcharts-devel protobuf-devel qrencode-devel
 
 Notes
 -----
@@ -187,7 +186,7 @@ If you need to build Boost yourself:
 
 Security
 --------
-To help make your GameFrag Core installation more secure by making certain attacks impossible to
+To help make your GAMEFRAG Core installation more secure by making certain attacks impossible to
 exploit even if a vulnerability is found, binaries are hardened by default.
 This can be disabled with:
 
@@ -217,7 +216,7 @@ Hardening enables the following features:
     ET_DYN
 
 * _Non-executable Stack_: If the stack is executable then trivial stack-based buffer overflow exploits are possible if
-    vulnerable buffers are found. By default, GameFrag Core should be built with a non-executable stack
+    vulnerable buffers are found. By default, GAMEFRAG Core should be built with a non-executable stack
     but if one of the libraries it uses asks for an executable stack or someone makes a mistake
     and uses a compiler extension which requires an executable stack, it will silently build an
     executable without the non-executable stack protection.
@@ -235,7 +234,7 @@ Disable-wallet mode
 --------------------
 **Note:** This functionality is not yet completely implemented, and compilation using the below option will currently fail.
 
-When the intention is to run only a P2P node without a wallet, GameFrag Core may be compiled in
+When the intention is to run only a P2P node without a wallet, GAMEFRAG Core may be compiled in
 disable-wallet mode with:
 
     ./configure --disable-wallet

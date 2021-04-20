@@ -34,6 +34,7 @@ EXCLUDE_DIRS = [
     "src/leveldb/",
     "src/secp256k1/",
     "src/univalue/",
+    "src/crc32c",
 ]
 
 INCLUDE = ['*.h', '*.cpp', '*.cc', '*.c', '*.py']
@@ -119,7 +120,7 @@ EXPECTED_HOLDER_NAMES = [
     "The Dash developers\n",
     "The Dash Developers\n",
     "The Dash Core developers\n",
-    "The GameFrag developers\n",
+    "The PIVX developers\n",
     "The PPCoin developers\n",
     "The NovaCoin Developers",
     "The BlackCoin Developers\n",
@@ -356,7 +357,7 @@ def write_file_lines(filename, file_lines):
 COPYRIGHT = 'Copyright \(c\)'
 YEAR = "20[0-9][0-9]"
 YEAR_RANGE = '(%s)(-%s)?' % (YEAR, YEAR)
-HOLDER = 'The GameFrag developers'
+HOLDER = 'The PIVX developers'
 UPDATEABLE_LINE_COMPILED = re.compile(' '.join([COPYRIGHT, YEAR_RANGE, HOLDER]))
 
 def get_updatable_copyright_line(file_lines):

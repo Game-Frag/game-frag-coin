@@ -12,7 +12,7 @@
 #include <QCheckBox>
 
 class WalletModel;
-class GameFragGUI;
+class GAMEFRAGGUI;
 
 namespace Ui
 {
@@ -44,8 +44,6 @@ public:
         ToggleLock,     /** Toggle wallet lock state */
         ChangePass,     /** Change passphrase */
         Send_FRAG,       /** Send FRAG */
-        Send_zFRAG,      /** Send zFRAG */
-        Mint_zFRAG,      /** Mint zFRAG */
         BIP_38,         /** BIP38 menu */
         Multi_Sig,      /** Multi-Signature dialog */
         Sign_Message,   /** Sign/verify message dialog */
@@ -66,13 +64,14 @@ private:
     bool fCapsLock;
     SecureString newpassCache = "";
 
+    void updateWarningsLabel();
     void run(int type) override;
     void onError(QString error, int type) override;
     QCheckBox *btnWatch;
 
     void initWatch(QWidget *parent);
 
-private slots:
+private Q_SLOTS:
     void onWatchClicked();
     void textChanged();
     void warningMessage();

@@ -27,12 +27,13 @@ from test_framework.siphash import siphash256
 from test_framework.util import hex_str_to_bytes, bytes_to_hex_str
 
 MIN_VERSION_SUPPORTED = 60001
-MY_VERSION = 70918
+MY_VERSION = 70920
 MY_SUBVERSION = b"/python-mininode-tester:0.0.3/"
 MY_RELAY = 1 # from version 70001 onwards, fRelay should be appended to version messages (BIP37)
 
 MAX_INV_SZ = 50000
 MAX_BLOCK_BASE_SIZE = 1000000
+CURRENT_BLK_VERSION = 7
 
 COIN = 100000000 # 1 btc in satoshis
 
@@ -361,6 +362,7 @@ class CTransaction():
             self.nVersion = 1
             self.vin = []
             self.vout = []
+            self.sapData = b""
             self.nLockTime = 0
             self.sha256 = None
             self.hash = None
@@ -369,23 +371,17 @@ class CTransaction():
             self.vin = copy.deepcopy(tx.vin)
             self.vout = copy.deepcopy(tx.vout)
             self.nLockTime = tx.nLockTime
+            self.sapData = tx.sapData
             self.sha256 = tx.sha256
             self.hash = tx.hash
 
     def deserialize(self, f):
         self.nVersion = struct.unpack("<i", f.read(4))[0]
         self.vin = deser_vector(f, CTxIn)
-        flags = 0
-        if len(self.vin) == 0:
-            flags = struct.unpack("<B", f.read(1))[0]
-            # Not sure why flags can't be zero, but this
-            # matches the implementation in bitcoind
-            if (flags != 0):
-                self.vin = deser_vector(f, CTxIn)
-                self.vout = deser_vector(f, CTxOut)
-        else:
-            self.vout = deser_vector(f, CTxOut)
+        self.vout = deser_vector(f, CTxOut)
         self.nLockTime = struct.unpack("<I", f.read(4))[0]
+        if self.nVersion >= 2:
+            self.sapData = deser_string(f)
         self.sha256 = None
         self.hash = None
 
@@ -395,6 +391,8 @@ class CTransaction():
         r += ser_vector(self.vin)
         r += ser_vector(self.vout)
         r += struct.pack("<I", self.nLockTime)
+        if self.nVersion >= 2:
+            r += ser_string(self.sapData)
         return r
 
     # Regular serialization is with witness -- must explicitly
@@ -459,19 +457,19 @@ class CBlockHeader():
             self.nTime = header.nTime
             self.nBits = header.nBits
             self.nNonce = header.nNonce
-            self.nAccumulatorCheckpoint = header.nAccumulatorCheckpoint
+            self.hashFinalSaplingRoot = header.hashFinalSaplingRoot
             self.sha256 = header.sha256
             self.hash = header.hash
             self.calc_sha256()
 
     def set_null(self):
-        self.nVersion = 4
+        self.nVersion = CURRENT_BLK_VERSION
         self.hashPrevBlock = 0
         self.hashMerkleRoot = 0
         self.nTime = 0
         self.nBits = 0
         self.nNonce = 0
-        self.nAccumulatorCheckpoint = 0
+        self.hashFinalSaplingRoot = 0
         self.sha256 = None
         self.hash = None
 
@@ -482,7 +480,8 @@ class CBlockHeader():
         self.nTime = struct.unpack("<I", f.read(4))[0]
         self.nBits = struct.unpack("<I", f.read(4))[0]
         self.nNonce = struct.unpack("<I", f.read(4))[0]
-        self.nAccumulatorCheckpoint = deser_uint256(f)
+        if self.nVersion >= 8:
+            self.hashFinalSaplingRoot = deser_uint256(f)
         self.sha256 = None
         self.hash = None
 
@@ -494,7 +493,8 @@ class CBlockHeader():
         r += struct.pack("<I", self.nTime)
         r += struct.pack("<I", self.nBits)
         r += struct.pack("<I", self.nNonce)
-        r += ser_uint256(self.nAccumulatorCheckpoint)
+        if self.nVersion >= 8:
+            r += ser_uint256(self.hashFinalSaplingRoot)
         return r
 
     def calc_sha256(self):
@@ -506,7 +506,8 @@ class CBlockHeader():
             r += struct.pack("<I", self.nTime)
             r += struct.pack("<I", self.nBits)
             r += struct.pack("<I", self.nNonce)
-            r += ser_uint256(self.nAccumulatorCheckpoint)
+            if self.nVersion >= 8:
+                r += ser_uint256(self.hashFinalSaplingRoot)
             self.sha256 = uint256_from_str(hash256(r))
             self.hash = encode(hash256(r)[::-1], 'hex_codec').decode('ascii')
 
@@ -515,8 +516,8 @@ class CBlockHeader():
         self.calc_sha256()
         return self.sha256
 
-    # GameFrag
-    def solve_stake(self, stakeInputs):
+    # GAMEFRAG
+    def solve_stake(self, stakeInputs, prevModifier):
         target0 = uint256_from_compact(self.nBits)
         loop = True
         while loop:
@@ -525,9 +526,9 @@ class CBlockHeader():
                 target = int(target0 * nvalue / 100) % 2**256
                 data = b""
                 # always modifier V2 (256 bits) on regtest
-                data += ser_uint256(0)
+                data += ser_uint256(prevModifier)
                 data += struct.pack("<I", prevTime)
-                # prevout is CStake uniquenessfor zPoS is provided as stakeMap key (instead of it being an COutPoint)
+                # prevout is CStake uniqueness
                 data += uniqueness
                 data += struct.pack("<I", self.nTime)
                 posHash = uint256_from_str(hash256(data))
@@ -623,7 +624,8 @@ class CBlock(CBlockHeader):
         data += struct.pack("<I", self.nTime)
         data += struct.pack("<I", self.nBits)
         data += struct.pack("<I", self.nNonce)
-        data += ser_uint256(self.nAccumulatorCheckpoint)
+        if self.nVersion >= 8:
+            data += ser_uint256(self.hashFinalSaplingRoot)
         sha256NoSig = hash256(data)
         self.vchBlockSig = key.sign(sha256NoSig, low_s=low_s)
         self.sig_key = key

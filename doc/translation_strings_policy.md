@@ -1,7 +1,7 @@
 Translation Strings Policy
 ===========================
 
-This document provides guidelines for internationalization of the GameFrag Core software.
+This document provides guidelines for internationalization of the GAMEFRAG Core software.
 
 How to translate?
 ------------------
@@ -75,10 +75,10 @@ In Qt code, use tr's third argument for optional plurality. For example:
 This adds `<numerusform>`s to the respective `.ts` file, which can be translated separately depending on the language. In English, this is simply:
 
     <message numerus="yes">
-        <source>%n active connection(s) to GameFrag network</source>
+        <source>%n active connection(s) to GAMEFRAG network</source>
         <translation>
-            <numerusform>%n active connection to GameFrag network</numerusform>
-            <numerusform>%n active connections to GameFrag network</numerusform>
+            <numerusform>%n active connection to GAMEFRAG network</numerusform>
+            <numerusform>%n active connections to GAMEFRAG network</numerusform>
         </translation>
     </message>
 

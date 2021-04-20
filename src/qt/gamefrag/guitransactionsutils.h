@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef FURSZY_GameFrag_GUITRANSACTIONSUTILS_H
-#define FURSZY_GameFrag_GUITRANSACTIONSUTILS_H
+#ifndef FURSZY_GAMEFRAG_GUITRANSACTIONSUTILS_H
+#define FURSZY_GAMEFRAG_GUITRANSACTIONSUTILS_H
 
 #include "walletmodel.h"
 #include "qt/gamefrag/pwidget.h"
@@ -34,4 +34,4 @@ namespace GuiTransactionsUtils {
 }
 
 
-#endif //FURSZY_GameFrag_GUITRANSACTIONSUTILS_H
+#endif //FURSZY_GAMEFRAG_GUITRANSACTIONSUTILS_H

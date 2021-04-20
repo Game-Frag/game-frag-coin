@@ -18,8 +18,8 @@ BITCOIND_BIN=${BITCOIND_BIN:-/usr/bin/gamefragd}
 BITCOIND_NICE=${BITCOIND_NICE:-${NICELEVEL:-0}}
 BITCOIND_OPTS="${BITCOIND_OPTS:-${BITCOIN_OPTS}}"
 
-name="GameFrag Core Daemon"
-description="GameFrag crypto-currency p2p network daemon"
+name="GAMEFRAG Core Daemon"
+description="GAMEFRAG crypto-currency p2p network daemon"
 
 command="/usr/bin/gamefragd"
 command_args="-pid=\"${BITCOIND_PIDFILE}\" \
@@ -84,7 +84,7 @@ checkconfig()
 		eerror "It is recommended that you also set alertnotify so you are "
 		eerror "notified of problems:"
 		eerror ""
-		eerror "ie: alertnotify=echo %%s | mail -s \"GameFrag Alert\"" \
+		eerror "ie: alertnotify=echo %%s | mail -s \"GAMEFRAG Alert\"" \
 			"admin@foo.com"
 		eerror ""
 		return 1

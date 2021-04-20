@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef GameFrag_BLOCKSIGNATURE_H
-#define GameFrag_BLOCKSIGNATURE_H
+#ifndef GAMEFRAG_BLOCKSIGNATURE_H
+#define GAMEFRAG_BLOCKSIGNATURE_H
 
 #include "key.h"
 #include "primitives/block.h"
@@ -11,6 +11,6 @@
 
 bool SignBlockWithKey(CBlock& block, const CKey& key);
 bool SignBlock(CBlock& block, const CKeyStore& keystore);
-bool CheckBlockSignature(const CBlock& block);
+bool CheckBlockSignature(const CBlock& block, const bool enableP2PKH);
 
-#endif //GameFrag_BLOCKSIGNATURE_H
+#endif //GAMEFRAG_BLOCKSIGNATURE_H
