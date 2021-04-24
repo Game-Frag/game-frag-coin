@@ -66,7 +66,14 @@ static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits
  */
 static Checkpoints::MapCheckpoints mapCheckpoints =
     boost::assign::map_list_of
-	(0, uint256S("0x001"));
+	(0, uint256S("0x00000c4083c9032f5e67d6756bf084e79e36882bbc4df26c278654c6735378b9")),
+	(50, uint256S("0x0000006f915a3dccd0c9b22dafc42fd27273b756576c502a8e20d6b37123a09f")),
+	(100, uint256S("0x000001e2f0d480c9eb875520744f7ae409542300948362b3fbbc38321262f4e9")),
+	(292, uint256S("0xe4d36145ee6b4ed81b7c66a5af836a2f9db7c854d834794e122691c0627d564f")), // POS Activation
+	(500, uint256S("0x6511e332ca0f80cbd4575c69b5df569f20f760c5894ec2e0e4045b87a5c17fa8")), // BIP Activation
+	(1500, uint256S("0xfd129cdf866130b764ab256aee8082223afd37b4b7060c44267a280bcc1541dd")), // POS V3_4 Activation
+	(4000, uint256S("0xaf9715359857402b89e843ae349a74fe4f7b054ec7370b720e734b330a505755")) // POS V4_0 Activation
+	;
 
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
@@ -168,10 +175,10 @@ public:
                 Consensus::NetworkUpgrade::NO_ACTIVATION_HEIGHT;
         consensus.vUpgrades[Consensus::UPGRADE_POS].nActivationHeight           = 292;
         consensus.vUpgrades[Consensus::UPGRADE_POS_V2].nActivationHeight        = 500;
-        consensus.vUpgrades[Consensus::UPGRADE_ZC].nActivationHeight            = 863787;
-        consensus.vUpgrades[Consensus::UPGRADE_ZC_V2].nActivationHeight         = 1153160;
+        consensus.vUpgrades[Consensus::UPGRADE_ZC].nActivationHeight            = 999999999;
+        consensus.vUpgrades[Consensus::UPGRADE_ZC_V2].nActivationHeight         = 999999999;
         consensus.vUpgrades[Consensus::UPGRADE_BIP65].nActivationHeight         = 292;
-        consensus.vUpgrades[Consensus::UPGRADE_ZC_PUBLIC].nActivationHeight     = 1880000;
+        consensus.vUpgrades[Consensus::UPGRADE_ZC_PUBLIC].nActivationHeight     = 999999999;
         consensus.vUpgrades[Consensus::UPGRADE_V3_4].nActivationHeight          = 1500;
         consensus.vUpgrades[Consensus::UPGRADE_V4_0].nActivationHeight          = 4000;
         consensus.vUpgrades[Consensus::UPGRADE_V5_0].nActivationHeight          = 6000;
@@ -183,14 +190,14 @@ public:
                 uint256S("0x37ea75fe1c9314171cff429a91b25b9f11331076d1c9de50ee4054d61877f8af");
 		consensus.vUpgrades[Consensus::UPGRADE_ZC_PUBLIC].hashActivationBlock =
                 uint256S("0xe2448b76d88d37aba4194ffed1041b680d779919157ddf5cbf423373d7f8078e");	
-				
-        consensus.vUpgrades[Consensus::UPGRADE_BIP65].hashActivationBlock =
-                uint256S("0x82629b7a9978f5c7ea3f70a12db92633a7d2e436711500db28b97efd48b1e527");
-        consensus.vUpgrades[Consensus::UPGRADE_V3_4].hashActivationBlock =
-                uint256S("0x0ef2556e40f3b9f6e02ce611b832e0bbfe7734a8ea751c7b555310ee49b61456");
-        consensus.vUpgrades[Consensus::UPGRADE_V4_0].hashActivationBlock =
-                uint256S("0x14e477e597d24549cac5e59d97d32155e6ec2861c1003b42d0566f9bf39b65d5");
 		*/
+		
+        consensus.vUpgrades[Consensus::UPGRADE_BIP65].hashActivationBlock =
+                uint256S("0x6511e332ca0f80cbd4575c69b5df569f20f760c5894ec2e0e4045b87a5c17fa8");
+        consensus.vUpgrades[Consensus::UPGRADE_V3_4].hashActivationBlock =
+                uint256S("0xfd129cdf866130b764ab256aee8082223afd37b4b7060c44267a280bcc1541dd");
+        consensus.vUpgrades[Consensus::UPGRADE_V4_0].hashActivationBlock =
+                uint256S("0xaf9715359857402b89e843ae349a74fe4f7b054ec7370b720e734b330a505755");
 		
         /**
          * The message start string is designed to be unlikely to occur in normal data.
