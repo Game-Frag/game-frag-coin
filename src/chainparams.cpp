@@ -72,15 +72,16 @@ static Checkpoints::MapCheckpoints mapCheckpoints =
 	(292, uint256S("0xe4d36145ee6b4ed81b7c66a5af836a2f9db7c854d834794e122691c0627d564f")), // POS Activation
 	(500, uint256S("0x6511e332ca0f80cbd4575c69b5df569f20f760c5894ec2e0e4045b87a5c17fa8")), // BIP Activation
 	(1500, uint256S("0xfd129cdf866130b764ab256aee8082223afd37b4b7060c44267a280bcc1541dd")), // POS V3_4 Activation
-	(4000, uint256S("0xaf9715359857402b89e843ae349a74fe4f7b054ec7370b720e734b330a505755")) // POS V4_0 Activation
+	(4000, uint256S("0xaf9715359857402b89e843ae349a74fe4f7b054ec7370b720e734b330a505755")), // POS V4_0 Activation
+	(6000, uint256S("0x380c2e41d31ac0f1803a4288b376aa6bdba93c5166fffa776495c8a1ffb0f376")) // POS V5_0 Activation
 	;
 
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-    1591401645, // * UNIX timestamp of last checkpoint block
-    5607713,    // * total number of transactions between genesis and last checkpoint
+    1619337870, // * UNIX timestamp of last checkpoint block
+    12499,    // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the UpdateTip debug.log lines)
-    3000        // * estimated number of transactions per day after checkpoint
+    1440        // * estimated number of transactions per day after checkpoint
 };
 
 static Checkpoints::MapCheckpoints mapCheckpointsTestnet =
