@@ -562,10 +562,7 @@ QPushButton[cssClass="btn-check-cold-staking"] {
     border-bottom:2px solid f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
     border-radius:2px;
 }
-
-
-QPushButton[cssClass="btn-check-cold-staking-inactive"] {
-    qproperty-icon: url("://ic-check-cold-staking-off");
+QPushButton[cssClass="btn-check-cold-staking-inactive"] {    qproperty-icon: url("://ic-check-cold-staking-off");
     qproperty-iconSize: 24px 24px;
     color:#B3FFFFFF; /* White. https://www.colorhexa.com/ffffff */
     background-color:#40f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
