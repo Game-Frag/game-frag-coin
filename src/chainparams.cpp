@@ -115,7 +115,7 @@ public:
         assert(consensus.hashGenesisBlock == uint256S("0x00000c4083c9032f5e67d6756bf084e79e36882bbc4df26c278654c6735378b9"));
         assert(genesis.hashMerkleRoot == uint256S("0x25e3542004d6979bc3947b7f405d9fe2120edddce3f0c5793b9032af18d745b7"));
  
-        consensus.fPowAllowMinDifficultyBlocks = true;
+        consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.powLimit   = ~UINT256_ZERO >> 20;   // GAMEFRAG starting difficulty is 1 / 2^12
         consensus.posLimitV1 = ~UINT256_ZERO >> 24;
         consensus.posLimitV2 = ~UINT256_ZERO >> 20;
