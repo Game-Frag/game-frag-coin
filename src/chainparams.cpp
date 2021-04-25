@@ -66,14 +66,14 @@ static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits
  */
 static Checkpoints::MapCheckpoints mapCheckpoints =
     boost::assign::map_list_of
-	(0, uint256S("0x00000c4083c9032f5e67d6756bf084e79e36882bbc4df26c278654c6735378b9")),
-	(100, uint256S("0x000001e2f0d480c9eb875520744f7ae409542300948362b3fbbc38321262f4e9")),
-	(292, uint256S("0xe4d36145ee6b4ed81b7c66a5af836a2f9db7c854d834794e122691c0627d564f")), // POS Activation
-	(500, uint256S("0x6511e332ca0f80cbd4575c69b5df569f20f760c5894ec2e0e4045b87a5c17fa8")), // BIP Activation
-	(1500, uint256S("0xfd129cdf866130b764ab256aee8082223afd37b4b7060c44267a280bcc1541dd")), // POS V3_4 Activation
-	(4000, uint256S("0xaf9715359857402b89e843ae349a74fe4f7b054ec7370b720e734b330a505755")), // POS V4_0 Activation
-	(6000, uint256S("0x380c2e41d31ac0f1803a4288b376aa6bdba93c5166fffa776495c8a1ffb0f376")) // POS V5_0 Activation
-	;
+	(0, uint256S("0x00000c4083c9032f5e67d6756bf084e79e36882bbc4df26c278654c6735378b9"))
+	(100, uint256S("0x000001e2f0d480c9eb875520744f7ae409542300948362b3fbbc38321262f4e9"))
+	(292, uint256S("0xe4d36145ee6b4ed81b7c66a5af836a2f9db7c854d834794e122691c0627d564f")) // POS Activation
+	(500, uint256S("0x6511e332ca0f80cbd4575c69b5df569f20f760c5894ec2e0e4045b87a5c17fa8")) // BIP Activation
+	(1500, uint256S("0xfd129cdf866130b764ab256aee8082223afd37b4b7060c44267a280bcc1541dd")) // POS V3_4 Activation
+	(4000, uint256S("0xaf9715359857402b89e843ae349a74fe4f7b054ec7370b720e734b330a505755")) // POS V4_0 Activation
+	(6000, uint256S("0x380c2e41d31ac0f1803a4288b376aa6bdba93c5166fffa776495c8a1ffb0f376")); // POS V5_0 Activation
+	
 
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
