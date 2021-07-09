@@ -5,4 +5,4 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 export LC_ALL=C
-chmod -Rv 775 *
+chmod -Rv 775 /home/travis/build/Game-Frag/game-frag-coin
