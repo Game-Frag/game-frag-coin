@@ -41,7 +41,7 @@ stages:
   - test
 
 git:
-  depth: false
+  depth: false 
 env:
   global:
     - MAKEJOBS=-j3
