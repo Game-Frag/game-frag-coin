@@ -7,7 +7,7 @@
 export LC_ALL=C
 
 chmod +x contrib/devtools/*.sh 
-
+chmod +x contrib/devtools/*.py
 contrib/devtools/check-doc.py
 contrib/devtools/logprint-scanner.py
 
