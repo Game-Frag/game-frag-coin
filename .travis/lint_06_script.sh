@@ -6,7 +6,7 @@
 
 export LC_ALL=C
 
-chmod +x contrib/devtools/git-subtree-check.sh 
+chmod +x contrib/devtools/*.sh 
 
 contrib/devtools/check-doc.py
 contrib/devtools/logprint-scanner.py
