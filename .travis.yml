@@ -40,8 +40,7 @@ stages:
   - cmake
   - test
 
-git:
-  depth: 999999 
+
 env:
   global:
     - MAKEJOBS=-j3
