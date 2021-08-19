@@ -19,7 +19,7 @@ GAMEFRAG is an open source community-driven cryptocurrency, focused on five main
 
 (5) Ease of Use: GAMEFRAG is determined to offer the best possible graphical interface for a core node/wallet. A full featured graphical product for new and advanced users.
 
-A lot more information and specs at [GAME-FRAG.org](https://www.game-frag.com/). Join the community at [GAME-FRAG Discord](https://discord.game-frag.com).
+A lot more information and specs at [GAME-FRAG.com](https://www.game-frag.com/). Join the community at [GAME-FRAG Discord](https://discord.game-frag.com).
 
 ## License
 GAMEFRAG Core is released under the terms of the MIT license. See [COPYING](https://github.com/Game-Frag/game-frag-coin/blob/master/COPYING) for more information or see https://opensource.org/licenses/MIT.
