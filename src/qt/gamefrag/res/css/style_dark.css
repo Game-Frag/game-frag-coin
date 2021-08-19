@@ -141,6 +141,57 @@ QPushButton[cssClass="img-nav-logo"] {
 !#############
  ################################*/
 
+/*******************
+******cold staking*********
+ ********************/
+
+QPushButton[cssClass="btn-check-cold-staking"] {
+    qproperty-icon: url("://ic-check-cold-staking");
+    qproperty-iconSize: 24px 24px;
+    color:#ffffff; /* White. https://www.colorhexa.com/ffffff */
+    background-color:#50f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    border-bottom:2px solid f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    border-radius:2px;
+}
+
+
+QPushButton[cssClass="btn-check-cold-staking-inactive"] {
+    qproperty-icon: url("://ic-check-cold-staking-off");
+    qproperty-iconSize: 24px 24px;
+    color:#B3FFFFFF; /* White. https://www.colorhexa.com/ffffff */
+    background-color:#40f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    border-bottom:2px solid #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    border-radius:2px;
+}
+
+QPushButton[cssClass="btn-check-cold-staking-checked"] {
+    qproperty-icon: url("://ic-check-cold-staking-enabled");
+    qproperty-iconSize: 24px 24px;
+    background-color:#50f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    color:#ffffff; /* White. https://www.colorhexa.com/ffffff */
+    border-bottom:2px solid #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+}
+
+QPushButton[cssClass="btn-check-cold-staking-unchecked"] {
+    qproperty-icon: url("://ic-check-cold-staking-enabled");
+    qproperty-iconSize: 24px 24px;
+    color:#B3FFFFFF; /* White. https://www.colorhexa.com/ffffff */
+    background-color:#40f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    border-bottom:2px solid #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    border-radius:2px;
+}
+
+QPushButton[cssClass="btn-check-cold-staking"]:checked {
+    qproperty-icon: url("://ic-check-cold-staking-enabled");
+    qproperty-iconSize: 24px 24px;
+    background-color:#50f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    color:#ffffff; /* White. https://www.colorhexa.com/ffffff */
+    border-bottom:2px solid #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+}
+
+/*******************
+******end cold staking*********
+ ********************/
 
 *[cssClass="btn-nav-settings"] {
     qproperty-icon: url("://ic-nav-settings") off,
@@ -554,55 +605,6 @@ QPushButton[cssClass="btn-check-stack"]:checked {
     color:#ffffff; /* White. https://www.colorhexa.com/ffffff */
     border-bottom:2px solid #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
 }
-
-/*******************
-******cold staking*********
- ********************/
-
-QPushButton[cssClass="btn-check-cold-staking"] {
-    qproperty-icon: url("://ic-check-cold-staking");
-    qproperty-iconSize: 24px 24px;
-    color:#ffffff; /* White. https://www.colorhexa.com/ffffff */
-    background-color:#50f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
-    border-bottom:2px solid f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
-    border-radius:2px;
-}
-QPushButton[cssClass="btn-check-cold-staking-inactive"] {    qproperty-icon: url("://ic-check-cold-staking-off");
-    qproperty-iconSize: 24px 24px;
-    color:#B3FFFFFF; /* White. https://www.colorhexa.com/ffffff */
-    background-color:#40f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
-    border-bottom:2px solid #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
-    border-radius:2px;
-}
-
-QPushButton[cssClass="btn-check-cold-staking-checked"] {
-    qproperty-icon: url("://ic-check-cold-staking-enabled");
-    qproperty-iconSize: 24px 24px;
-    background-color:#50f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
-    color:#ffffff; /* White. https://www.colorhexa.com/ffffff */
-    border-bottom:2px solid #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
-}
-
-QPushButton[cssClass="btn-check-cold-staking-unchecked"] {
-    qproperty-icon: url("://ic-check-cold-staking-enabled");
-    qproperty-iconSize: 24px 24px;
-    color:#B3FFFFFF; /* White. https://www.colorhexa.com/ffffff */
-    background-color:#40f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
-    border-bottom:2px solid #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
-    border-radius:2px;
-}
-
-QPushButton[cssClass="btn-check-cold-staking"]:checked {
-    qproperty-icon: url("://ic-check-cold-staking-enabled");
-    qproperty-iconSize: 24px 24px;
-    background-color:#50f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
-    color:#ffffff; /* White. https://www.colorhexa.com/ffffff */
-    border-bottom:2px solid #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
-}
-
-/*******************
-******end cold staking*********
- ********************/
 
 QPushButton[cssClass="btn-check-connect"] {
     qproperty-icon: url("://ic-check-connect") ;
@@ -1756,6 +1758,13 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
     color: #707070; /* Very dark gray. https://www.colorhexa.com/707070 */
 }
 
+*[cssClass="edit-primary-no-border"] {
+    border: 0px;
+    background-color:#FFFFFF; /* White. https://www.colorhexa.com/ffffff */
+    font-size:15px;
+    color: #707070; /* Very dark gray. https://www.colorhexa.com/707070 */
+}
+
 QPushButton[cssClass="btn-expand"] {
     background-image: url("://ic-expand");
     background-position:center;
@@ -1763,12 +1772,6 @@ QPushButton[cssClass="btn-expand"] {
     background-color:#FFFFFF; /* White. https://www.colorhexa.com/ffffff */
 }
 
-*[cssClass="edit-primary-no-border"] {
-    border: 0px;
-    background-color:#FFFFFF; /* White. https://www.colorhexa.com/ffffff */
-    font-size:15px;
-    color: #707070; /* Very dark gray. https://www.colorhexa.com/707070 */
-}
 
 /*HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 HH      SPLASH
@@ -2179,6 +2182,7 @@ QComboBox[cssClass="btn-combo"] {
     font-size:16px;
     border:1px solid #ffffff;
     color: #707070; /* Very dark gray. https://www.colorhexa.com/707070 */
+    selection-color:#707070;
     text-align: right;
 }
 
@@ -2297,7 +2301,6 @@ QComboBox QAbstractItemView::item {
     font-size:16px;
     color: #707070; /* Very dark gray. https://www.colorhexa.com/707070 */
     border-radius:0px;
-    border:0px;
     outline: 0px;
 }
 QComboBox QAbstractItemView::item:selected {
@@ -2307,7 +2310,6 @@ QComboBox QAbstractItemView::item:selected {
     margin:0px;
     color: #000000; /* Black. https://www.colorhexa.com/000000 */
     border-radius:0px;
-    border:none;
     outline: 0px;
 }
 
@@ -2498,6 +2500,7 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 *[cssClass="container-dialog"] {
     background-color:#FFFFFF; /* White. https://www.colorhexa.com/ffffff */
     border-radius: 2px;
+    border:1px solid #000000; /* Black. https://www.colorhexa.com/000000 */
 }
 
 *[cssClass="container-popup"] {
@@ -2621,7 +2624,6 @@ QComboBox[cssClass="btn-combo-dialog"] {
     border:1px solid #bababa; /* Gray. https://www.colorhexa.com/bababa */
     color: #000000; /* Black. https://www.colorhexa.com/000000 */
     text-align: right;
-
 }
 
 QComboBox[cssClass="btn-combo-dialog"]::down-arrow {
@@ -2639,7 +2641,6 @@ QComboBox[cssClass="btn-combo-edit-dialog"] {
     border:1px solid #bababa; /* Gray. https://www.colorhexa.com/bababa */
     color: #000000; /* Black. https://www.colorhexa.com/000000 */
     text-align: right;
-
 }
 
 QComboBox[cssClass="btn-combo-edit-dialog"]::down-arrow {

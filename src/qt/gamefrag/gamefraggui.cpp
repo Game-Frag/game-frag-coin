@@ -10,6 +10,7 @@
 
 #include "qt/guiutil.h"
 #include "clientmodel.h"
+#include "interfaces/handler.h"
 #include "optionsmodel.h"
 #include "networkstyle.h"
 #include "notificator.h"
@@ -336,6 +337,9 @@ void GAMEFRAGGUI::changeEvent(QEvent* e)
             if (!(wsevt->oldState() & Qt::WindowMinimized) && isMinimized()) {
                 QTimer::singleShot(0, this, &GAMEFRAGGUI::hide);
                 e->ignore();
+            } else if ((wsevt->oldState() & Qt::WindowMinimized) && !isMinimized()) {
+                QTimer::singleShot(0, this, &GAMEFRAGGUI::show);
+                e->ignore();
             }
         }
     }
@@ -348,10 +352,14 @@ void GAMEFRAGGUI::closeEvent(QCloseEvent* event)
     if (clientModel && clientModel->getOptionsModel()) {
         if (!clientModel->getOptionsModel()->getMinimizeOnClose()) {
             QApplication::quit();
+        } else {
+            QMainWindow::showMinimized();
+            event->ignore();
         }
     }
-#endif
+#else
     QMainWindow::closeEvent(event);
+#endif
 }
 
 
@@ -419,7 +427,7 @@ void GAMEFRAGGUI::message(const QString& title, const QString& message, unsigned
         // Append title to "GAMEFRAG - "
         if (!msgType.isEmpty())
             strTitle += " - " + msgType;
-        notificator->notify((Notificator::Class) nNotifyIcon, strTitle, message);
+        notificator->notify(static_cast<Notificator::Class>(nNotifyIcon), strTitle, message);
     }
 }
 
@@ -689,11 +697,11 @@ static bool ThreadSafeMessageBox(GAMEFRAGGUI* gui, const std::string& message, c
 void GAMEFRAGGUI::subscribeToCoreSignals()
 {
     // Connect signals to client
-    uiInterface.ThreadSafeMessageBox.connect(boost::bind(ThreadSafeMessageBox, this, _1, _2, _3));
+    m_handler_message_box = interfaces::MakeHandler(uiInterface.ThreadSafeMessageBox.connect(std::bind(ThreadSafeMessageBox, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3)));
 }
 
 void GAMEFRAGGUI::unsubscribeFromCoreSignals()
 {
     // Disconnect signals from client
-    uiInterface.ThreadSafeMessageBox.disconnect(boost::bind(ThreadSafeMessageBox, this, _1, _2, _3));
+    m_handler_message_box->disconnect();
 }

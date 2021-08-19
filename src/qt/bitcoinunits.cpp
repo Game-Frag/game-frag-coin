@@ -59,7 +59,7 @@ QString BitcoinUnits::name(int unit, bool isZfrag)
     const QString CURR_UNIT = QString(CURRENCY_UNIT.c_str());
     QString z = "";
     if(isZfrag) z = "z";
-    if (Params().NetworkID() == CBaseChainParams::MAIN) {
+    if (Params().NetworkIDString() == CBaseChainParams::MAIN) {
         switch (unit) {
         case FRAG:
             return z + CURR_UNIT;
@@ -87,7 +87,7 @@ QString BitcoinUnits::name(int unit, bool isZfrag)
 QString BitcoinUnits::description(int unit)
 {
     const QString CURR_UNIT = QString(CURRENCY_UNIT.c_str());
-    if (Params().NetworkID() == CBaseChainParams::MAIN) {
+    if (Params().NetworkIDString() == CBaseChainParams::MAIN) {
         switch (unit) {
         case FRAG:
             return CURR_UNIT;

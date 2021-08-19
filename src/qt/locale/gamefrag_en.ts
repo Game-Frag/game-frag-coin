@@ -217,7 +217,7 @@
 <context>
     <name>AddressTableModel</name>
     <message>
-        <location filename="../addresstablemodel.cpp" line="+311"/>
+        <location filename="../addresstablemodel.cpp" line="+316"/>
         <source>Label</source>
         <translation>Label</translation>
     </message>
@@ -537,7 +537,7 @@ for staking</source>
 <context>
     <name>BalanceBubble</name>
     <message>
-        <location filename="../gamefrag/forms/balancebubble.ui" line="+20"/>
+        <location filename="../gamefrag/forms/balancebubble.ui" line="+26"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -547,7 +547,7 @@ for staking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+15"/>
         <location line="+26"/>
         <source>0.00 gamefrag</source>
         <translation type="unfinished"></translation>
@@ -686,7 +686,7 @@ for staking</source>
     </message>
     <message>
         <location line="-319"/>
-        <location filename="../coincontroldialog.cpp" line="+145"/>
+        <location filename="../coincontroldialog.cpp" line="+143"/>
         <source>Select all</source>
         <translation type="unfinished"></translation>
     </message>
@@ -926,12 +926,12 @@ for staking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gamefrag/coldstakingwidget.cpp" line="+797"/>
+        <location filename="../gamefrag/coldstakingwidget.cpp" line="+801"/>
         <source>Total Staking: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-507"/>
+        <location line="-508"/>
         <source>Error loading delegations: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -977,7 +977,7 @@ stake on your behalf, while you keep the keys securely offline.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-290"/>
+        <location line="-293"/>
         <source>Coin Control</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1008,7 +1008,7 @@ and stake them on their owner&apos;s behalf.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+254"/>
+        <location line="+257"/>
         <source>Invalid entry</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1054,7 +1054,7 @@ Do you wish to proceed?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+27"/>
         <source>You don&apos;t have any %1 to select.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1196,7 +1196,12 @@ address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+500"/>
+        <location line="+65"/>
+        <source>Amount of staking rewards received.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+435"/>
         <source>Sort by</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1221,17 +1226,12 @@ address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-558"/>
-        <source>Amount of FRAG and zFRAG staked.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../gamefrag/dashboardwidget.cpp" line="+115"/>
         <source>Please wait until the wallet is fully synced to see your correct balance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gamefrag/forms/dashboardwidget.ui" line="-100"/>
+        <location filename="../gamefrag/forms/dashboardwidget.ui" line="-658"/>
         <source>No transactions yet</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1243,23 +1243,23 @@ It will start automatically as soon as the wallet has enough confirmations on an
     </message>
     <message>
         <location filename="../gamefrag/dashboardwidget.cpp" line="+36"/>
-        <location line="+278"/>
+        <location line="+274"/>
         <source>You have no staking rewards</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-276"/>
+        <location line="-272"/>
         <source>No charts library</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+276"/>
+        <location line="+272"/>
         <source>Loading chart..</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+123"/>
-        <location line="+220"/>
+        <location line="+127"/>
+        <location line="+222"/>
         <location line="+88"/>
         <source>Error loading chart, invalid show option</source>
         <translation type="unfinished"></translation>
@@ -1270,7 +1270,7 @@ It will start automatically as soon as the wallet has enough confirmations on an
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+133"/>
+        <location line="+150"/>
         <source>Error loading chart: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2510,14 +2510,14 @@ https://www.transifex.com/gamefrag-project/gamefrag-project-translations</source
 <context>
     <name>GAMEFRAGGUI</name>
     <message>
-        <location filename="../gamefrag/gamefraggui.cpp" line="+68"/>
-        <location line="+301"/>
+        <location filename="../gamefrag/gamefraggui.cpp" line="+69"/>
+        <location line="+308"/>
         <location line="+69"/>
         <source>GAMEFRAG Core</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-369"/>
+        <location line="-376"/>
         <source>Wallet</source>
         <translation type="unfinished">Wallet</translation>
     </message>
@@ -2557,7 +2557,7 @@ https://www.transifex.com/gamefrag-project/gamefrag-project-translations</source
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+123"/>
+        <location line="+130"/>
         <source>Error</source>
         <translation type="unfinished">Error</translation>
     </message>
@@ -2763,7 +2763,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+777"/>
+        <location line="+806"/>
         <source>%1 d</source>
         <translation>%1 d</translation>
     </message>
@@ -2814,20 +2814,20 @@ Address: %4
         <translation>%1 ms</translation>
     </message>
     <message>
-        <location filename="../gamefrag.cpp" line="+516"/>
+        <location filename="../gamefrag.cpp" line="+535"/>
         <source>A fatal error occurred. GAMEFRAG can no longer continue safely and will quit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+73"/>
+        <location line="+75"/>
         <location line="+7"/>
-        <location line="+13"/>
+        <location line="+15"/>
         <location line="+19"/>
         <source>GAMEFRAG Core</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-38"/>
+        <location line="-40"/>
         <source>Error: Specified data directory &quot;%1&quot; does not exist.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2837,18 +2837,18 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+12"/>
-        <source>Error: Invalid combination of -regtest and -testnet.</source>
+        <location line="+14"/>
+        <source>Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+84"/>
+        <source>%1 didn&apos;t yet exit safely...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-64"/>
         <source>Error reading masternode configuration file: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+64"/>
-        <source>GAMEFRAG Core didn&apos;t yet exit safely...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2858,7 +2858,7 @@ Address: %4
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../gamefrag/qtutils.cpp" line="+136"/>
+        <location filename="../gamefrag/qtutils.cpp" line="+135"/>
         <source>Receiving</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3007,7 +3007,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+84"/>
+        <location line="+74"/>
         <source>by Label</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3022,7 +3022,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gamefrag/dashboardwidget.cpp" line="-507"/>
+        <location filename="../gamefrag/dashboardwidget.cpp" line="-530"/>
         <source>Jan</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3082,7 +3082,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gamefrag/coldstakingwidget.cpp" line="-707"/>
+        <location filename="../gamefrag/coldstakingwidget.cpp" line="-711"/>
         <source>Address with no label</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3686,6 +3686,7 @@ Address: %4
     </message>
     <message>
         <location line="+179"/>
+        <location filename="../gamefrag/receivewidget.cpp" line="+188"/>
         <source>Add Label</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3700,12 +3701,17 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-329"/>
+        <location line="+134"/>
+        <source>Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-463"/>
         <source>Receive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gamefrag/receivewidget.cpp" line="+60"/>
+        <location filename="../gamefrag/receivewidget.cpp" line="-128"/>
         <source>My Addresses</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3725,7 +3731,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+85"/>
+        <location line="+90"/>
         <location line="+16"/>
         <source>No available address
 try unlocking the wallet</source>
@@ -3743,7 +3749,7 @@ try unlocking the wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+36"/>
+        <location line="+37"/>
         <source>Edit Address Label</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4051,12 +4057,12 @@ try unlocking the wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gamefrag/sendcustomfeedialog.cpp" line="+89"/>
+        <location filename="../gamefrag/sendcustomfeedialog.cpp" line="+90"/>
         <source>Fee too high. Must be below: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+10"/>
         <source>Fee too low. Must be at least: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4139,13 +4145,13 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>SendWidget</name>
     <message>
-        <location filename="../gamefrag/send.cpp" line="+157"/>
+        <location filename="../gamefrag/send.cpp" line="+159"/>
         <source>Total remaining from the selected UTXO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+211"/>
-        <location line="+227"/>
+        <location line="+228"/>
+        <location line="+239"/>
         <source>Warning!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4157,12 +4163,12 @@ Do you want to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+368"/>
+        <location line="+370"/>
         <source>Customize Fee</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-688"/>
+        <location line="-696"/>
         <source>Maximum amount of outputs reached</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4172,7 +4178,7 @@ Do you want to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+42"/>
+        <location line="+36"/>
         <source>Possibly spend coins delegated for cold-staking (currently available: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4192,19 +4198,19 @@ Do you want to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+84"/>
+        <location line="+86"/>
         <source>WARNING:
 Transaction spends a cold-stake delegation, voiding it.
 These coins will no longer be cold-staked.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+20"/>
         <source>Transaction sent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+50"/>
+        <location line="+63"/>
         <source>Address label update failed for address: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4219,7 +4225,7 @@ These coins will no longer be cold-staked.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+290"/>
+        <location line="+292"/>
         <source>Memo</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4229,7 +4235,7 @@ These coins will no longer be cold-staked.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-897"/>
+        <location line="-929"/>
         <source>Coin Control</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4260,22 +4266,22 @@ These coins will no longer be cold-staked.</source>
     </message>
     <message>
         <location line="+3"/>
-        <location line="+629"/>
+        <location line="+661"/>
         <source>Shield Coins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-628"/>
+        <location line="-660"/>
         <source>Convert all transparent coins into shielded coins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+83"/>
+        <location line="+92"/>
         <source>Unlocked remaining</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+207"/>
+        <location line="+216"/>
         <source>Cannot send memo to address
 %1
 
@@ -4287,13 +4293,13 @@ Do you wish to proceed without memo?
     </message>
     <message>
         <location line="+31"/>
-        <location line="+273"/>
+        <location line="+287"/>
         <location line="+92"/>
         <source>Cannot perform shielded operations, v5 upgrade isn&apos;t being enforced yet!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-360"/>
+        <location line="-374"/>
         <source>Sapling Protocol temporarily in maintenance. Shielded transactions disabled (SPORK 20)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4308,7 +4314,12 @@ Do you wish to proceed without memo?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+236"/>
+        <location line="+135"/>
+        <source>Processing full, refreshing amounts later</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+115"/>
         <source>You don&apos;t have any %1 to select.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4938,7 +4949,7 @@ There was an error trying to save the address list to %1. Please try again.</sou
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+85"/>
+        <location line="+72"/>
         <source>2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4948,20 +4959,7 @@ There was an error trying to save the address list to %1. Please try again.</sou
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+26"/>
-        <source>
-                           &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;
-                           Newly received GAMEFRAG requires 6 confirmations on the network
-                           to become eligible for spending which can take ~6 minutes.
-                           &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;
-                           Your GAMEFRAG wallet also needs to be completely synchronized
-                           to see and spend balances on the network.
-                           &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
-                         </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+54"/>
+        <location line="+72"/>
         <source>3</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4971,125 +4969,37 @@ There was an error trying to save the address list to %1. Please try again.</sou
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+26"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;ol style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li align=&quot;justify&quot; style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Make sure your wallet is completely synchronized and you are using the latest release. &lt;/li&gt;&lt;li align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;You must have a balance of GAMEFRAG with a minimum of 600 confirmations. &lt;/li&gt;&lt;li align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Your wallet must stay online and be unlocked for staking purposes. &lt;/li&gt;&lt;li align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Once all those steps are followed staking should be enabled. &lt;/li&gt;&lt;li align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state &amp;quot;Staking Enabled&amp;quot; to indicate it is staking. Using the command line interface (gamefrag-cli); the command &lt;span style=&quot; font-style:italic;&quot;&gt;getstakingstatus&lt;/span&gt; will confirm that staking is active. &lt;/li&gt;&lt;/ol&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+46"/>
+        <location line="+72"/>
         <source>4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+99"/>
+        <location line="+90"/>
         <source>5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+131"/>
+        <location line="+90"/>
         <source>6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-212"/>
+        <location line="-162"/>
         <source>Where should I go if I need support?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-268"/>
-        <source>
-                           &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;
-                           GAMEFRAG is a form of digital online money using blockchain technology
-                           that can be easily transferred globally, instantly, and with near
-                           zero fees.  GAMEFRAG incorporates market leading security &amp;
-                           privacy and is also the first PoS (Proof of Stake) Cryptocurrency
-                           to implement Sapling(SHIELD), a zk-SNARKs based privacy protocol.
-                           &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;
-                           GAMEFRAG utilizes a Proof of Stake (PoS) consensus system algorithm,
-                           allowing all owners of GAMEFRAG to participate in earning block rewards
-                           while securing the network with full node wallets, as well as to
-                           run Masternodes to create and vote on proposals.
-                           &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
-                         </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+294"/>
-        <source>
-                           &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;
-                           We have support channels in most of our official chat groups, for example
-                           &lt;a style=&apos;color: #b088ff&apos; href=&apos;https://discord.game-frag.com&apos;&gt;
-                           #support in our Discord&lt;/a&gt;.
-                           If you prefer to submit a ticket, You can do so at
-                           &lt;a style=&apos;color: #b088ff&apos; href=&apos;https://GAMEFRAG.freshdesk.com&apos;&gt;
-                           our Freshdesk support site&lt;/a&gt;.
-                           &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
-                         </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+73"/>
+        <location line="+90"/>
         <source>What is a Masternode?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+131"/>
+        <location line="+90"/>
         <source>What is a Masternode Controller?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+26"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;A Masternode Controller wallet is where the 250,000 FRAG collateral can reside during a Controller-Remote masternode setup. It is a wallet that can activate the remote masternode wallet(s) and allows you to keep your collateral coins offline while the remote masternode remains online. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-131"/>
-        <source>
-                           &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;
-                           A masternode is a computer running a full node GAMEFRAG core wallet with a
-                           requirement of 250,000 FRAG secured collateral to provide extra services
-                           to the network and in return, receive a portion of the block reward
-                           regularly.  These services include:
-                           &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;
-
-                           &lt;ul&gt;
-                           &lt;li&gt;Instant transactions (SwiftX)&lt;/li&gt;
-                           &lt;li&gt;A decentralized governance (Proposal Voting)&lt;/li&gt;
-                           &lt;li&gt;A decentralized budgeting system (Treasury)&lt;/li&gt;
-                           &lt;li&gt;Validation of transactions within each block&lt;/li&gt;
-                           &lt;li&gt;Act as an additional full node in the network&lt;/li&gt;
-                           &lt;/ul&gt;
-
-                           &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;
-                           For providing such services, masternodes are also paid a certain portion
-                           of reward for each block. This can serve as a passive income to the
-                           masternode owners minus their running cost.
-                           &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;
-
-                           Masternode Perks:
-                           &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;
-                           &lt;ul&gt;
-                           &lt;li&gt;Participate in GAMEFRAG Governance&lt;/li&gt;
-                           &lt;li&gt;Earn Masternode Rewards&lt;/li&gt;
-                           &lt;li&gt;Commodity option for future sale&lt;/li&gt;
-                           &lt;li&gt;Help secure the GAMEFRAG network&lt;/li&gt;
-                           &lt;/ul&gt;
-                           &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;
-
-                           Requirements:
-                           &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;
-                           &lt;ul&gt;
-                           &lt;li&gt;250,000 FRAG per single Masternode instance&lt;/li&gt;
-                           &lt;li&gt;Must be stored in a core wallet&lt;/li&gt;
-                           &lt;li&gt;Need dedicated IP address&lt;/li&gt;
-                           &lt;li&gt;Masternode wallet to remain online&lt;/li&gt;
-                           &lt;/ul&gt;
-                           &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
-                         </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-856"/>
+        <location line="-890"/>
         <source>Frequently Asked Questions</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5121,6 +5031,146 @@ There was an error trying to save the address list to %1. Please try again.</sou
     <message>
         <location line="+34"/>
         <source>You can read more here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gamefrag/settings/settingsfaqwidget.cpp" line="+71"/>
+        <source>GAMEFRAG is a form of digital online money using blockchain technology that can be easily transferred globally, instantly, and with near zero fees. GAMEFRAG incorporates market leading security &amp; privacy and is also the first PoS (Proof of Stake) Cryptocurrency to implement Sapling(SHIELD), a zk-SNARKs based privacy protocol.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>GAMEFRAG utilizes a Proof of Stake (PoS) consensus system algorithm, allowing all owners of GAMEFRAG to participate in earning block rewards while securing the network with full node wallets, as well as to run Masternodes to create and vote on proposals.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Newly received GAMEFRAG requires 6 confirmations on the network to become eligible for spending which can take ~6 minutes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Your GAMEFRAG wallet also needs to be completely synchronized to see and spend balances on the network.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Make sure your wallet is completely synchronized and you are using the latest release.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>You must have a balance of GAMEFRAG with a minimum of 600 confirmations.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Your wallet must stay online and be unlocked for staking purposes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Once all those steps are followed staking should be enabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. The package will be lit up and will state &quot;Staking Enabled&quot; to indicate it is staking. Using the command line interface (%1); the command %2 will confirm that staking is active.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>We have support channels in most of our official chat groups, for example %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>#support in our Discord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>A masternode is a computer running a full node GAMEFRAG core wallet with a requirement of 250,000 FRAG secured collateral to provide extra services to the network and in return, receive a portion of the block reward regularly. These services include:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>A decentralized governance (Proposal Voting)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>A decentralized budgeting system (Treasury)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Validation of transactions within each block</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Act as an additional full node in the network</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>For providing such services, masternodes are also paid a certain portion of reward for each block. This can serve as a passive income to the masternode owners minus their running cost.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Masternode Perks:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Participate in GAMEFRAG Governance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Earn Masternode Rewards</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Commodity option for future sale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Help secure the GAMEFRAG network</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Requirements:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>250,000 FRAG per single Masternode instance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Must be stored in a core wallet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Need dedicated IP address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Masternode wallet to remain online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>A Masternode Controller wallet is where the 250,000 FRAG collateral can reside during a Controller-Remote masternode setup. It is a wallet that can activate the remote masternode wallet(s) and allows you to keep your collateral coins offline while the remote masternode remains online.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5262,7 +5312,7 @@ There was an error trying to save the address list to %1. Please try again.</sou
         <translation type="unfinished">Out:</translation>
     </message>
     <message>
-        <location line="+56"/>
+        <location line="+59"/>
         <source>No available data</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6111,7 +6161,7 @@ Are you sure?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gamefrag/splash.cpp" line="+30"/>
+        <location filename="../gamefrag/splash.cpp" line="+31"/>
         <source>GAMEFRAG Core</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6171,7 +6221,7 @@ Are you sure?
     </message>
     <message>
         <location line="+213"/>
-        <location filename="../gamefrag/topbar.cpp" line="+688"/>
+        <location filename="../gamefrag/topbar.cpp" line="+668"/>
         <source>Available</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6186,13 +6236,13 @@ Are you sure?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gamefrag/topbar.cpp" line="-387"/>
-        <location line="+359"/>
+        <location filename="../gamefrag/topbar.cpp" line="-369"/>
+        <location line="+341"/>
         <source>Wallet Unlocked for staking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-329"/>
+        <location line="-311"/>
         <source>Error generating address</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6212,7 +6262,7 @@ Are you sure?
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location line="+31"/>
+        <location line="+32"/>
         <source>%n active connection(s)</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -6220,7 +6270,7 @@ Are you sure?
         </translation>
     </message>
     <message>
-        <location line="+34"/>
+        <location line="+15"/>
         <source>Synchronized - Block: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6294,13 +6344,13 @@ backup will be created.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-526"/>
-        <location line="+531"/>
+        <location line="-508"/>
+        <location line="+513"/>
         <source>Tor Disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-541"/>
+        <location line="-523"/>
         <source>FAQ</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6348,13 +6398,13 @@ backup will be created.
     </message>
     <message>
         <location line="+119"/>
-        <location line="+394"/>
+        <location line="+376"/>
         <source>Wallet Locked</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-378"/>
-        <location line="+386"/>
+        <location line="-360"/>
+        <location line="+368"/>
         <source>Wallet Unlocked</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6453,7 +6503,7 @@ backup will be created.
 <context>
     <name>TransactionTableModel</name>
     <message>
-        <location filename="../transactiontablemodel.cpp" line="+334"/>
+        <location filename="../transactiontablemodel.cpp" line="+330"/>
         <source>Date</source>
         <translation>Date</translation>
     </message>
@@ -6646,7 +6696,7 @@ backup will be created.
         <translation>(n/a)</translation>
     </message>
     <message>
-        <location line="+207"/>
+        <location line="+205"/>
         <source>Transaction status. Hover over this field to show number of confirmations.</source>
         <translation>Transaction status. Hover over this field to show number of confirmations.</translation>
     </message>
@@ -6853,7 +6903,7 @@ backup will be created.
 <context>
     <name>WalletModel</name>
     <message>
-        <location filename="../walletmodel.cpp" line="+448"/>
+        <location filename="../walletmodel.cpp" line="+502"/>
         <source>Send Coins</source>
         <translation>Send Coins</translation>
     </message>
@@ -6977,12 +7027,7 @@ GAMEFRAG Core Wallet</source>
         <translation type="unfinished">Bind to given address to listen for JSON-RPC connections. Use [host]:port notation for IPv6. This option can be specified multiple times (default: bind to all interfaces)</translation>
     </message>
     <message>
-        <location line="+9"/>
-        <source>Cannot obtain a lock on data directory %s. GAMEFRAG Core is probably already running.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
+        <location line="+14"/>
         <source>Change automatic finalized budget voting behavior. mode=auto: Vote for only exact finalized budget match to my generated budget. (string, default: auto)</source>
         <translation type="unfinished">Change automatic finalized budget voting behavior. mode=auto: Vote for only exact finalized budget match to my generated budget. (string, default: auto)</translation>
     </message>
@@ -7018,11 +7063,6 @@ GAMEFRAG Core Wallet</source>
     </message>
     <message>
         <location line="+2"/>
-        <source>Enter regression test mode, which uses a special chain in which blocks can be solved instantly.</source>
-        <translation type="unfinished">Enter regression test mode, which uses a special chain in which blocks can be solved instantly.</translation>
-    </message>
-    <message>
-        <location line="+3"/>
         <source>Error: Listening for incoming connections failed (listen returned error %s)</source>
         <translation type="unfinished">Error: Listening for incoming connections failed (listen returned error %s)</translation>
     </message>
@@ -7052,7 +7092,7 @@ GAMEFRAG Core Wallet</source>
         <translation type="unfinished">Execute command when the best block changes (%s in cmd is replaced by block hash)</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+9"/>
         <source>Flush database activity from memory pool to disk log every &lt;n&gt; megabytes (default: %u)</source>
         <translation type="unfinished">Flush database activity from memory pool to disk log every &lt;n&gt; megabytes (default: %u)</translation>
     </message>
@@ -7060,11 +7100,6 @@ GAMEFRAG Core Wallet</source>
         <location line="+3"/>
         <source>If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</source>
         <translation type="unfinished">If paytxfee is not set, include enough fee so transactions begin confirmation on average within n blocks (default: %u)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>In this mode -genproclimit controls how many blocks are generated immediately.</source>
-        <translation type="unfinished">In this mode -genproclimit controls how many blocks are generated immediately.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -7147,7 +7182,7 @@ GAMEFRAG Core Wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+5"/>
         <source>The block database contains a block which appears to be from the future. This may be due to your computer&apos;s date and time being set incorrectly. Only rebuild the block database if you are sure that your computer&apos;s date and time are correct</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7167,7 +7202,7 @@ GAMEFRAG Core Wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+5"/>
         <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: %s)</source>
         <translation type="unfinished">Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: %s)</translation>
     </message>
@@ -7197,7 +7232,7 @@ GAMEFRAG Core Wallet</source>
         <translation type="unfinished">Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+8"/>
         <source>Whitelist peers connecting from the given netmask or IP address. Can be specified multiple times.</source>
         <translation type="unfinished">Whitelist peers connecting from the given netmask or IP address. Can be specified multiple times.</translation>
     </message>
@@ -7247,7 +7282,7 @@ GAMEFRAG Core Wallet</source>
         <translation type="unfinished">Block creation options:</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Connect through SOCKS5 proxy</source>
         <translation type="unfinished">Connect through SOCKS5 proxy</translation>
     </message>
@@ -7422,12 +7457,7 @@ GAMEFRAG Core Wallet</source>
         <translation type="unfinished">Information</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Initialization sanity check failed. GAMEFRAG Core is shutting down.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Insufficient funds.</source>
         <translation type="unfinished">Insufficient funds.</translation>
     </message>
@@ -7452,27 +7482,22 @@ GAMEFRAG Core Wallet</source>
         <translation type="unfinished">Invalid netmask specified in -whitelist: &apos;%s&apos;</translation>
     </message>
     <message>
-        <location line="-123"/>
+        <location line="-129"/>
         <source>This is a pre-release test build - use at your own risk - do not use for staking or merchant applications!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-100"/>
+        <location line="-97"/>
         <source>Error: Unsupported argument -checklevel found. Checklevel must be level 4.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+18"/>
-        <source>Execute command when the best block changes and its size is over (%s in cmd is replaced by block hash, %d with the block size)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+65"/>
+        <location line="+77"/>
         <source>Specify custom backup path to add a copy of any wallet backup. If set as dir, every backup generates a timestamped file. If set as file, will rewrite to that file every backup.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+61"/>
+        <location line="+69"/>
         <source>&lt;category&gt; can be:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7482,7 +7507,7 @@ GAMEFRAG Core Wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+21"/>
+        <location line="+22"/>
         <source>Display the stake modifier calculations in the debug.log file.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7522,7 +7547,7 @@ GAMEFRAG Core Wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-273"/>
+        <location line="-272"/>
         <source>(1 = keep tx meta data e.g. payment request information, 2 = drop tx meta data)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7539,7 +7564,7 @@ Please run &apos;sapling-fetch-params&apos; or &apos;./util/fetch-params.sh&apos
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+7"/>
         <source>Cannot upgrade to Sapling wallet (already running Sapling support). Version: %d</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7549,17 +7574,17 @@ Please run &apos;sapling-fetch-params&apos; or &apos;./util/fetch-params.sh&apos
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+126"/>
+        <location line="+120"/>
         <source>This file contains all of your private keys in plain text. DO NOT send this file to anyone!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+36"/>
+        <location line="+39"/>
         <source>Warning: error reading %s! All keys read correctly, but transaction data or address book entries might be missing or incorrect.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+14"/>
         <source>A fatal internal error occurred, see debug.log for details</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7584,7 +7609,7 @@ Please run &apos;sapling-fetch-params&apos; or &apos;./util/fetch-params.sh&apos
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+27"/>
         <source>Error loading %s: Wallet corrupted</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7675,7 +7700,7 @@ Please run &apos;sapling-fetch-params&apos; or &apos;./util/fetch-params.sh&apos
         <translation type="unfinished">Loading wallet...</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Location of the auth cookie (default: data dir)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7720,12 +7745,12 @@ Please run &apos;sapling-fetch-params&apos; or &apos;./util/fetch-params.sh&apos
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+46"/>
+        <location line="+48"/>
         <source>Specify zk params directory (default: %s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-45"/>
+        <location line="-47"/>
         <source>Need to specify a port with -whitebind: &apos;%s&apos;</source>
         <translation type="unfinished">Need to specify a port with -whitebind: &apos;%s&apos;</translation>
     </message>
@@ -7775,12 +7800,22 @@ Please run &apos;sapling-fetch-params&apos; or &apos;./util/fetch-params.sh&apos
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+66"/>
+        <location line="+65"/>
+        <source>Upgrading coins database if needed...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>Use block spam filter (default: %u)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+1"/>
+        <source>Use the test chain</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
         <source>Wallet debugging/testing options:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7790,12 +7825,17 @@ Please run &apos;sapling-fetch-params&apos; or &apos;./util/fetch-params.sh&apos
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-82"/>
+        <location line="-83"/>
         <source>Preparing for resync...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-303"/>
+        <location line="-312"/>
+        <source>Cannot obtain a lock on data directory %s. %s is probably already running.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
         <source>Connect only to the specified node(s); -noconnect or -connect=0 alone to disable automatic connections</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7825,7 +7865,7 @@ Please run &apos;sapling-fetch-params&apos; or &apos;./util/fetch-params.sh&apos
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+32"/>
+        <location line="+26"/>
         <source>Fees (in %s/Kb) smaller than this are considered zero fee for relaying, mining and transaction creation (default: %s)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7835,7 +7875,7 @@ Please run &apos;sapling-fetch-params&apos; or &apos;./util/fetch-params.sh&apos
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+31"/>
+        <location line="+28"/>
         <source>Minimum positive amount (in FRAG) allowed by GUI and RPC for the stake split threshold (default: %s)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7855,12 +7895,27 @@ Please run &apos;sapling-fetch-params&apos; or &apos;./util/fetch-params.sh&apos
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+28"/>
+        <location line="+5"/>
+        <source>System error while flushing the chainstate after pruning invalid entries. Possible corrupt database.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Unable to replay blocks. You will need to rebuild the database using -reindex.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>WARNING: The transaction has been signed and recorded, so the wallet will try to re-send it. Use &apos;abandontransaction&apos; to cancel it. (txid: %s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+28"/>
+        <location line="+21"/>
+        <source>Whether to save the mempool on shutdown and load on restart (default: %u)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
         <source>(must be %d for %s-net)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7886,6 +7941,11 @@ Please run &apos;sapling-fetch-params&apos; or &apos;./util/fetch-params.sh&apos
     </message>
     <message>
         <location line="+2"/>
+        <source>Chain selection options:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Change index out of range</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7911,7 +7971,12 @@ Please run &apos;sapling-fetch-params&apos; or &apos;./util/fetch-params.sh&apos
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+10"/>
+        <source>Initialization sanity check failed. %s is shutting down.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>Invalid -masternodeaddr address: %s</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7946,7 +8011,12 @@ Please run &apos;sapling-fetch-params&apos; or &apos;./util/fetch-params.sh&apos
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+12"/>
+        <source>Loading/Pruning invalid outputs...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
         <source>No error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7982,6 +8052,11 @@ Please run &apos;sapling-fetch-params&apos; or &apos;./util/fetch-params.sh&apos
     </message>
     <message>
         <location line="+1"/>
+        <source>Reaccepting wallet transactions...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Rebuild block chain index from current blk000??.dat files</source>
         <translation type="unfinished">Rebuild block chain index from current blk000??.dat files</translation>
     </message>
@@ -7994,6 +8069,11 @@ Please run &apos;sapling-fetch-params&apos; or &apos;./util/fetch-params.sh&apos
         <location line="+1"/>
         <source>Relay non-P2SH multisig (default: %u)</source>
         <translation type="unfinished">Relay non-P2SH multisig (default: %u)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Replaying blocks...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
@@ -8172,11 +8252,6 @@ Please run &apos;sapling-fetch-params&apos; or &apos;./util/fetch-params.sh&apos
     </message>
     <message>
         <location line="+1"/>
-        <source>This is intended for regression testing tools and app development.</source>
-        <translation type="unfinished">This is intended for regression testing tools and app development.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>This is not a masternode. &apos;local&apos; option disabled.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8261,22 +8336,12 @@ Please run &apos;sapling-fetch-params&apos; or &apos;./util/fetch-params.sh&apos
         <translation type="unfinished">Upgrade wallet to latest format</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Upgrading coins database...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Use UPnP to map the listening port (default: %u)</source>
         <translation type="unfinished">Use UPnP to map the listening port (default: %u)</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Use the test network</source>
-        <translation type="unfinished">Use the test network</translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+3"/>
         <source>User Agent comment (%s) contains unsafe characters.</source>
         <translation type="unfinished"></translation>
     </message>

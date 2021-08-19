@@ -9,6 +9,7 @@
 #include "budget/budgetmanager.h"
 #include "checkpoints.h"
 #include "clientversion.h"
+#include "core_io.h"
 #include "consensus/upgrades.h"
 #include "kernel.h"
 #include "masternodeman.h"
@@ -21,15 +22,11 @@
 #include "utilmoneystr.h"
 #include "utilstrencodings.h"
 #include "hash.h"
+#include "validationinterface.h"
 #include "wallet/wallet.h"
-#include "zfrag/zfragmodule.h"
-#include "zfragchain.h"
 
 #include <stdint.h>
-#include <fstream>
-#include <iostream>
 #include <univalue.h>
-#include <mutex>
 #include <numeric>
 #include <condition_variable>
 
@@ -46,7 +43,21 @@ static std::condition_variable cond_blockchange;
 static CUpdatedBlock latestblock;
 
 extern void TxToJSON(const CTransaction& tx, const uint256 hashBlock, UniValue& entry);
-void ScriptPubKeyToJSON(const CScript& scriptPubKey, UniValue& out, bool fIncludeHex);
+
+UniValue syncwithvalidationinterfacequeue(const JSONRPCRequest& request)
+{
+    if (request.fHelp || request.params.size() > 0) {
+        throw std::runtime_error(
+                "syncwithvalidationinterfacequeue\n"
+                "\nWaits for the validation interface queue to catch up on everything that was there when we entered this function.\n"
+                "\nExamples:\n"
+                + HelpExampleCli("syncwithvalidationinterfacequeue","")
+                + HelpExampleRpc("syncwithvalidationinterfacequeue","")
+        );
+    }
+    SyncWithValidationInterfaceQueue();
+    return NullUniValue;
+}
 
 double GetDifficulty(const CBlockIndex* blockindex)
 {
@@ -159,8 +170,8 @@ UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool tx
     ////////// Coin stake data ////////////////
     /////////
     if (block.IsProofOfStake()) {
-        uint256 hashProofOfStakeRet;
-        if (!GetStakeKernelHash(hashProofOfStakeRet, block, blockindex->pprev))
+        uint256 hashProofOfStakeRet{UINT256_ZERO};
+        if (blockindex->pprev && !GetStakeKernelHash(hashProofOfStakeRet, block, blockindex->pprev))
             throw JSONRPCError(RPC_INTERNAL_ERROR, "Cannot get proof of stake hash");
 
         std::string stakeModifier = (Params().GetConsensus().NetworkUpgradeActive(blockindex->nHeight, Consensus::UPGRADE_V3_4) ?
@@ -399,7 +410,7 @@ UniValue mempoolToJSON(bool fVerbose = false)
             info.pushKV("currentpriority", e.GetPriority(chainActive.Height()));
             info.pushKV("descendantcount", e.GetCountWithDescendants());
             info.pushKV("descendantsize", e.GetSizeWithDescendants());
-            info.pushKV("descendantfees", e.GetFeesWithDescendants());
+            info.pushKV("descendantfees", e.GetModFeesWithDescendants());
             const CTransaction& tx = e.GetTx();
             std::set<std::string> setDepends;
             for (const CTxIn& txin : tx.vin) {
@@ -456,7 +467,7 @@ UniValue getrawmempool(const JSONRPCRequest& request)
             "    \"currentpriority\" : n,  (numeric) transaction priority now\n"
             "    \"descendantcount\" : n,  (numeric) number of in-mempool descendant transactions (including this one)\n"
             "    \"descendantsize\" : n,   (numeric) size of in-mempool descendants (including this one)\n"
-            "    \"descendantfees\" : n,   (numeric) fees of in-mempool descendants (including this one)\n"
+            "    \"descendantfees\" : n,   (numeric) modified fees (see above) of in-mempool descendants (including this one)\n"
             "    \"depends\" : [           (array) unconfirmed transactions used as inputs for this transaction\n"
             "        \"transactionid\",    (string) parent transaction id\n"
             "       ... ]\n"
@@ -679,15 +690,13 @@ UniValue getsupplyinfo(const JSONRPCRequest& request)
 
 struct CCoinsStats
 {
-    int nHeight;
-    uint256 hashBlock;
-    uint64_t nTransactions;
-    uint64_t nTransactionOutputs;
-    uint256 hashSerialized;
-    uint64_t nDiskSize;
-    CAmount nTotalAmount;
-
-    CCoinsStats() : nHeight(0), nTransactions(0), nTransactionOutputs(0), nTotalAmount(0) {}
+    int nHeight{0};
+    uint256 hashBlock{UINT256_ZERO};
+    uint64_t nTransactions{0};
+    uint64_t nTransactionOutputs{0};
+    uint256 hashSerialized{UINT256_ZERO};
+    uint64_t nDiskSize{0};
+    CAmount nTotalAmount{0};
 };
 
 static void ApplyStats(CCoinsStats &stats, CHashWriter& ss, const uint256& hash, const std::map<uint32_t, Coin>& outputs)
@@ -699,7 +708,7 @@ static void ApplyStats(CCoinsStats &stats, CHashWriter& ss, const uint256& hash,
     stats.nTransactions++;
     for (const auto& output : outputs) {
         ss << VARINT(output.first + 1);
-        ss << *(const CScriptBase*)(&output.second.out.scriptPubKey);
+        ss << output.second.out.scriptPubKey;
         ss << VARINT(output.second.out.nValue);
         stats.nTransactionOutputs++;
         stats.nTotalAmount += output.second.out.nValue;
@@ -856,7 +865,7 @@ UniValue gettxout(const JSONRPCRequest& request)
     }
     ret.pushKV("value", ValueFromAmount(coin.out.nValue));
     UniValue o(UniValue::VOBJ);
-    ScriptPubKeyToJSON(coin.out.scriptPubKey, o, true);
+    ScriptPubKeyToUniv(coin.out.scriptPubKey, o, true);
     ret.pushKV("scriptPubKey", o);
     ret.pushKV("coinbase", (bool)coin.fCoinBase);
 
@@ -1020,7 +1029,7 @@ UniValue getblockchaininfo(const JSONRPCRequest& request)
     obj.pushKV("verificationprogress", Checkpoints::GuessVerificationProgress(pChainTip));
     obj.pushKV("chainwork", pChainTip ? pChainTip->nChainWork.GetHex() : "");
     // Sapling shield pool value
-    obj.pushKV("shield_pool_value", ValuePoolDesc(pChainTip->nChainSaplingValue, pChainTip->nSaplingValue));
+    obj.pushKV("shield_pool_value", pChainTip ? ValuePoolDesc(pChainTip->nChainSaplingValue, pChainTip->nSaplingValue) : 0);
     obj.pushKV("initial_block_downloading", IsInitialBlockDownload());
     UniValue softforks(UniValue::VARR);
     softforks.push_back(SoftForkDesc("bip65", 5, pChainTip));
@@ -1141,9 +1150,13 @@ UniValue getchaintips(const JSONRPCRequest& request)
 UniValue mempoolInfoToJSON()
 {
     UniValue ret(UniValue::VOBJ);
+    ret.pushKV("loaded", mempool.IsLoaded());
     ret.pushKV("size", (int64_t) mempool.size());
     ret.pushKV("bytes", (int64_t) mempool.GetTotalTxSize());
     ret.pushKV("usage", (int64_t) mempool.DynamicMemoryUsage());
+    size_t maxmempool = gArgs.GetArg("-maxmempool", DEFAULT_MAX_MEMPOOL_SIZE) * 1000000;
+    ret.pushKV("mempoolminfee", ValueFromAmount(std::max(mempool.GetMinFee(maxmempool), ::minRelayTxFee).GetFeePerK()));
+    ret.pushKV("minrelaytxfee", ValueFromAmount(::minRelayTxFee.GetFeePerK()));
 
     return ret;
 }
@@ -1157,9 +1170,13 @@ UniValue getmempoolinfo(const JSONRPCRequest& request)
 
             "\nResult:\n"
             "{\n"
+            "  \"loaded\": true|false         (boolean) True if the mempool is fully loaded\n"
             "  \"size\": xxxxx                (numeric) Current tx count\n"
             "  \"bytes\": xxxxx               (numeric) Sum of all tx sizes\n"
             "  \"usage\": xxxxx               (numeric) Total memory usage for the mempool\n"
+            "  \"maxmempool\": xxxxx,         (numeric) Maximum memory usage for the mempool\n"
+            "  \"mempoolminfee\": xxxxx       (numeric) Minimum fee rate in " + CURRENCY_UNIT + "/kB for tx to be accepted. Is the maximum of minrelaytxfee and minimum mempool fee\n"
+            "  \"minrelaytxfee\": xxxxx       (numeric) Current minimum relay fee for transactions\n"
             "}\n"
 
             "\nExamples:\n" +
@@ -1301,7 +1318,6 @@ UniValue getblockindexstats(const JSONRPCRequest& request) {
                 "  \"txcount_all\": xxxxx            (numeric) tx count (including coinbase/coinstake)\n"
                 "  \"txbytes\": xxxxx                (numeric) Sum of the size of all txes over block range\n"
                 "  \"ttlfee\": xxxxx                 (numeric) Sum of the fee amount of all txes over block range\n"
-                "  \"ttlfee_all\": xxxxx             (numeric) Sum of the fee amount of all txes over block range\n"
                 "  \"feeperkb\": xxxxx               (numeric) Average fee per kb (excluding zc txes)\n"
                 "}\n"
 
@@ -1317,21 +1333,15 @@ UniValue getblockindexstats(const JSONRPCRequest& request) {
     ret.pushKV("Ending block", heightEnd);
 
     CAmount nFees = 0;
-    CAmount nFees_all = 0;
     int64_t nBytes = 0;
     int64_t nTxCount = 0;
     int64_t nTxCount_all = 0;
 
-    CBlockIndex* pindex = nullptr;
-    {
-        LOCK(cs_main);
-        pindex = chainActive[heightStart];
-    }
-
+    const CBlockIndex* pindex = WITH_LOCK(cs_main, return chainActive[heightEnd]);
     if (!pindex)
         throw JSONRPCError(RPC_INVALID_PARAMETER, "invalid block height");
 
-    while (true) {
+    while (pindex && pindex->nHeight >= heightStart) {
         CBlock block;
         if (!ReadBlockFromDisk(block, pindex)) {
             throw JSONRPCError(RPC_DATABASE_ERROR, "failed to read block from disk");
@@ -1340,51 +1350,40 @@ UniValue getblockindexstats(const JSONRPCRequest& request) {
         CAmount nValueIn = 0;
         CAmount nValueOut = 0;
         const int ntx = block.vtx.size();
+        const int firstTxIndex = block.IsProofOfStake() ? 2 : 1;
         nTxCount_all += ntx;
-        nTxCount = block.IsProofOfStake() ? nTxCount + ntx - 2 : nTxCount + ntx - 1;
+        nTxCount = nTxCount + ntx - firstTxIndex;
 
-        // loop through each tx in block and save size and fee
-        for (const auto& txIn : block.vtx) {
-            const CTransaction& tx = *txIn;
-            if (tx.IsCoinBase() || (tx.IsCoinStake() && !tx.HasZerocoinSpendInputs()))
+        // loop through each tx in block and save size and fee (except for coinbase/coinstake)
+        for (int idx = firstTxIndex; idx < ntx; idx++) {
+            const CTransaction& tx = *(block.vtx[idx]);
+
+            // zerocoin txes have fixed fee, don't count them here.
+            if (tx.ContainsZerocoins())
                 continue;
 
-            // fetch input value from prevouts and count spends
+            // Transaction size
+            nBytes += GetSerializeSize(tx, SER_NETWORK, CLIENT_VERSION);
+
+            // Transparent inputs
             for (unsigned int j = 0; j < tx.vin.size(); j++) {
-                if (tx.vin[j].IsZerocoinSpend() || tx.vin[j].IsZerocoinPublicSpend()) {
-                    continue;
-                }
                 COutPoint prevout = tx.vin[j].prevout;
-                CTransaction txPrev;
+                CTransactionRef txPrev;
                 uint256 hashBlock;
                 if(!GetTransaction(prevout.hash, txPrev, hashBlock, true))
                     throw JSONRPCError(RPC_DATABASE_ERROR, "failed to read tx from disk");
-                nValueIn += txPrev.vout[prevout.n].nValue;
+                nValueIn += txPrev->vout[prevout.n].nValue;
             }
+            // Shield inputs
+            nValueIn += tx.GetShieldedValueIn();
 
-            // zc spends have no fee
-            if (tx.HasZerocoinSpendInputs())
-                continue;
+            // Tranparent/Shield outputs
+            nValueOut += tx.GetValueOut();
 
-            // sum output values in nValueOut
-            for (unsigned int j = 0; j < tx.vout.size(); j++) {
-                nValueOut += tx.vout[j].nValue;
-            }
-
-            // update sums
-            nFees_all += nValueIn - nValueOut;
-            if (!tx.HasZerocoinMintOutputs()) {
-                nFees += nValueIn - nValueOut;
-                nBytes += GetSerializeSize(tx, SER_NETWORK, CLIENT_VERSION);
-            }
+            // update fee
+            nFees += nValueIn - nValueOut;
         }
-
-        if (pindex->nHeight < heightEnd) {
-            LOCK(cs_main);
-            pindex = chainActive.Next(pindex);
-        } else {
-            break;
-        }
+        pindex = pindex->pprev;
     }
 
     // get fee rate
@@ -1395,7 +1394,6 @@ UniValue getblockindexstats(const JSONRPCRequest& request) {
     ret.pushKV("txcount_all", (int64_t)nTxCount_all);
     ret.pushKV("txbytes", (int64_t)nBytes);
     ret.pushKV("ttlfee", FormatMoney(nFees));
-    ret.pushKV("ttlfee_all", FormatMoney(nFees_all));
     ret.pushKV("feeperkb", FormatMoney(nFeeRate.GetFeePerK()));
 
     return ret;
@@ -1469,6 +1467,7 @@ static const CRPCCommand commands[] =
     { "hidden",             "waitfornewblock",        &waitfornewblock,        true  },
     { "hidden",             "waitforblock",           &waitforblock,           true  },
     { "hidden",             "waitforblockheight",     &waitforblockheight,     true  },
+    { "hidden",             "syncwithvalidationinterfacequeue", &syncwithvalidationinterfacequeue, true },
 
 
 };

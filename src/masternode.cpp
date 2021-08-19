@@ -7,7 +7,6 @@
 
 #include "addrman.h"
 #include "init.h"
-#include "masternode-payments.h"
 #include "masternode-sync.h"
 #include "masternodeman.h"
 #include "netbase.h"
@@ -191,11 +190,11 @@ bool CMasternode::IsInputAssociatedWithPubkey() const
     CScript payee;
     payee = GetScriptForDestination(pubKeyCollateralAddress.GetID());
 
-    CTransaction txVin;
+    CTransactionRef txVin;
     uint256 hash;
     if(GetTransaction(vin.prevout.hash, txVin, hash, true)) {
-        for (CTxOut out : txVin.vout) {
-            if (out.nValue == 250000 * COIN && out.scriptPubKey == payee) return true;
+        for (const CTxOut& out : txVin->vout) {
+            if (out.nValue == MN_COLL_AMT && out.scriptPubKey == payee) return true;
         }
     }
 
@@ -289,7 +288,7 @@ bool CMasternodeBroadcast::Create(const CTxIn& txin,
     // Get block hash to ping (TODO: move outside of this function)
     const uint256& nBlockHashToPing = mnodeman.GetBlockHashToPing();
     CMasternodePing mnp(txin, nBlockHashToPing, GetAdjustedTime());
-    if (!mnp.Sign(keyMasternodeNew, pubKeyMasternodeNew)) {
+    if (!mnp.Sign(keyMasternodeNew, pubKeyMasternodeNew.GetID())) {
         strErrorRet = strprintf("Failed to sign ping, masternode=%s", txin.prevout.hash.ToString());
         LogPrint(BCLog::MASTERNODE,"CMasternodeBroadcast::Create -- %s\n", strErrorRet);
         mnbRet = CMasternodeBroadcast();
@@ -419,7 +418,7 @@ bool CMasternodeBroadcast::CheckAndUpdate(int& nDos)
         return error("%s : Got bad Masternode address signature", __func__);
     }
 
-    if (Params().NetworkID() == CBaseChainParams::MAIN) {
+    if (Params().NetworkIDString() == CBaseChainParams::MAIN) {
         if (addr.GetPort() != 42020) return false;
     } else if (addr.GetPort() == 42020)
         return false;
@@ -460,7 +459,7 @@ bool CMasternodeBroadcast::CheckAndUpdate(int& nDos)
     return true;
 }
 
-bool CMasternodeBroadcast::CheckInputsAndAdd(int& nDoS)
+bool CMasternodeBroadcast::CheckInputsAndAdd(int nChainHeight, int& nDoS)
 {
     // we are a masternode with the same vin (i.e. already activated) and this mnb is ours (matches our Masternode privkey)
     // so nothing to do here for us
@@ -478,7 +477,6 @@ bool CMasternodeBroadcast::CheckInputsAndAdd(int& nDoS)
 
     // search existing Masternode list
     CMasternode* pmn = mnodeman.Find(vin.prevout);
-
     if (pmn != NULL) {
         // nothing to do here if we already know about this masternode and it's enabled
         if (pmn->IsEnabled()) return true;
@@ -487,26 +485,16 @@ bool CMasternodeBroadcast::CheckInputsAndAdd(int& nDoS)
             mnodeman.Remove(pmn->vin.prevout);
     }
 
-    if (pcoinsTip->AccessCoin(vin.prevout).IsSpent()) {
+    const Coin& collateralUtxo = pcoinsTip->AccessCoin(vin.prevout);
+    if (collateralUtxo.IsSpent()) {
         LogPrint(BCLog::MASTERNODE,"mnb - vin %s spent\n", vin.prevout.ToString());
         return false;
     }
 
-    int nChainHeight = 0;
-    {
-        TRY_LOCK(cs_main, lockMain);
-        if (!lockMain) {
-            // not mnb fault, let it to be checked again later
-            mnodeman.mapSeenMasternodeBroadcast.erase(GetHash());
-            masternodeSync.mapSeenSyncMNB.erase(GetHash());
-            return false;
-        }
-        nChainHeight = chainActive.Height();
-    }
-
     LogPrint(BCLog::MASTERNODE, "mnb - Accepted Masternode entry\n");
-
-    if (pcoinsTip->GetCoinDepthAtHeight(vin.prevout, nChainHeight) < MasternodeCollateralMinConf()) {
+    const int utxoHeight = collateralUtxo.nHeight;
+    int collateralUtxoDepth = nChainHeight - utxoHeight + 1;
+    if (collateralUtxoDepth < MasternodeCollateralMinConf()) {
         LogPrint(BCLog::MASTERNODE,"mnb - Input must have at least %d confirmations\n", MasternodeCollateralMinConf());
         // maybe we miss few blocks, let this mnb to be checked again later
         mnodeman.mapSeenMasternodeBroadcast.erase(GetHash());
@@ -516,18 +504,11 @@ bool CMasternodeBroadcast::CheckInputsAndAdd(int& nDoS)
 
     // verify that sig time is legit in past
     // should be at least not earlier than block when 1000 FRAG tx got MASTERNODE_MIN_CONFIRMATIONS
-    uint256 hashBlock = UINT256_ZERO;
-    CTransaction tx2;
-    GetTransaction(vin.prevout.hash, tx2, hashBlock, true);
-    BlockMap::iterator mi = mapBlockIndex.find(hashBlock);
-    if (mi != mapBlockIndex.end() && (*mi).second) {
-        CBlockIndex* pMNIndex = (*mi).second;                                                        // block for 1000 GAMEFRAG tx -> 1 confirmation
-        CBlockIndex* pConfIndex = chainActive[pMNIndex->nHeight + MasternodeCollateralMinConf() - 1]; // block where tx got MASTERNODE_MIN_CONFIRMATIONS
-        if (pConfIndex->GetBlockTime() > sigTime) {
-            LogPrint(BCLog::MASTERNODE,"mnb - Bad sigTime %d for Masternode %s (%i conf block is at %d)\n",
-                sigTime, vin.prevout.hash.ToString(), MasternodeCollateralMinConf(), pConfIndex->GetBlockTime());
-            return false;
-        }
+    CBlockIndex* pConfIndex = WITH_LOCK(cs_main, return chainActive[utxoHeight + MasternodeCollateralMinConf() - 1]); // block where tx got MASTERNODE_MIN_CONFIRMATIONS
+    if (pConfIndex->GetBlockTime() > sigTime) {
+        LogPrint(BCLog::MASTERNODE,"mnb - Bad sigTime %d for Masternode %s (%i conf block is at %d)\n",
+            sigTime, vin.prevout.hash.ToString(), MasternodeCollateralMinConf(), pConfIndex->GetBlockTime());
+        return false;
     }
 
     LogPrint(BCLog::MASTERNODE,"mnb - Got NEW Masternode entry - %s - %lli \n", vin.prevout.hash.ToString(), sigTime);
@@ -614,7 +595,7 @@ bool CMasternodePing::CheckAndUpdate(int& nDos, bool fRequireAvailable, bool fCh
     // see if we have this Masternode
     CMasternode* pmn = mnodeman.Find(vin.prevout);
     const bool isMasternodeFound = (pmn != nullptr);
-    const bool isSignatureValid = (isMasternodeFound && CheckSignature(pmn->pubKeyMasternode));
+    const bool isSignatureValid = (isMasternodeFound && CheckSignature(pmn->pubKeyMasternode.GetID()));
 
     if(fCheckSigTimeOnly) {
         if (isMasternodeFound && !isSignatureValid) {

@@ -88,8 +88,10 @@ bool AppInit(int argc, char* argv[])
             return false;
         }
         // Check for -testnet or -regtest parameter (Params() calls are only valid after this clause)
-        if (!SelectParamsFromCommandLine()) {
-            fprintf(stderr, "Error: Invalid combination of -regtest and -testnet.\n");
+        try {
+            SelectParams(ChainNameFromCommandLine());
+        } catch(const std::exception& e) {
+            fprintf(stderr, "Error: %s\n", e.what());
             return false;
         }
 
@@ -106,6 +108,24 @@ bool AppInit(int argc, char* argv[])
                 fprintf(stderr, "Error: Command line contains unexpected token '%s', see bitcoind -h for a list of options.\n", argv[i]);
                 exit(EXIT_FAILURE);
             }
+        }
+
+        // -server defaults to true for bitcoind but not for the GUI so do this here
+        gArgs.SoftSetBoolArg("-server", true);
+        // Set this early so that parameter interactions go to console
+        InitLogging();
+        InitParameterInteraction();
+        if (!AppInitBasicSetup()) {
+            // UIError will have been called with detailed error, which ends up on console
+            exit(1);
+        }
+        if (!AppInitParameterInteraction()) {
+            // UIError will have been called with detailed error, which ends up on console
+            exit(1);
+        }
+        if (!AppInitSanityChecks()) {
+            // UIError will have been called with detailed error, which ends up on console
+            exit(1);
         }
 
 #ifndef WIN32
@@ -130,12 +150,9 @@ bool AppInit(int argc, char* argv[])
                 fprintf(stderr, "Error: setsid() returned %d errno %d\n", sid, errno);
         }
 #endif
-        gArgs.SoftSetBoolArg("-server", true);
 
         // Set this early so that parameter interactions go to console
-        InitLogging();
-        InitParameterInteraction();
-        fRet = AppInit2();
+        fRet = AppInitMain();
     } catch (const std::exception& e) {
         PrintExceptionContinue(&e, "AppInit()");
     } catch (...) {

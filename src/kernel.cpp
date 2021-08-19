@@ -18,8 +18,6 @@
 #include "zfragchain.h"
 #include "zfrag/zpos.h"
 
-#include <boost/assign/list_of.hpp>
-
 /**
  * CStakeKernel Constructor
  *

@@ -23,7 +23,7 @@ class CBlockHeader
 {
 public:
     // header
-    static const int32_t CURRENT_VERSION=8;     //!> Version 8 Sapling feature and tx v2
+    static const int32_t CURRENT_VERSION=10;    // since v5.1.99
     int32_t nVersion;
     uint256 hashPrevBlock;
     uint256 hashMerkleRoot;
@@ -31,7 +31,7 @@ public:
     uint32_t nBits;
     uint32_t nNonce;
     uint256 nAccumulatorCheckpoint;             // only for version 4, 5 and 6.
-    uint256 hashFinalSaplingRoot;               // only for version 8
+    uint256 hashFinalSaplingRoot;               // only for version 8+
 
     CBlockHeader()
     {
@@ -94,7 +94,7 @@ public:
     std::vector<unsigned char> vchBlockSig;
 
     // memory only
-    mutable bool fChecked;
+    mutable bool fChecked{false};
 
     CBlock()
     {
@@ -104,14 +104,14 @@ public:
     CBlock(const CBlockHeader &header)
     {
         SetNull();
-        *((CBlockHeader*)this) = header;
+        *(static_cast<CBlockHeader*>(this)) = header;
     }
 
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
     inline void SerializationOp(Stream& s, Operation ser_action) {
-        READWRITE(*(CBlockHeader*)this);
+        READWRITE(*static_cast<CBlockHeader*>(this));
         READWRITE(vtx);
         if(vtx.size() > 1 && vtx[1]->IsCoinStake())
             READWRITE(vchBlockSig);

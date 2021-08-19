@@ -144,7 +144,7 @@ public:
     void CheckSpentCollaterals(const std::vector<CTransactionRef>& vtx);
 
     /// Find an entry in the masternode list that is next to be paid
-    const CMasternode* GetNextMasternodeInQueueForPayment(int nBlockHeight, bool fFilterSigTime, int& nCount) const;
+    const CMasternode* GetNextMasternodeInQueueForPayment(int nBlockHeight, bool fFilterSigTime, int& nCount, const CBlockIndex* pChainTip = nullptr) const;
 
     /// Get the current winner for this block
     const CMasternode* GetCurrentMasterNode(int mod = 1, int64_t nBlockHeight = 0, int minProtocol = 0) const;
@@ -169,7 +169,7 @@ public:
     void Remove(const COutPoint& collateralOut);
 
     /// Update masternode list and maps using provided CMasternodeBroadcast
-    void UpdateMasternodeList(CMasternodeBroadcast mnb);
+    void UpdateMasternodeList(CMasternodeBroadcast& mnb);
 
     /// Get the time a masternode was last paid
     int64_t GetLastPaid(const MasternodeRef& mn, const CBlockIndex* BlockReading) const;

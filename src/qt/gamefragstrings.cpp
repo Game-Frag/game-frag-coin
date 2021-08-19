@@ -35,8 +35,7 @@ QT_TRANSLATE_NOOP("gamefrag-core", ""
 "Please run 'sapling-fetch-params' or './util/fetch-params.sh' and then "
 "restart."),
 QT_TRANSLATE_NOOP("gamefrag-core", ""
-"Cannot obtain a lock on data directory %s. GAMEFRAG Core is probably already "
-"running."),
+"Cannot obtain a lock on data directory %s. %s is probably already running."),
 QT_TRANSLATE_NOOP("gamefrag-core", ""
 "Cannot upgrade to Sapling wallet (already running Sapling support). Version: "
 "%d"),
@@ -80,9 +79,6 @@ QT_TRANSLATE_NOOP("gamefrag-core", ""
 QT_TRANSLATE_NOOP("gamefrag-core", ""
 "Enable spork administration functionality with the appropriate private key."),
 QT_TRANSLATE_NOOP("gamefrag-core", ""
-"Enter regression test mode, which uses a special chain in which blocks can "
-"be solved instantly."),
-QT_TRANSLATE_NOOP("gamefrag-core", ""
 "Error: Listening for incoming connections failed (listen returned error %s)"),
 QT_TRANSLATE_NOOP("gamefrag-core", ""
 "Error: Unsupported argument -checklevel found. Checklevel must be level 4."),
@@ -103,9 +99,6 @@ QT_TRANSLATE_NOOP("gamefrag-core", ""
 "Execute command when the best block changes (%s in cmd is replaced by block "
 "hash)"),
 QT_TRANSLATE_NOOP("gamefrag-core", ""
-"Execute command when the best block changes and its size is over (%s in cmd "
-"is replaced by block hash, %d with the block size)"),
-QT_TRANSLATE_NOOP("gamefrag-core", ""
 "Fees (in %s/Kb) smaller than this are considered zero fee for relaying, "
 "mining and transaction creation (default: %s)"),
 QT_TRANSLATE_NOOP("gamefrag-core", ""
@@ -117,9 +110,6 @@ QT_TRANSLATE_NOOP("gamefrag-core", ""
 QT_TRANSLATE_NOOP("gamefrag-core", ""
 "If paytxfee is not set, include enough fee so transactions begin "
 "confirmation on average within n blocks (default: %u)"),
-QT_TRANSLATE_NOOP("gamefrag-core", ""
-"In this mode -genproclimit controls how many blocks are generated "
-"immediately."),
 QT_TRANSLATE_NOOP("gamefrag-core", ""
 "Invalid amount for -maxtxfee=<amount>: '%s' (must be at least the minrelay "
 "fee of %s to prevent stuck transactions)"),
@@ -177,6 +167,9 @@ QT_TRANSLATE_NOOP("gamefrag-core", ""
 QT_TRANSLATE_NOOP("gamefrag-core", ""
 "Support filtering of blocks and transaction with bloom filters (default: %u)"),
 QT_TRANSLATE_NOOP("gamefrag-core", ""
+"System error while flushing the chainstate after pruning invalid entries. "
+"Possible corrupt database."),
+QT_TRANSLATE_NOOP("gamefrag-core", ""
 "The block database contains a block which appears to be from the future. "
 "This may be due to your computer's date and time being set incorrectly. Only "
 "rebuild the block database if you are sure that your computer's date and "
@@ -196,6 +189,9 @@ QT_TRANSLATE_NOOP("gamefrag-core", ""
 "Reduce the number or size of uacomments."),
 QT_TRANSLATE_NOOP("gamefrag-core", ""
 "Unable to bind to %s on this computer. GAMEFRAG Core is probably already running."),
+QT_TRANSLATE_NOOP("gamefrag-core", ""
+"Unable to replay blocks. You will need to rebuild the database using -"
+"reindex."),
 QT_TRANSLATE_NOOP("gamefrag-core", ""
 "Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: "
 "%s)"),
@@ -220,6 +216,8 @@ QT_TRANSLATE_NOOP("gamefrag-core", ""
 QT_TRANSLATE_NOOP("gamefrag-core", ""
 "Warning: error reading %s! All keys read correctly, but transaction data or "
 "address book entries might be missing or incorrect."),
+QT_TRANSLATE_NOOP("gamefrag-core", ""
+"Whether to save the mempool on shutdown and load on restart (default: %u)"),
 QT_TRANSLATE_NOOP("gamefrag-core", ""
 "Whitelist peers connecting from the given netmask or IP address. Can be "
 "specified multiple times."),
@@ -246,6 +244,7 @@ QT_TRANSLATE_NOOP("gamefrag-core", "Calculating money supply..."),
 QT_TRANSLATE_NOOP("gamefrag-core", "Can't generate a change-address key. Please call keypoolrefill first."),
 QT_TRANSLATE_NOOP("gamefrag-core", "Cannot resolve -%s address: '%s'"),
 QT_TRANSLATE_NOOP("gamefrag-core", "Cannot set -bind or -whitebind together with -listen=0"),
+QT_TRANSLATE_NOOP("gamefrag-core", "Chain selection options:"),
 QT_TRANSLATE_NOOP("gamefrag-core", "Change index out of range"),
 QT_TRANSLATE_NOOP("gamefrag-core", "Connect through SOCKS5 proxy"),
 QT_TRANSLATE_NOOP("gamefrag-core", "Connect to a node to retrieve peer addresses, and disconnect"),
@@ -298,7 +297,7 @@ QT_TRANSLATE_NOOP("gamefrag-core", "Imports blocks from external blk000??.dat fi
 QT_TRANSLATE_NOOP("gamefrag-core", "Include IP addresses in debug output (default: %u)"),
 QT_TRANSLATE_NOOP("gamefrag-core", "Incorrect or no genesis block found. Wrong datadir for network?"),
 QT_TRANSLATE_NOOP("gamefrag-core", "Information"),
-QT_TRANSLATE_NOOP("gamefrag-core", "Initialization sanity check failed. GAMEFRAG Core is shutting down."),
+QT_TRANSLATE_NOOP("gamefrag-core", "Initialization sanity check failed. %s is shutting down."),
 QT_TRANSLATE_NOOP("gamefrag-core", "Insufficient funds."),
 QT_TRANSLATE_NOOP("gamefrag-core", "Invalid -masternodeaddr address: %s"),
 QT_TRANSLATE_NOOP("gamefrag-core", "Invalid -masternodeaddr port %d, isn't the same as the peer port %d"),
@@ -325,6 +324,7 @@ QT_TRANSLATE_NOOP("gamefrag-core", "Loading masternode cache..."),
 QT_TRANSLATE_NOOP("gamefrag-core", "Loading masternode payment cache..."),
 QT_TRANSLATE_NOOP("gamefrag-core", "Loading sporks..."),
 QT_TRANSLATE_NOOP("gamefrag-core", "Loading wallet..."),
+QT_TRANSLATE_NOOP("gamefrag-core", "Loading/Pruning invalid outputs..."),
 QT_TRANSLATE_NOOP("gamefrag-core", "Location of the auth cookie (default: data dir)"),
 QT_TRANSLATE_NOOP("gamefrag-core", "Lock masternodes from masternode configuration file (default: %u)"),
 QT_TRANSLATE_NOOP("gamefrag-core", "Lookup(): Invalid -proxy address or hostname: '%s'"),
@@ -352,9 +352,11 @@ QT_TRANSLATE_NOOP("gamefrag-core", "Print version and exit"),
 QT_TRANSLATE_NOOP("gamefrag-core", "RPC server options:"),
 QT_TRANSLATE_NOOP("gamefrag-core", "Randomly drop 1 of every <n> network messages"),
 QT_TRANSLATE_NOOP("gamefrag-core", "Randomly fuzz 1 of every <n> network messages"),
+QT_TRANSLATE_NOOP("gamefrag-core", "Reaccepting wallet transactions..."),
 QT_TRANSLATE_NOOP("gamefrag-core", "Rebuild block chain index from current blk000??.dat files"),
 QT_TRANSLATE_NOOP("gamefrag-core", "Relay and mine data carrier transactions (default: %u)"),
 QT_TRANSLATE_NOOP("gamefrag-core", "Relay non-P2SH multisig (default: %u)"),
+QT_TRANSLATE_NOOP("gamefrag-core", "Replaying blocks..."),
 QT_TRANSLATE_NOOP("gamefrag-core", "Rescan the block chain for missing wallet transactions"),
 QT_TRANSLATE_NOOP("gamefrag-core", "Rescanning..."),
 QT_TRANSLATE_NOOP("gamefrag-core", "Run a thread to flush wallet periodically (default: %u)"),
@@ -391,7 +393,6 @@ QT_TRANSLATE_NOOP("gamefrag-core", "Synchronizing sporks..."),
 QT_TRANSLATE_NOOP("gamefrag-core", "The threshold value cannot be less than %s"),
 QT_TRANSLATE_NOOP("gamefrag-core", "This help message"),
 QT_TRANSLATE_NOOP("gamefrag-core", "This is experimental software."),
-QT_TRANSLATE_NOOP("gamefrag-core", "This is intended for regression testing tools and app development."),
 QT_TRANSLATE_NOOP("gamefrag-core", "This is not a masternode. 'local' option disabled."),
 QT_TRANSLATE_NOOP("gamefrag-core", "This is not a masternode."),
 QT_TRANSLATE_NOOP("gamefrag-core", "Threshold for disconnecting misbehaving peers (default: %u)"),
@@ -409,10 +410,10 @@ QT_TRANSLATE_NOOP("gamefrag-core", "Unable to start HTTP server. See debug log f
 QT_TRANSLATE_NOOP("gamefrag-core", "Unknown network specified in -onlynet: '%s'"),
 QT_TRANSLATE_NOOP("gamefrag-core", "Unsupported logging category %s=%s."),
 QT_TRANSLATE_NOOP("gamefrag-core", "Upgrade wallet to latest format"),
-QT_TRANSLATE_NOOP("gamefrag-core", "Upgrading coins database..."),
+QT_TRANSLATE_NOOP("gamefrag-core", "Upgrading coins database if needed..."),
 QT_TRANSLATE_NOOP("gamefrag-core", "Use UPnP to map the listening port (default: %u)"),
 QT_TRANSLATE_NOOP("gamefrag-core", "Use block spam filter (default: %u)"),
-QT_TRANSLATE_NOOP("gamefrag-core", "Use the test network"),
+QT_TRANSLATE_NOOP("gamefrag-core", "Use the test chain"),
 QT_TRANSLATE_NOOP("gamefrag-core", "User Agent comment (%s) contains unsafe characters."),
 QT_TRANSLATE_NOOP("gamefrag-core", "Username for JSON-RPC connections"),
 QT_TRANSLATE_NOOP("gamefrag-core", "Verifying blocks..."),

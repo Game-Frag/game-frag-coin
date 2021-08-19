@@ -36,6 +36,7 @@
 
 #include <algorithm>
 #include <fcntl.h>
+#include <sched.h>
 #include <sys/resource.h>
 #include <sys/stat.h>
 
@@ -737,13 +738,13 @@ void AllocateFileRange(FILE* file, unsigned int offset, unsigned int length)
 #ifdef WIN32
 fs::path GetSpecialFolderPath(int nFolder, bool fCreate)
 {
-    char pszPath[MAX_PATH] = "";
+    WCHAR pszPath[MAX_PATH] = L"";
 
-    if (SHGetSpecialFolderPathA(NULL, pszPath, nFolder, fCreate)) {
+    if (SHGetSpecialFolderPathW(nullptr, pszPath, nFolder, fCreate)) {
         return fs::path(pszPath);
     }
 
-    LogPrintf("SHGetSpecialFolderPathA() failed, could not obtain requested path.\n");
+    LogPrintf("SHGetSpecialFolderPathW() failed, could not obtain requested path.\n");
     return fs::path("");
 }
 #endif
@@ -838,3 +839,17 @@ int GetNumCores()
     return std::thread::hardware_concurrency();
 }
 
+
+int ScheduleBatchPriority(void)
+{
+#ifdef SCHED_BATCH
+    const static sched_param param{0};
+    if (int ret = pthread_setschedparam(pthread_self(), SCHED_BATCH, &param)) {
+        LogPrintf("Failed to pthread_setschedparam: %s\n", strerror(errno));
+        return ret;
+    }
+    return 0;
+#else
+    return 1;
+#endif
+}

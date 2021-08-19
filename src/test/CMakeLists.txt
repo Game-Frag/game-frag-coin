@@ -100,6 +100,7 @@ set(BITCOIN_TESTS
         ${CMAKE_CURRENT_SOURCE_DIR}/main_tests.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/mempool_tests.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/merkle_tests.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/miner_tests.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/multisig_tests.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/net_tests.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/netbase_tests.cpp
@@ -113,6 +114,7 @@ set(BITCOIN_TESTS
         ${CMAKE_CURRENT_SOURCE_DIR}/scheduler_tests.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/script_P2SH_tests.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/script_tests.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/script_standard_tests.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/scriptnum_tests.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/script_P2CS_tests.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/serialize_tests.cpp
@@ -124,16 +126,19 @@ set(BITCOIN_TESTS
         ${CMAKE_CURRENT_SOURCE_DIR}/timedata_tests.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/torcontrol_tests.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/transaction_tests.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/txvalidationcache_tests.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/uint256_tests.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/univalue_tests.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/util_tests.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/validation_tests.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/sha256compress_tests.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/upgrades_tests.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/validation_block_tests.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/librust/sapling_rpc_wallet_tests.cpp
         ${CMAKE_SOURCE_DIR}/src/wallet/test/wallet_tests.cpp
         ${CMAKE_SOURCE_DIR}/src/wallet/test/crypto_tests.cpp
         ${CMAKE_SOURCE_DIR}/src/wallet/test/wallet_shielded_balances_tests.cpp
+        ${CMAKE_SOURCE_DIR}/src/wallet/test/wallet_sapling_transactions_validations_tests.cpp
         )
 
 set(test_test_gamefrag_SOURCES ${BITCOIN_TEST_SUITE} ${BITCOIN_TESTS} ${JSON_TEST_FILES})

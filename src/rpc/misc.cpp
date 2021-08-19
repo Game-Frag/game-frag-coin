@@ -25,8 +25,6 @@
 
 #include <stdint.h>
 
-#include <boost/assign/list_of.hpp>
-
 #include <univalue.h>
 
 extern std::vector<CSporkDef> sporkDefs;
@@ -128,7 +126,7 @@ UniValue getinfo(const JSONRPCRequest& request)
         obj.pushKV("connections", (int)g_connman->GetNodeCount(CConnman::CONNECTIONS_ALL));
     obj.pushKV("proxy", (proxy.IsValid() ? proxy.proxy.ToStringIPPort() : std::string()));
     obj.pushKV("difficulty", (double)GetDifficulty());
-    obj.pushKV("testnet", Params().NetworkID() == CBaseChainParams::TESTNET);
+    obj.pushKV("testnet", Params().IsTestnet());
 
     // Add (cached) money supply via getsupplyinfo RPC
     UniValue supply_info = getsupplyinfo(JSONRPCRequest());
@@ -353,8 +351,6 @@ public:
 
     UniValue operator()(const CTxDestination &dest) const {
         UniValue ret(UniValue::VOBJ);
-        std::string currentAddress = EncodeDestination(dest, isStaking);
-        ret.pushKV("address", currentAddress);
         CScript scriptPubKey = GetScriptForDestination(dest);
         ret.pushKV("scriptPubKey", HexStr(scriptPubKey.begin(), scriptPubKey.end()));
 
@@ -613,7 +609,7 @@ UniValue setmocktime(const JSONRPCRequest& request)
 
     LOCK(cs_main);
 
-    RPCTypeCheck(request.params, boost::assign::list_of(UniValue::VNUM));
+    RPCTypeCheck(request.params, {UniValue::VNUM});
     SetMockTime(request.params[0].get_int64());
 
     uint64_t t = GetTime();

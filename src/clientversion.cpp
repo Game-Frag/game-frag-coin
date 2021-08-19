@@ -45,8 +45,8 @@ const std::string CLIENT_NAME("GAMEFRAG Core");
 //! git will put "#define GIT_ARCHIVE 1" on the next line inside archives. 
 #define GIT_ARCHIVE 1
 #ifdef GIT_ARCHIVE
-#define GIT_COMMIT_ID "641b107ea24ff1077e6f5047bffc2f54f91e2a14"
-#define GIT_COMMIT_DATE "Thu, 14 Jan 2021 09:15:35 -0800"
+#define GIT_COMMIT_ID "ed88818da232d2c65f91bc41edeb098dc8e2a015"
+#define GIT_COMMIT_DATE "Sun, 27 Jun 2021 14:12:13 -0700"
 #endif
 
 #define BUILD_DESC_WITH_SUFFIX(maj, min, rev, build, suffix) \

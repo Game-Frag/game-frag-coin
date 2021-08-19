@@ -6,8 +6,11 @@
 
 export LC_ALL=C
 
-chmod +x contrib/devtools/*.sh 
-chmod +x contrib/devtools/*.py
+
+contrib/devtools/git-subtree-check.sh src/secp256k1
+contrib/devtools/git-subtree-check.sh src/univalue
+contrib/devtools/git-subtree-check.sh src/leveldb
+contrib/devtools/git-subtree-check.sh src/crc32c
 contrib/devtools/check-doc.py
 contrib/devtools/logprint-scanner.py
 

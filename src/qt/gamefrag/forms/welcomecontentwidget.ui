@@ -1139,7 +1139,7 @@ GAMEFRAG Core Wallet</string>
                 <item>
                  <widget class="QLabel" name="labelMessage4">
                   <property name="text">
-                   <string>The masternode network is GAMEFRAG's second layer network on top of the blockchain that enables our DAO to provide decentralized network.</string>
+                   <string>The masternode network is GAMEFRAG's second layer network on top of the blockchain that enables our DAO to provide decentralized governance and a treasury.</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>

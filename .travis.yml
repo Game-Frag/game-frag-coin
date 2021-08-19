@@ -40,7 +40,6 @@ stages:
   - cmake
   - test
 
-
 env:
   global:
     - MAKEJOBS=-j3

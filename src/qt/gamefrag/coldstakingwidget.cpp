@@ -204,7 +204,6 @@ ColdStakingWidget::ColdStakingWidget(GAMEFRAGGUI* parent) :
 void ColdStakingWidget::loadWalletModel()
 {
     if (walletModel) {
-        coinControlDialog->setModel(walletModel);
         sendMultiRow->setWalletModel(walletModel);
         txModel = walletModel->getTransactionTableModel();
         csModel = new ColdStakingModel(walletModel, txModel, walletModel->getAddressTableModel(), this);
@@ -225,8 +224,6 @@ void ColdStakingWidget::loadWalletModel()
         ui->containerHistoryLabel->setVisible(false);
         ui->emptyContainer->setVisible(false);
         ui->listView->setVisible(false);
-
-        tryRefreshDelegations();
     }
 
 }
@@ -246,8 +243,14 @@ void ColdStakingWidget::walletSynced(bool sync)
     }
 }
 
+void ColdStakingWidget::showEvent(QShowEvent *event)
+{
+    tryRefreshDelegations();
+}
+
 void ColdStakingWidget::tryRefreshDelegations()
 {
+    if (!isVisible()) return;
     // Check for min update time to not reload the UI so often if the node is syncing.
     int64_t now = GetTime();
     if (lastRefreshTime + LOAD_MIN_TIME_INTERVAL < now) {
@@ -533,6 +536,7 @@ void ColdStakingWidget::onCoinControlClicked()
 {
     if (isInDelegation) {
         if (walletModel->getBalance() > 0) {
+            if (!coinControlDialog->hasModel()) coinControlDialog->setModel(walletModel);
             coinControlDialog->refreshDialog();
             setCoinControlPayAmounts();
             coinControlDialog->exec();

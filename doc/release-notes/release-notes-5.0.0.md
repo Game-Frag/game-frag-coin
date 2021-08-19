@@ -1,8 +1,8 @@
-GAMEFRAG Core version *v5.0.0* is now available from:  <https://github.com/Game-Frag/game-frag-coin/releases>
+GAMEFRAG Core version *v5.0.0* is now available from:  <https://github.com/gamefrag-project/gamefrag/releases>
 
 This is a new major version release, including various bug fixes and performance improvements, as well as updated translations.
 
-Please report bugs using the issue tracker at github: <https://github.com/Game-Frag/game-frag-coin/issues>
+Please report bugs using the issue tracker at github: <https://github.com/gamefrag-project/gamefrag/issues>
 
 
 Mandatory Update
@@ -10,7 +10,10 @@ Mandatory Update
 
 GAMEFRAG Core v5.0.0 is a mandatory update for all users. This release contains a protocol upgrade (to `70920`), new consensus rules and improvements that are not backwards compatible with older versions. Users will need to update their clients before enforcement of this update goes into effect.
 
-
+Update enforcement is currently scheduled to go into effect at the following block height:
+```
+Mainnet: 2,700,500
+```
 Masternodes will need to be restarted once both the masternode daemon and the controller wallet have been upgraded.
 
 Note: In preparation for the enforcement, upgraded peers will start rejecting non-upgraded peers few hours before the enforcement block height, we recommend everyone to be updated at max a day before the final time.
@@ -55,7 +58,7 @@ New SHIELD Protocol Implemented!
 
 #### Overview
 Users will be able to protect their financial information by sending and receiving FRAGs privately, as well as sending and receiving encrypted messages attached to the shield transactions.
-More visual information about the protocol can be found at https://game-frag.com .
+More visual information about the protocol can be found at https://www.game-frag.com .
 
 #### GUI features
 New set of functionalities for the interaction with the SHIELD protocol:

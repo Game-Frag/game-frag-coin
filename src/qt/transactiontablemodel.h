@@ -11,6 +11,12 @@
 #include <QAbstractTableModel>
 #include <QStringList>
 
+#include <memory>
+
+namespace interfaces {
+    class Handler;
+}
+
 class TransactionRecord;
 class TransactionTablePriv;
 class WalletModel;
@@ -54,8 +60,6 @@ public:
         LabelRole,
         /** Net amount of transaction */
         AmountRole,
-        /** Unique identifier */
-        TxIDRole,
         /** Transaction hash */
         TxHashRole,
         /** Is transaction confirmed? */
@@ -83,11 +87,15 @@ Q_SIGNALS:
     void txArrived(const QString& hash, const bool& isCoinStake, const bool& isCSAnyType);
 
 private:
-    CWallet* wallet;
-    WalletModel* walletModel;
-    QStringList columns;
-    TransactionTablePriv* priv;
-    bool fProcessingQueuedTransactions;
+    // Listeners
+    std::unique_ptr<interfaces::Handler> m_handler_transaction_changed;
+    std::unique_ptr<interfaces::Handler> m_handler_show_progress;
+
+    CWallet* wallet{nullptr};
+    WalletModel* walletModel{nullptr};
+    QStringList columns{};
+    TransactionTablePriv* priv{nullptr};
+    bool fProcessingQueuedTransactions{false};
 
     void subscribeToCoreSignals();
     void unsubscribeFromCoreSignals();

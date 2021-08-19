@@ -6,7 +6,6 @@
 
 #include "chain.h"
 #include "txdb.h"
-#include "zfrag/deterministicmint.h"
 #include "wallet/wallet.h"
 
 CFragStake* CFragStake::NewFragStake(const CTxIn& txin)
@@ -18,7 +17,7 @@ CFragStake* CFragStake::NewFragStake(const CTxIn& txin)
 
     // Find the previous transaction in database
     uint256 hashBlock;
-    CTransaction txPrev;
+    CTransactionRef txPrev;
     if (!GetTransaction(txin.prevout.hash, txPrev, hashBlock, true)) {
         error("%s : INFO: read txPrev failed, tx id prev: %s", __func__, txin.prevout.hash.GetHex());
         return nullptr;
@@ -36,7 +35,7 @@ CFragStake* CFragStake::NewFragStake(const CTxIn& txin)
         return nullptr;
     }
 
-    return new CFragStake(txPrev.vout[txin.prevout.n],
+    return new CFragStake(txPrev->vout[txin.prevout.n],
                          txin.prevout,
                          pindexFrom);
 }

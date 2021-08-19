@@ -1,5 +1,5 @@
 ---
-name: "gamefrag-osx-5.0"
+name: "gamefrag-osx-5.2"
 enable_cache: true
 distro: "ubuntu"
 suites:

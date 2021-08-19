@@ -11,18 +11,9 @@
 #include "tinyformat.h"
 #include "utilstrencodings.h"
 
-// contextual flag to guard the serialization for v5 upgrade.
-// can be removed once v5 enforcement is activated.
-std::atomic<bool> g_IsSaplingActive{false};
-
 std::string BaseOutPoint::ToStringShort() const
 {
     return strprintf("%s-%u", hash.ToString().substr(0,64), n);
-}
-
-uint256 BaseOutPoint::GetHash() const
-{
-    return Hash(BEGIN(hash), END(hash), BEGIN(n), END(n));
 }
 
 std::string COutPoint::ToString() const
@@ -125,9 +116,9 @@ uint256 CMutableTransaction::GetHash() const
     return SerializeHash(*this);
 }
 
-void CTransaction::UpdateHash() const
+uint256 CTransaction::ComputeHash() const
 {
-    *const_cast<uint256*>(&hash) = SerializeHash(*this);
+    return SerializeHash(*this);
 }
 
 size_t CTransaction::DynamicMemoryUsage() const
@@ -135,26 +126,10 @@ size_t CTransaction::DynamicMemoryUsage() const
     return memusage::RecursiveDynamicUsage(vin) + memusage::RecursiveDynamicUsage(vout);
 }
 
-CTransaction::CTransaction() : nVersion(CTransaction::CURRENT_VERSION), nType(TxType::NORMAL), vin(), vout(), nLockTime(0) { }
-
-CTransaction::CTransaction(const CMutableTransaction &tx) : nVersion(tx.nVersion), nType(tx.nType), vin(tx.vin), vout(tx.vout), nLockTime(tx.nLockTime), sapData(tx.sapData), extraPayload(tx.extraPayload) {
-    UpdateHash();
-}
-
-CTransaction::CTransaction(CMutableTransaction &&tx) : nVersion(tx.nVersion), nType(tx.nType), vin(std::move(tx.vin)), vout(std::move(tx.vout)), nLockTime(tx.nLockTime), sapData(tx.sapData), extraPayload(tx.extraPayload) {
-    UpdateHash();
-}
-
-CTransaction& CTransaction::operator=(const CTransaction &tx) {
-    *const_cast<int16_t*>(&nVersion) = tx.nVersion;
-    *const_cast<int16_t*>(&nType) = tx.nType;
-    *const_cast<std::vector<CTxIn>*>(&vin) = tx.vin;
-    *const_cast<std::vector<CTxOut>*>(&vout) = tx.vout;
-    *const_cast<unsigned int*>(&nLockTime) = tx.nLockTime;
-    *const_cast<uint256*>(&hash) = tx.hash;
-    *const_cast<Optional<SaplingTxData>*>(&sapData) = tx.sapData;
-    return *this;
-}
+/* For backward compatibility, the hash is initialized to 0. TODO: remove the need for this default constructor entirely. */
+CTransaction::CTransaction() : nVersion(CTransaction::CURRENT_VERSION), nType(TxType::NORMAL), vin(), vout(), nLockTime(0), hash() {}
+CTransaction::CTransaction(const CMutableTransaction &tx) : nVersion(tx.nVersion), nType(tx.nType), vin(tx.vin), vout(tx.vout), nLockTime(tx.nLockTime), sapData(tx.sapData), extraPayload(tx.extraPayload), hash(ComputeHash()) {}
+CTransaction::CTransaction(CMutableTransaction &&tx) : nVersion(tx.nVersion), nType(tx.nType), vin(std::move(tx.vin)), vout(std::move(tx.vout)), nLockTime(tx.nLockTime), sapData(tx.sapData), extraPayload(tx.extraPayload), hash(ComputeHash()) {}
 
 bool CTransaction::HasZerocoinSpendInputs() const
 {
@@ -194,31 +169,6 @@ bool CTransaction::IsCoinStake() const
         return false;
 
     return (vout.size() >= 2 && vout[0].IsEmpty());
-}
-
-bool CTransaction::CheckColdStake(const CScript& script) const
-{
-
-    // tx is a coinstake tx
-    if (!IsCoinStake())
-        return false;
-
-    // all inputs have the same scriptSig
-    CScript firstScript = vin[0].scriptSig;
-    if (vin.size() > 1) {
-        for (unsigned int i=1; i<vin.size(); i++)
-            if (vin[i].scriptSig != firstScript) return false;
-    }
-
-    // all outputs except first (coinstake marker) and last (masternode payout)
-    // have the same pubKeyScript and it matches the script we are spending
-    if (vout[1].scriptPubKey != script) return false;
-    if (vin.size() > 3) {
-        for (unsigned int i=2; i<vout.size()-1; i++)
-            if (vout[i].scriptPubKey != script) return false;
-    }
-
-    return true;
 }
 
 bool CTransaction::HasP2CSOutputs() const
