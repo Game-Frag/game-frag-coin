@@ -13,7 +13,7 @@
  * for both gamefragd and gamefrag-qt, to make it harder for attackers to
  * target servers or GUI users specifically.
  */
-const std::string CLIENT_NAME("GAMEFRAG Core");
+const std::string CLIENT_NAME(PACKAGE_NAME);
 
 /**
  * Client version number
@@ -45,8 +45,8 @@ const std::string CLIENT_NAME("GAMEFRAG Core");
 //! git will put "#define GIT_ARCHIVE 1" on the next line inside archives. 
 #define GIT_ARCHIVE 1
 #ifdef GIT_ARCHIVE
-#define GIT_COMMIT_ID "ed88818da232d2c65f91bc41edeb098dc8e2a015"
-#define GIT_COMMIT_DATE "Sun, 27 Jun 2021 14:12:13 -0700"
+#define GIT_COMMIT_ID "e05705aea04fab82d3c2026c01aecc84a69ac71d"
+#define GIT_COMMIT_DATE "Sun, 19 Dec 2021 15:37:48 -0300"
 #endif
 
 #define BUILD_DESC_WITH_SUFFIX(maj, min, rev, build, suffix) \
@@ -68,16 +68,7 @@ const std::string CLIENT_NAME("GAMEFRAG Core");
 #endif
 #endif
 
-#ifndef BUILD_DATE
-#ifdef GIT_COMMIT_DATE
-#define BUILD_DATE GIT_COMMIT_DATE
-#else
-#define BUILD_DATE __DATE__ ", " __TIME__
-#endif
-#endif
-
 const std::string CLIENT_BUILD(BUILD_DESC CLIENT_VERSION_SUFFIX);
-const std::string CLIENT_DATE(BUILD_DATE);
 
 static std::string FormatVersion(int nVersion)
 {

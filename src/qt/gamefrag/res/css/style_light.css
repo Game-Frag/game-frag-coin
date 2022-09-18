@@ -75,7 +75,7 @@ QPushButton[cssClass="img-nav-logo"] {
 }
 
 *[cssClass="btn-nav-receive"]:checked {
-     background-color: #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    background-color: #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
     font-size:14px;
     color: #FFFFFF; /* White. https://www.colorhexa.com/ffffff */
 }
@@ -353,6 +353,42 @@ QPushButton[cssClass="img-nav-logo"] {
     color: #FFFFFF; /* White. https://www.colorhexa.com/ffffff */
 }
 
+
+*[cssClass="btn-nav-governance"] {
+    qproperty-icon: url("://ic-nav-governance") off,
+                    url("://ic-nav-governance-active") on ;
+    qproperty-iconSize: 36px 36px;
+    background-color:transparent;
+    font-size:14px;
+	color: #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+}
+
+*[cssClass="btn-nav-governance"]:checked {
+    background-color: #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    font-size:14px;
+    color: #FFFFFF; /* White. https://www.colorhexa.com/ffffff */
+}
+
+*[cssClass="btn-nav-governance"]:checked:hover {
+    background-color: #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    color:  #FFFFFF; /* White. https://www.colorhexa.com/ffffff */
+}
+
+*[cssClass="btn-nav-governance"]:hover {
+    qproperty-icon: url("://ic-nav-governance-hover");
+    qproperty-iconSize: 36px 36px;
+    background-color: #1A000000; /* Black. https://www.colorhexa.com/000000 */
+    color: #FFFFFF; /* White. https://www.colorhexa.com/ffffff */
+}
+
+*[cssClass="btn-nav-governance-active"] {
+    qproperty-icon:url("://ic-nav-governance-active")  ;
+    qproperty-iconSize: 36px 36px;
+    background-color: #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    font-size:14px;
+    color: #FFFFFF; /* White. https://www.colorhexa.com/ffffff */
+}
+
 /*HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 HH       TOP BAR
 HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
@@ -470,7 +506,7 @@ QPushButton[cssClass="btn-check-faq"]:checked {
     background-color:#50000000; /* Black. https://www.colorhexa.com/000000 */
     border-bottom:2px solid #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
     border-radius:2px;
-}
+	}
 
 QPushButton[cssClass="btn-check-sync"] {
     qproperty-icon: url("://ic-check-sync");
@@ -1592,27 +1628,27 @@ QPushButton[cssClass="btn-secundary-label"] {
 }
 
 QPushButton[cssClass="btn-secundary-label"]:hover {
-    border:  1px solid #5c4b7d;
+    border:  1px solid #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
     background-color:#FFFFFF;
 }
 
 QPushButton[cssClass="btn-secundary-label"]:pressed {
-    border:  1px solid #5c4b7d;
-    background-color:#1A5c4b7d;
+    border:  1px solid #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    background-color:#1Af23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
 }
 
 QPushButton[cssClass="btn-secundary-copy"] {
     qproperty-icon: url("://ic-copy") off,
     url("://ic-copy") on ;
     qproperty-iconSize: 30px 30px;
-    border:  1px solid #335c4b7d;
+    border:  1px solid #33f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
     background-color:#FFFFFF;
     font-size:18px;
     padding-top:4px;
     padding-left:6px;
     padding-bottom:4px;
     padding-right:6px;
-    color: #5c4b7d;
+    color: #f23030;
     border-radius: 2px;
 }
 
@@ -1826,7 +1862,7 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 }
 
 *[cssClass="text-stake-frag"] {
-    color:#35281c; /* Very dark desaturated orange. https://www.colorhexa.com/35281c */
+	color:#f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
     font-size:16px;
     padding:10px;
     border-bottom: 5px solid #000000; /* Black. https://www.colorhexa.com/000000 */
@@ -1839,14 +1875,14 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
     border-bottom: 5px solid #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
 }
 
-*[cssClass="text-stake-zfrag"] {
+*[cssClass="text-stake-mn"] {
     color:#f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
     font-size:16px;
     padding:10px;
     border-bottom: 5px solid #000000; /* Black. https://www.colorhexa.com/000000 */
 }
 
-*[cssClass="text-stake-zfrag-disable"] {
+*[cssClass="text-stake-mn-disable"] {
     color:#000000; /* Black. https://www.colorhexa.com/000000 */
     font-size:16px;
     padding:10px;
@@ -1858,25 +1894,27 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
     font-size:16px;
 }
 
-*[cssClass="text-chart-zfrag"] {
-    color:#f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+*[cssClass="text-chart-mn"] {
+	color:#35281c; /* Very dark desaturated orange. https://www.colorhexa.com/35281c */
     font-size:16px;
     padding-left:4px;
 }
 
 *[cssClass="text-chart-frag"] {
-    color:#f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+	color:#f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
     font-size:16px;
     padding-left:4px;
 }
 
-*[cssClass="square-chart-zfrag"] {
-    background-color:#f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+*[cssClass="square-chart-mn"] {
+    
+	background-color:#35281c; /* Very dark desaturated orange. https://www.colorhexa.com/35281c */
     border:none;
 }
 
 *[cssClass="square-chart-frag"] {
-    background-color:#f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    
+	color:#f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
     border:none;
 }
 
@@ -2049,7 +2087,7 @@ QCheckBox {
     color:#707070; /* Very dark gray. https://www.colorhexa.com/707070 */
 }
 
-QCheckBox:checked  {
+QCheckBox:checked {
     spacing: 5px;
     font-size:18px;
     color:#000000; /* Black. https://www.colorhexa.com/000000 */
@@ -2068,6 +2106,10 @@ QCheckBox::indicator:checked {
     image: url("://ic-check-active");
 }
 
+QTreeView::indicator:indeterminate:disabled{
+    image: url("://ic-check-block")
+}
+
 
 QCheckBox[cssClass="btn-watch-password"] {
     spacing: 5px;
@@ -2082,6 +2124,28 @@ QCheckBox[cssClass="btn-watch-password"]::indicator:unchecked {
 
 QCheckBox[cssClass="btn-watch-password"]::indicator:checked {
     image: url("://ic-watch-password");
+}
+
+QCheckBox[cssClass="combo-light"] {
+    spacing: 5px;
+    font-size:18px;
+    color:#bababa;
+}
+
+QCheckBox[cssClass="combo-light"]:checked {
+    spacing: 5px;
+    font-size:18px;
+    color:#707070;
+}
+
+QCheckBox[cssClass="combo-light"]:hover {
+    spacing: 5px;
+    font-size:18px;
+    color: #707070;
+}
+
+QCheckBox[cssClass="combo-light"]::indicator:unchecked:hover {
+    image: url("://ic-check-box-light");
 }
 
 /*HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
@@ -2124,6 +2188,372 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
     padding:10px 10px;
 }
 
+/*HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+HH       PROPOSAL
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
+
+*[cssClass="dialog-proposal-message"] {
+    color:#707070; /* Very dark gray. https://www.colorhexa.com/707070 */
+    font-size:16px;
+}
+
+/*HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+HH       GOVERNANCE
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
+
+*[cssClass="label-budget-title"] {
+    color:#707070; /* Very dark gray. https://www.colorhexa.com/707070 */
+    font-size:22px;
+}
+
+
+*[cssClass="label-budget-text"] {
+    color:#707070; /* Very dark gray. https://www.colorhexa.com/707070 */
+    font-size:16px;
+}
+
+
+*[cssClass="label-budget-amount"] {
+    color:#707070; /* Very dark gray. https://www.colorhexa.com/707070 */
+    font-size:17px;
+}
+
+
+*[cssClass="label-budget-amount-allocated"] {
+    color:#bababa;
+    font-size:17px;
+}
+
+*[cssClass="ic-time"] {
+    qproperty-icon: url("://ic-time");
+    qproperty-iconSize: 26px 26px;
+    background-color: transparent;
+}
+
+/*HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+HH       GOVERNANCE CARD
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
+
+
+*[cssClass="card-governance"] {
+    background-color:#ffffff;
+    border:  1px solid #E0E0E0;
+    border-radius: 6px;
+}
+
+
+*[cssClass="card-title"] {
+    color:#4D4D4D;
+    font-size:20px;
+}
+
+*[cssClass="card-amount"] {
+    color:#4D4D4D;
+    font-size:18px;
+}
+
+*[cssClass="card-time"] {
+    color:#707070; /* Very dark gray. https://www.colorhexa.com/707070 */
+    font-size:14px;
+}
+
+
+*[cssClass="card-status-passing"] {
+    color:#4D4D4D;
+    font-size:12px;
+    border-radius:12px;
+    background-color:rgba(176, 136, 255, 0.2);
+    padding:6px 6px;
+}
+
+*[cssClass="card-status-not-passing"] {
+    color:#4D4D4D;
+    font-size:12px;
+    border-radius:12px;
+    background-color:rgba(186, 186, 186, 0.2);
+    padding:6px 6px;
+}
+
+*[cssClass="card-status-no-votes"] {
+    border: 1px solid #BABABA;
+    color:#4D4D4D;
+    font-size:12px;
+    border-radius:12px;
+    background-color:transparent;
+    padding:6px 6px;
+}
+
+*[cssClass="card-progress-box"] {
+    border: 1px solid #bababa;
+    border-radius: 2px;
+}
+
+
+*[cssClass="card-progress-no"] {
+    color:#4D4D4D;
+    font-size:14px;
+    padding-left:4px;
+    background-color:transparent;
+}
+
+
+*[cssClass="card-progress-no"]::chunk:horizontal {
+    background: #cbcbcb;
+    margin-right: 2px;
+}
+
+*[cssClass="label-progress-no"] {
+    color:#4D4D4D;
+}
+
+*[cssClass="label-progress-yes"] {
+    color:#f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+}
+
+*[cssClass="card-progress-yes"] {
+    color:#4D4D4D;
+    font-size:14px;
+    padding-right:4px;
+    background-color:transparent;
+}
+
+
+*[cssClass="card-progress-yes"]::chunk:horizontal {
+    background: transparent;
+    margin-right: 2px;
+}
+
+*[cssClass="btn-link"] {
+    qproperty-icon: url(" ");
+    qproperty-iconSize: 22px 22px;
+    background-image: url("://ic-link");
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-position: center center;
+}
+
+
+*[cssClass="btn-link"]:hover {
+    background-color: transparent;
+    background-image: url("://ic-link-hover");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+*[cssClass="card-btn-vote"] {
+    border:  1px solid #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    background-color:#FFFFFF;
+    font-size:18px;
+    padding:4px 10px;
+    color: #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    border-radius: 2px;
+}
+
+*[cssClass="card-btn-vote"]:hover {
+    background-color:rgba(92, 75, 125, 0.2);;
+ }
+
+/*HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+HH       VOTE DIALOG
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
+
+
+
+*[cssClass="vote-title"] {
+    color:#4D4D4D; /* Very Dark Gray https://www.colorhexa.com/4d4d4d */
+    font-size:22px;
+}
+
+*[cssClass="vote-amount"] {
+    color:#4D4D4D; /* Very Dark Gray https://www.colorhexa.com/4d4d4d */
+    font-size:20px;
+}
+
+*[cssClass="vote-time"] {
+    color:#707070; /* Very dark gray. https://www.colorhexa.com/707070 */
+    font-size:18px;
+}
+
+*[cssClass="btn-vote-select"] {
+    background: transparent;
+    border: 0px;
+    color:#f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    font-size:16px;
+}
+
+*[cssClass="btn-vote-select"]:hover {
+    text-decoration: underline;
+}
+
+*[cssClass="vote-message"] {
+    color:#707070; /* Very dark gray. https://www.colorhexa.com/707070 */
+    font-size:14px;
+}
+
+*[cssClass="vote-grid"] {
+    border: 1px solid #BABABA;
+    background-color:transparent;
+}
+
+*[cssClass="vote-progress"] {
+    color: #4d4d4d; /* Very Dark Gray https://www.colorhexa.com/4d4d4d */
+    font-size:14px;
+    background-color: transparent;
+    border-radius: 2px;
+}
+
+*[cssClass="vote-progress"]::chunk:horizontal {
+    background: rgba(238, 238, 238, 0.85);
+    border-right:1px solid  #bababa;
+}
+
+*[cssClass="vote-progress-no"] {
+    height: 36px;
+    color: #4d4d4d; /* Very Dark Gray https://www.colorhexa.com/4d4d4d */
+    font-size:14px;
+    background-color: transparent;
+    border-radius: 2px;
+}
+
+*[cssClass="vote-progress-no"]::chunk:horizontal {
+    background: rgba(238, 238, 238, 0.85);
+    height: 36px;
+}
+
+*[cssClass="vote-progress-yes"] {
+    min-height: 36px;
+    color: #4d4d4d; /* Very Dark Gray https://www.colorhexa.com/4d4d4d */
+    font-size:14px;
+    background-color: transparent;
+    border-radius: 2px;
+}
+
+*[cssClass="vote-progress-yes"]::chunk:horizontal {
+    background: rgba(92, 75, 125, 0.2);
+}
+
+QCheckBox[cssClass="check-vote"] {
+    spacing: 5px;
+    padding:5px;
+    font-size:18px;
+    color:#707070; /* Very dark gray. https://www.colorhexa.com/707070 */
+}
+
+QCheckBox:checked[cssClass="check-vote"]  {
+    spacing: 5px;
+    font-size:18px;
+    color:#f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+}
+
+QCheckBox::indicator[cssClass="check-vote"] {
+    width: 24px;
+    height: 24px;
+}
+
+QCheckBox::indicator:unchecked[cssClass="check-vote"] {
+    image: url("://ic-check-vote");
+}
+
+QCheckBox::indicator:checked[cssClass="check-vote"] {
+    image: url("://ic-check-vote-active");
+}
+
+/*HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+HH       SELECT MASTER NODE
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
+
+
+*[cssClass="text-title-purple"] {
+    color: #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    font-size: 14px;
+}
+
+*[cssClass="text-purple"] {
+    color: #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    font-size: 14px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+*[cssClass="btn-dialog-secondary"] {
+    background: #FFFFFF; /* White. https://www.colorhexa.com/ffffff */
+    border:1px solid #bababa;
+    border-radius: 2px;
+    color: #4d4d4d; /* Very Dark Gray https://www.colorhexa.com/4d4d4d */
+    font-size: 14px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+
+*[cssClass="btn-dialog-secondary"]:hover {
+    border:1px solid #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    color: #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+}
+
+
+QHeaderView::section {
+    background-color: #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    color: white;
+    font-size: 14px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border: 1px solid #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+}
+
+
+QTreeView {
+    show-decoration-selected: 1;
+    background: white;
+    border: 1px solid #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    font-size: 14px;
+    color: #4d4d4d; /* Very Dark Gray https://www.colorhexa.com/4d4d4d */
+    padding-left: 0px;
+}
+
+QTreeView::item {
+    border:0px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 0px;
+    font-size: 14px;
+    color: #4d4d4d; /* Very Dark Gray https://www.colorhexa.com/4d4d4d */
+}
+
+QTreeView::item:hover {
+    background:rgba(176, 136, 255, 0.2);
+    border:0px;
+}
+
+QTreeView::item:selected {
+    color: #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    border:0px;
+}
+
+QTreeView::item:selected:active{
+    color: #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    border:0px;
+}
+
+QTreeView::item:selected:!active {
+    color:#f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    border:0px;
+}
+
+
+QTreeView::indicator {
+    width: 24px;
+    height: 24px;
+}
+
+
+QTreeView::indicator:unchecked {
+    image: url(://ic-check-box);
+}
+
+QTreeView::indicator:checked {
+    image: url(://ic-check-active);
+}
 
 /*HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 HH       SPIN BOX
@@ -2192,6 +2622,24 @@ QComboBox[cssClass="btn-combo-small"]::down-arrow {
     image: url("://ic-arrow-drop-down");
     width: 15px;
     height: 15px;
+}
+
+QComboBox[cssClass="btn-filter"] {
+    background-image: url("://ic-filter");
+    background-position:right center;
+    background-repeat:no-repeat;
+    background-color:#ffffff;
+    padding:10px 10px 10px 10px;
+    font-size:16px;
+    border:1px solid #ffffff;
+    color: #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    text-align: right;
+}
+
+QComboBox[cssClass="btn-filter"]::down-arrow {
+    image: url(noimg);
+    width: 24px;
+    height: 24px;
 }
 
 QComboBox[cssClass="btn-combo-edit"] {
@@ -2504,6 +2952,10 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
     font-size:22px;
 }
 
+*[cssClass="text-body-dialog"] {
+    color:#f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    font-size:16px;
+}
 
 *[cssClass="text-body1-dialog"] {
     color:#707070; /* Very dark gray. https://www.colorhexa.com/707070 */
@@ -2743,6 +3195,14 @@ QPushButton[cssClass="ic-arrow"]:checked{
     border:none;
 }
 
+*[cssClass="ic-chevron-left"] {
+    qproperty-icon: url("://ic-chevron-left") off,
+    url("://ic-chevron-left") on ;
+    qproperty-iconSize: 24px 24px;
+    background-color: transparent;
+    border:none;
+}
+
 *[cssClass="layout-arrow"] {
     background: url("://ic-arrow-right");
     background-repeat:no-repeat;
@@ -2794,7 +3254,7 @@ QPushButton[cssClass="btn-faq-exit"] {
     border:none;
     padding:0 30px 0 0;
     font-size:18px;
-    color:#CC000000; /* Black. https://www.colorhexa.com/000000 */
+    color:#FFFFFF; /* White. https://www.colorhexa.com/ffffff */
     text-align:left;
 }
 
@@ -3064,6 +3524,11 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
     color: #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
 }
 
+*[cssClass="btn-list-menu"]:checked{
+    font-size:16px;
+    color: #b088ff;
+}
+
 
 /*HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 HH        EMPTY LIST
@@ -3131,6 +3596,12 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
     background-color: transparent;
 }
 
+*[cssClass="img-empty-governance"] {
+    qproperty-icon: url("://img-empty-governance");
+    qproperty-iconSize: 100px 100px;
+    background-color: transparent;
+}
+
 /*HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 HH        TREE WIDGET
 HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
@@ -3169,6 +3640,10 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 #treeWidget::indicator:checked {
     image: url("://ic-check-active");
+}
+
+#treeWidget::indicator:unchecked:disabled {
+    image: url("://ic-check-block");
 }
 
 #treeWidget::item {

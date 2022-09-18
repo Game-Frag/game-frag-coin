@@ -50,7 +50,7 @@ static const int MAX_URI_LENGTH = 255;
 
 
 #define QAPP_ORG_NAME "GAMEFRAG"
-#define QAPP_ORG_DOMAIN "gamefrag.org"
+#define QAPP_ORG_DOMAIN "game-frag.com"
 #define QAPP_APP_NAME_DEFAULT "GAMEFRAG-Qt"
 #define QAPP_APP_NAME_TESTNET "GAMEFRAG-Qt-testnet"
 

@@ -2,15 +2,22 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#if defined(HAVE_CONFIG_H)
+#include "config/gamefrag-config.h"
+#endif
+
 #include "qt/gamefrag/settings/settingsfaqwidget.h"
 #include "qt/gamefrag/settings/forms/ui_settingsfaqwidget.h"
-#include <QScrollBar>
-#include <QMetaObject>
+#include "clientmodel.h"
 #include "qt/gamefrag/qtutils.h"
 
-SettingsFaqWidget::SettingsFaqWidget(GAMEFRAGGUI *parent) :
+#include <QScrollBar>
+#include <QMetaObject>
+
+SettingsFaqWidget::SettingsFaqWidget(GAMEFRAGGUI* parent, ClientModel* _model) :
     QDialog(parent),
-    ui(new Ui::SettingsFaqWidget)
+    ui(new Ui::SettingsFaqWidget),
+    clientModel(_model)
 {
     ui->setupUi(this);
     this->setStyleSheet(parent->styleSheet());
@@ -101,7 +108,7 @@ SettingsFaqWidget::SettingsFaqWidget(GAMEFRAGGUI *parent) :
                "package will be lit up and will state \"Staking Enabled\" to indicate "
                "it is staking. Using the command line interface (%1); the command %2 "
                "will confirm that staking is active.")
-                .arg("gamefrag-core", "<span style=\"font-style:italic\">getstakingstatus</span>")));
+                .arg("gamefrag-cli", "<span style=\"font-style:italic\">getstakingstatus</span>")));
     ui->labelContent_Stake->setText(stakeContent);
 
     QString supportContent = formatFAQContent(
@@ -112,10 +119,12 @@ SettingsFaqWidget::SettingsFaqWidget(GAMEFRAGGUI *parent) :
 
     QString masternodeContent = formatFAQContent(
         formatFAQParagraph(
-            tr("A masternode is a computer running a full node GAMEFRAG core wallet with a "
-               "requirement of 250,000 FRAG secured collateral to provide extra services "
+            tr("A masternode is a computer running a full node %1 wallet with a "
+               "requirement of %2 secured collateral to provide extra services "
                "to the network and in return, receive a portion of the block reward "
-               "regularly. These services include:") +
+               "regularly. These services include:")
+                .arg(PACKAGE_NAME)
+                .arg(GUIUtil::formatBalance(clientModel->getMNCollateralRequiredAmount(), BitcoinUnits::FRAG)) +
             formatFAQUnorderedList(
                 formatFAQListItem(tr("A decentralized governance (Proposal Voting)")) +
                 formatFAQListItem(tr("A decentralized budgeting system (Treasury)")) +
@@ -135,7 +144,8 @@ SettingsFaqWidget::SettingsFaqWidget(GAMEFRAGGUI *parent) :
         formatFAQParagraph(
             tr("Requirements:") +
             formatFAQUnorderedList(
-                formatFAQListItem(tr("250,000 FRAG per single Masternode instance")) +
+                formatFAQListItem(tr("%1 per single Masternode instance")
+                        .arg(GUIUtil::formatBalance(clientModel->getMNCollateralRequiredAmount(), BitcoinUnits::FRAG))) +
                 formatFAQListItem(tr("Must be stored in a core wallet")) +
                 formatFAQListItem(tr("Need dedicated IP address")) +
                 formatFAQListItem(tr("Masternode wallet to remain online")))));
@@ -143,10 +153,11 @@ SettingsFaqWidget::SettingsFaqWidget(GAMEFRAGGUI *parent) :
 
     QString mNControllerContent = formatFAQContent(
         formatFAQParagraph(
-            tr("A Masternode Controller wallet is where the 250,000 FRAG collateral "
+            tr("A Masternode Controller wallet is where the %1 collateral "
                "can reside during a Controller-Remote masternode setup. It is a wallet "
                "that can activate the remote masternode wallet(s) and allows you to keep "
-               "your collateral coins offline while the remote masternode remains online.")));
+               "your collateral coins offline while the remote masternode remains online.")
+                    .arg(GUIUtil::formatBalance(clientModel->getMNCollateralRequiredAmount(), BitcoinUnits::FRAG))));
     ui->labelContent_MNController->setText(mNControllerContent);
 
 

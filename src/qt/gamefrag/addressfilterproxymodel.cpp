@@ -3,7 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "qt/gamefrag/addressfilterproxymodel.h"
-#include <iostream>
+#include "qt/addresstablemodel.h"
 
 bool AddressFilterProxyModel::filterAcceptsRow(int row, const QModelIndex& parent) const
 {

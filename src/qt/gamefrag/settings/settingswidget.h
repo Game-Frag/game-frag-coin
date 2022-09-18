@@ -15,7 +15,6 @@
 #include "qt/gamefrag/settings/settingswalletoptionswidget.h"
 #include "qt/gamefrag/settings/settingsmainoptionswidget.h"
 #include "qt/gamefrag/settings/settingsdisplayoptionswidget.h"
-#include "qt/gamefrag/settings/settingsmultisendwidget.h"
 #include "qt/gamefrag/settings/settingsinformationwidget.h"
 #include "qt/gamefrag/settings/settingsconsolewidget.h"
 
@@ -57,7 +56,6 @@ private Q_SLOTS:
     // Wallet Configuration
     void onConfigurationClicked();
     void onBipToolClicked();
-    void onMultisendClicked();
     void onExportCSVClicked();
 
     // Options
@@ -92,7 +90,6 @@ private:
     SettingsWalletOptionsWidget *settingsWalletOptionsWidget{nullptr};
     SettingsMainOptionsWidget *settingsMainOptionsWidget{nullptr};
     SettingsDisplayOptionsWidget *settingsDisplayOptionsWidget{nullptr};
-    SettingsMultisendWidget *settingsMultisendWidget{nullptr};
     SettingsInformationWidget *settingsInformationWidget{nullptr};
     SettingsConsoleWidget *settingsConsoleWidget{nullptr};
 

@@ -3,6 +3,10 @@
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or https://www.opensource.org/licenses/mit-license.php.
 
+from decimal import Decimal
+import os
+import time
+
 from test_framework.test_framework import GamefragTestFramework
 from test_framework.util import (
     assert_equal,
@@ -12,9 +16,6 @@ from test_framework.util import (
     set_node_times,
 )
 
-from decimal import Decimal
-import os
-import time
 
 class GovernanceReorgTest(GamefragTestFramework):
 
@@ -66,10 +67,10 @@ class GovernanceReorgTest(GamefragTestFramework):
         # Setup Masternodes
         self.log.info("Masternodes setup...")
         ownerdir = os.path.join(self.options.tmpdir, "node%d" % self.minerAPos, "regtest")
-        self.mnOneTxHash = self.setupMasternode(minerA, minerA, self.masternodeOneAlias,
-                                                ownerdir, self.remoteOnePos, self.mnOnePrivkey)
-        self.mnTwoTxHash = self.setupMasternode(minerA, minerA, self.masternodeTwoAlias,
-                                                ownerdir, self.remoteTwoPos, self.mnTwoPrivkey)
+        self.mnOneCollateral = self.setupMasternode(minerA, minerA, self.masternodeOneAlias,
+                                                    ownerdir, self.remoteOnePos, self.mnOnePrivkey)
+        self.mnTwoCollateral = self.setupMasternode(minerA, minerA, self.masternodeTwoAlias,
+                                                    ownerdir, self.remoteTwoPos, self.mnTwoPrivkey)
 
         # Activate masternodes
         self.log.info("Masternodes activation...")
@@ -84,11 +85,11 @@ class GovernanceReorgTest(GamefragTestFramework):
         self.wait_until_mnsync_finished()
         self.controller_start_masternode(minerA, self.masternodeOneAlias)
         self.controller_start_masternode(minerA, self.masternodeTwoAlias)
-        self.wait_until_mn_preenabled(self.mnOneTxHash, 40)
-        self.wait_until_mn_preenabled(self.mnTwoTxHash, 40)
+        self.wait_until_mn_preenabled(self.mnOneCollateral.hash, 40)
+        self.wait_until_mn_preenabled(self.mnOneCollateral.hash, 40)
         self.send_3_pings([mn1, mn2])
-        self.wait_until_mn_enabled(self.mnOneTxHash, 120, [mn1, mn2])
-        self.wait_until_mn_enabled(self.mnTwoTxHash, 120, [mn1, mn2])
+        self.wait_until_mn_enabled(self.mnOneCollateral.hash, 120, [mn1, mn2])
+        self.wait_until_mn_enabled(self.mnOneCollateral.hash, 120, [mn1, mn2])
 
         # activate sporks
         self.log.info("Masternodes enabled. Activating sporks.")

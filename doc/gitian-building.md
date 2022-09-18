@@ -56,7 +56,7 @@ On Debian you might have to compile a suitable version of lxc or you can use Ubu
 
 #### macOS Builds
 
-In order to build and sign for macOS, you need to download the free SDK and extract a file. The steps are described [here](./gitian-building/gitian-building-mac-os-sdk.md). Alternatively, you can skip the macOS build by adding `--os=lw` below.
+In order to build and sign for macOS, you need to download the free SDK and extract a file. The steps are described [here](../contrib/macdeploy/README.md#sdk-extraction). Alternatively, you can skip the macOS build by adding `--os=lw` below.
 
 Initial Gitian Setup
 --------------------
@@ -120,7 +120,7 @@ git commit -S -a -m "Add $NAME $VERSION non-code signed signatures"
 git push --set-upstream $NAME $VERSION-not-codesigned
 ```
 
-You can also mail the files to Fuzzbawls (fuzzbawls@gamefrag.org) and he will commit them.
+You can also mail the files to Support (support@game-frag.com) and he will commit them.
 
 ```bash
 gpg --detach-sign ${VERSION}-linux/${NAME}/gamefrag-linux-*-build.assert

@@ -8,7 +8,6 @@
 #include "qt/gamefrag/txrow.h"
 #include "qt/gamefrag/qtutils.h"
 #include "guiutil.h"
-#include "walletmodel.h"
 #include "clientmodel.h"
 #include "optionsmodel.h"
 #include "utiltime.h"
@@ -53,9 +52,9 @@ DashboardWidget::DashboardWidget(GAMEFRAGGUI* parent) :
     // Staking Information
     setCssSubtitleScreen(ui->labelMessage);
     setCssProperty(ui->labelSquareFrag, "square-chart-frag");
-    setCssProperty(ui->labelSquarezFrag, "square-chart-zfrag");
+    setCssProperty(ui->labelSquareMN, "square-chart-mn");
     setCssProperty(ui->labelFrag, "text-chart-frag");
-    setCssProperty(ui->labelZfrag, "text-chart-zfrag");
+    setCssProperty(ui->labelMN, "text-chart-mn");
 
     // Staking Amount
     QFont fontBold;
@@ -63,7 +62,7 @@ DashboardWidget::DashboardWidget(GAMEFRAGGUI* parent) :
 
     setCssProperty(ui->labelChart, "legend-chart");
     setCssProperty(ui->labelAmountFrag, "text-stake-frag-disable");
-    setCssProperty(ui->labelAmountZfrag, "text-stake-zfrag-disable");
+    setCssProperty(ui->labelAmountMN, "text-stake-mn-disable");
 
     setCssProperty({ui->pushButtonAll,  ui->pushButtonMonth, ui->pushButtonYear}, "btn-check-time");
     setCssProperty({ui->comboBoxMonths,  ui->comboBoxYears}, "btn-combo-chart-selected");
@@ -220,13 +219,13 @@ void DashboardWidget::loadWalletModel()
     updateDisplayUnit();
 }
 
-void DashboardWidget::onTxArrived(const QString& hash, const bool& isCoinStake, const bool& isCSAnyType)
+void DashboardWidget::onTxArrived(const QString& hash, const bool isCoinStake, const bool isMNReward, const bool isCSAnyType)
 {
     showList();
     if (!isVisible()) return;
 #ifdef USE_QTCHARTS
-    if (isCoinStake) {
-        // Update value if this is our first stake
+    if (isCoinStake || isMNReward) {
+        // Update value if this is our first stake/reward
         if (!hasStakes && stakesFilter)
             hasStakes = stakesFilter->rowCount() > 0;
         tryChartRefresh();
@@ -492,9 +491,10 @@ void DashboardWidget::updateStakeFilter()
         if (yearFilter != 0) {
             if (filterByMonth) {
                 QDate monthFirst = QDate(yearFilter, monthFilter, 1);
+                QDate monthLast = QDate(yearFilter, monthFilter, monthFirst.daysInMonth());
                 stakesFilter->setDateRange(
                         QDateTime(monthFirst),
-                        QDateTime(QDate(yearFilter, monthFilter, monthFirst.daysInMonth()))
+                        QDateTime(monthLast).addSecs(86399) // last second of the day
                 );
             } else {
                 stakesFilter->setDateRange(
@@ -518,8 +518,8 @@ void DashboardWidget::updateStakeFilter()
     }
 }
 
-// pair FRAG, zFRAG
-const QMap<int, std::pair<qint64, qint64>> DashboardWidget::getAmountBy()
+// pair FRAG, MN Reward
+QMap<int, std::pair<qint64, qint64>> DashboardWidget::getAmountBy()
 {
     if (filterUpdateNeeded) {
         filterUpdateNeeded = false;
@@ -527,12 +527,12 @@ const QMap<int, std::pair<qint64, qint64>> DashboardWidget::getAmountBy()
     }
     const int size = stakesFilter->rowCount();
     QMap<int, std::pair<qint64, qint64>> amountBy;
-    // Get all of the stakes
+    // Get all the stakes
     for (int i = 0; i < size; ++i) {
         QModelIndex modelIndex = stakesFilter->index(i, TransactionTableModel::ToAddress);
         qint64 amount = llabs(modelIndex.data(TransactionTableModel::AmountRole).toLongLong());
         QDate date = modelIndex.data(TransactionTableModel::DateRole).toDateTime().date();
-        bool isFrag = modelIndex.data(TransactionTableModel::TypeRole).toInt() != TransactionRecord::StakeZFRAG;
+        bool isFrag = modelIndex.data(TransactionTableModel::TypeRole).toInt() != TransactionRecord::MNReward;
 
         int time = 0;
         switch (chartShow) {
@@ -562,7 +562,7 @@ const QMap<int, std::pair<qint64, qint64>> DashboardWidget::getAmountBy()
                 amountBy[time] = std::make_pair(amount, 0);
             } else {
                 amountBy[time] = std::make_pair(0, amount);
-                hasZfragStakes = true;
+                hasMNRewards = true;
             }
         }
     }
@@ -577,7 +577,7 @@ bool DashboardWidget::loadChartData(bool withMonthNames)
     }
 
     chartData = new ChartData();
-    chartData->amountsByCache = getAmountBy(); // pair FRAG, zFRAG
+    chartData->amountsByCache = getAmountBy(); // pair FRAG, MN Reward
 
     std::pair<int,int> range = getChartRange(chartData->amountsByCache);
     if (range.first == 0 && range.second == 0) {
@@ -591,21 +591,21 @@ bool DashboardWidget::loadChartData(bool withMonthNames)
     for (int j = range.first; j < range.second; j++) {
         int num = (isOrderedByMonth && j > daysInMonth) ? (j % daysInMonth) : j;
         qreal frag = 0;
-        qreal zfrag = 0;
+        qreal mn = 0;
         if (chartData->amountsByCache.contains(num)) {
             std::pair <qint64, qint64> pair = chartData->amountsByCache[num];
             frag = (pair.first != 0) ? pair.first / 100000000 : 0;
-            zfrag = (pair.second != 0) ? pair.second / 100000000 : 0;
+            mn = (pair.second != 0) ? pair.second / 100000000 : 0;
             chartData->totalFrag += pair.first;
-            chartData->totalZfrag += pair.second;
+            chartData->totalMN += pair.second;
         }
 
         chartData->xLabels << ((withMonthNames) ? monthsNames[num - 1] : QString::number(num));
 
         chartData->valuesFrag.append(frag);
-        chartData->valueszFrag.append(zfrag);
+        chartData->valuesMN.append(mn);
 
-        int max = std::max(frag, zfrag);
+        int max = std::max(frag, mn);
         if (max > chartData->maxValue) {
             chartData->maxValue = max;
         }
@@ -664,8 +664,8 @@ void DashboardWidget::onChartRefreshed()
         axisX->clear();
     }
     // init sets
-    set0 = new QBarSet(CURRENCY_UNIT.c_str());
-    set1 = new QBarSet("z" + QString(CURRENCY_UNIT.c_str()));
+    set0 = new QBarSet(tr("Stakes"));
+    set1 = new QBarSet(tr("MN"));
     set0->setColor(QColor(206,15,15));
     set1->setColor(QColor(85,85,85));
 
@@ -677,23 +677,23 @@ void DashboardWidget::onChartRefreshed()
     series->attachAxis(axisY);
 
     set0->append(chartData->valuesFrag);
-    set1->append(chartData->valueszFrag);
+    set1->append(chartData->valuesMN);
 
     // Total
     nDisplayUnit = walletModel->getOptionsModel()->getDisplayUnit();
-    if (chartData->totalFrag > 0 || chartData->totalZfrag > 0) {
+    if (chartData->totalFrag > 0 || chartData->totalMN > 0) {
         setCssProperty(ui->labelAmountFrag, "text-stake-frag");
-        setCssProperty(ui->labelAmountZfrag, "text-stake-zfrag");
+        setCssProperty(ui->labelAmountMN, "text-stake-mn");
     } else {
         setCssProperty(ui->labelAmountFrag, "text-stake-frag-disable");
-        setCssProperty(ui->labelAmountZfrag, "text-stake-zfrag-disable");
+        setCssProperty(ui->labelAmountMN, "text-stake-mn-disable");
     }
-    forceUpdateStyle({ui->labelAmountFrag, ui->labelAmountZfrag});
+    forceUpdateStyle({ui->labelAmountFrag, ui->labelAmountMN});
     ui->labelAmountFrag->setText(GUIUtil::formatBalance(chartData->totalFrag, nDisplayUnit));
-    ui->labelAmountZfrag->setText(GUIUtil::formatBalance(chartData->totalZfrag, nDisplayUnit, true));
+    ui->labelAmountMN->setText(GUIUtil::formatBalance(chartData->totalMN, nDisplayUnit));
 
     series->append(set0);
-    if (hasZfragStakes)
+    if (hasMNRewards)
         series->append(set1);
 
     // bar width
@@ -753,7 +753,7 @@ void DashboardWidget::onChartRefreshed()
     isLoading = false;
 }
 
-std::pair<int, int> DashboardWidget::getChartRange(QMap<int, std::pair<qint64, qint64>> amountsBy)
+std::pair<int, int> DashboardWidget::getChartRange(const QMap<int, std::pair<qint64, qint64>>& amountsBy)
 {
     switch (chartShow) {
         case YEAR:
@@ -883,7 +883,11 @@ void DashboardWidget::onHideChartsChanged(bool fHide)
             stakesFilter->setDynamicSortFilter(false);
             stakesFilter->setSortCaseSensitivity(Qt::CaseInsensitive);
             stakesFilter->setFilterCaseSensitivity(Qt::CaseInsensitive);
-            stakesFilter->setOnlyStakes(true);
+            stakesFilter->setTypeFilter(TransactionFilterProxy::TYPE(TransactionRecord::StakeMint) |
+                                        TransactionFilterProxy::TYPE(TransactionRecord::Generated) |
+                                        TransactionFilterProxy::TYPE(TransactionRecord::StakeZFRAG) |
+                                        TransactionFilterProxy::TYPE(TransactionRecord::StakeDelegated) |
+                                        TransactionFilterProxy::TYPE(TransactionRecord::MNReward));
         }
         stakesFilter->setSourceModel(txModel);
         hasStakes = stakesFilter->rowCount() > 0;
