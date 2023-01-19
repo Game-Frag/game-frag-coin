@@ -1,0 +1,15 @@
+# http://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.0.html
+
+[Desktop Entry]
+Encoding=UTF-8
+Name=GAMEFRAG Core Daemon SNAP
+Comment=testnet
+GenericName=GAMEFRAG Digital Currency Daemon Client testnet network
+Exec=gamefrag-core.daemon-testnet %u
+Terminal=true
+Type=Application
+Icon=${SNAP}/share/pixmaps/gamefrag_testnet.png
+MimeType=x-scheme-handler/frag;
+Categories=X-Office;X-Finance;
+Keywords=internet;gamefrag;zfrag;core;wallet;daemon;testnet;snap;launchpad;crypto;digital;currency;coin;token;zerocoin;
+Version=1.0

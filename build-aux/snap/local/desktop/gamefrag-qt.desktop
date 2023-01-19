@@ -1,0 +1,15 @@
+# http://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.0.html
+
+[Desktop Entry]
+Encoding=UTF-8
+Name=GAMEFRAG Core
+Comment=GAMEFRAG Core QT main network
+GenericName=GAMEFRAG Digital Currency QT client main network
+Exec=gamefrag-core.qt %u
+Terminal=false
+Type=Application
+Icon=${SNAP}/share/pixmaps/gamefrag.png
+MimeType=x-scheme-handler/gamefrag;
+Categories=X-Office;X-Finance;
+Keywords=internet;gamefrag;zfrag;frag;core;wallet;qt;main;snap;launchpad;crypto;digital;currency;coin;token;zerocoin;
+Version=1.0
