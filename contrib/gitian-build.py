@@ -357,7 +357,7 @@ def main():
         raise Exception('Cannot have both commit and pull')
     args.commit = ('' if args.commit else 'v') + args.version
 
-    os.chdir('gamefrag')
+    os.chdir('game-frag-coin')
     if args.pull:
         subprocess.check_call(['git', 'fetch', args.url, 'refs/pull/'+args.version+'/merge'])
         if not os.path.isdir('../gitian-builder/inputs/gamefrag'):
