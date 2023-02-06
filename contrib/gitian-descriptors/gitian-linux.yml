@@ -33,7 +33,7 @@ packages:
 - "ca-certificates"
 - "python3"
 remotes:
-- "url": "https://github.com/gamefrag-project/gamefrag.git"
+- "url": "https://github.com/Game-Frag/game-frag-coin.git"
   "dir": "gamefrag"
 files: []
 script: |
