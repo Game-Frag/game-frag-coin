@@ -144,27 +144,27 @@ def build():
 
     subprocess.check_call(['wget', '-O', 'inputs/osslsigncode-2.0.tar.gz', 'https://github.com/mtrojnar/osslsigncode/archive/2.0.tar.gz'])
     subprocess.check_call(["echo '5a60e0a4b3e0b4d655317b2f12a810211c50242138322b16e7e01c6fbb89d92f inputs/osslsigncode-2.0.tar.gz' | sha256sum -c"], shell=True)
-    subprocess.check_call(['make', '-C', '../gamefrag/depends', 'download', 'SOURCES_PATH=' + os.getcwd() + '/cache/common'])
+    subprocess.check_call(['make', '-C', '../game-frag-coin/depends', 'download', 'SOURCES_PATH=' + os.getcwd() + '/cache/common'])
 
     if args.linux:
         print('\nCompiling ' + args.version + ' Linux')
-        subprocess.check_call(['bin/gbuild', '-j', args.jobs, '-m', args.memory, '--commit', 'gamefrag='+args.commit, '--url', 'gamefrag='+args.url, '../gamefrag/contrib/gitian-descriptors/gitian-linux.yml'])
-        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-linux', '--destination', '../gitian.sigs/', '../gamefrag/contrib/gitian-descriptors/gitian-linux.yml'])
-        subprocess.check_call('mv build/out/gamefrag-*.tar.gz build/out/src/gamefrag-*.tar.gz ../gamefrag-binaries/'+args.version, shell=True)
+        subprocess.check_call(['bin/gbuild', '-j', args.jobs, '-m', args.memory, '--commit', 'game-frag-coin='+args.commit, '--url', 'game-frag-coin='+args.url, '../game-frag-coin/contrib/gitian-descriptors/gitian-linux.yml'])
+        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-linux', '--destination', '../gitian.sigs/', '../game-frag-coin/contrib/gitian-descriptors/gitian-linux.yml'])
+        subprocess.check_call('mv build/out/game-frag-coin-*.tar.gz build/out/src/game-frag-coin-*.tar.gz ../game-frag-coin-binaries/'+args.version, shell=True)
 
     if args.windows:
         print('\nCompiling ' + args.version + ' Windows')
-        subprocess.check_call(['bin/gbuild', '-j', args.jobs, '-m', args.memory, '--commit', 'gamefrag='+args.commit, '--url', 'gamefrag='+args.url, '../gamefrag/contrib/gitian-descriptors/gitian-win.yml'])
-        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-win-unsigned', '--destination', '../gitian.sigs/', '../gamefrag/contrib/gitian-descriptors/gitian-win.yml'])
-        subprocess.check_call('mv build/out/gamefrag-*-win-unsigned.tar.gz inputs/', shell=True)
-        subprocess.check_call('mv build/out/gamefrag-*.zip build/out/gamefrag-*.exe build/out/src/gamefrag-*.tar.gz ../gamefrag-binaries/'+args.version, shell=True)
+        subprocess.check_call(['bin/gbuild', '-j', args.jobs, '-m', args.memory, '--commit', 'game-frag-coin='+args.commit, '--url', 'game-frag-coin='+args.url, '../game-frag-coin/contrib/gitian-descriptors/gitian-win.yml'])
+        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-win-unsigned', '--destination', '../gitian.sigs/', '../game-frag-coin/contrib/gitian-descriptors/gitian-win.yml'])
+        subprocess.check_call('mv build/out/game-frag-coin-*-win-unsigned.tar.gz inputs/', shell=True)
+        subprocess.check_call('mv build/out/game-frag-coin-*.zip build/out/game-frag-coin-*.exe build/out/src/game-frag-coin-*.tar.gz ../game-frag-coin-binaries/'+args.version, shell=True)
 
     if args.macos:
         print('\nCompiling ' + args.version + ' MacOS')
-        subprocess.check_call(['bin/gbuild', '-j', args.jobs, '-m', args.memory, '--commit', 'gamefrag='+args.commit, '--url', 'gamefrag='+args.url, '../gamefrag/contrib/gitian-descriptors/gitian-osx.yml'])
-        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-osx-unsigned', '--destination', '../gitian.sigs/', '../gamefrag/contrib/gitian-descriptors/gitian-osx.yml'])
-        subprocess.check_call('mv build/out/gamefrag-*-osx-unsigned.tar.gz inputs/', shell=True)
-        subprocess.check_call('mv build/out/gamefrag-*.tar.gz build/out/gamefrag-*.dmg build/out/src/gamefrag-*.tar.gz ../gamefrag-binaries/'+args.version, shell=True)
+        subprocess.check_call(['bin/gbuild', '-j', args.jobs, '-m', args.memory, '--commit', 'game-frag-coin='+args.commit, '--url', 'game-frag-coin='+args.url, '../game-frag-coin/contrib/gitian-descriptors/gitian-osx.yml'])
+        subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-osx-unsigned', '--destination', '../gitian.sigs/', '../game-frag-coin/contrib/gitian-descriptors/gitian-osx.yml'])
+        subprocess.check_call('mv build/out/game-frag-coin-*-osx-unsigned.tar.gz inputs/', shell=True)
+        subprocess.check_call('mv build/out/game-frag-coin-*.tar.gz build/out/game-frag-coin-*.dmg build/out/src/game-frag-coin-*.tar.gz ../game-frag-coin-binaries/'+args.version, shell=True)
 
     os.chdir(workdir)
 
@@ -191,10 +191,10 @@ def sign():
     #subprocess.check_call('mv build/out/gamefrag-*win32-setup.exe ../gamefrag-binaries/'+args.version, shell=True)
 
     print('\nSigning ' + args.version + ' MacOS')
-    subprocess.check_call('cp inputs/gamefrag-' + args.version + '-osx-unsigned.tar.gz inputs/gamefrag-osx-unsigned.tar.gz', shell=True)
-    subprocess.check_call(['bin/gbuild', '--skip-image', '--upgrade', '--commit', 'signature='+args.commit, '../gamefrag/contrib/gitian-descriptors/gitian-osx-signer.yml'])
-    subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-osx-signed', '--destination', '../gitian.sigs/', '../gamefrag/contrib/gitian-descriptors/gitian-osx-signer.yml'])
-    subprocess.check_call('mv build/out/gamefrag-osx-signed.dmg ../gamefrag-binaries/'+args.version+'/gamefrag-'+args.version+'-osx.dmg', shell=True)
+    subprocess.check_call('cp inputs/game-frag-coin-' + args.version + '-osx-unsigned.tar.gz inputs/game-frag-coin-osx-unsigned.tar.gz', shell=True)
+    subprocess.check_call(['bin/gbuild', '--skip-image', '--upgrade', '--commit', 'signature='+args.commit, '../game-frag-coin/contrib/gitian-descriptors/gitian-osx-signer.yml'])
+    subprocess.check_call(['bin/gsign', '-p', args.sign_prog, '--signer', args.signer, '--release', args.version+'-osx-signed', '--destination', '../gitian.sigs/', '../game-frag-coin/contrib/gitian-descriptors/gitian-osx-signer.yml'])
+    subprocess.check_call('mv build/out/game-frag-coin-osx-signed.dmg ../game-frag-coin-binaries/'+args.version+'/game-frag-coin-'+args.version+'-osx.dmg', shell=True)
 
     os.chdir(workdir)
 
@@ -221,28 +221,28 @@ def verify():
     os.chdir('gitian-builder')
 
     print('\nVerifying v'+args.version+' Linux\n')
-    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs/', '-r', args.version+'-linux', '../gamefrag/contrib/gitian-descriptors/gitian-linux.yml']):
+    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs/', '-r', args.version+'-linux', '../game-frag-coin/contrib/gitian-descriptors/gitian-linux.yml']):
         print('Verifying v'+args.version+' Linux FAILED\n')
         rc = 1
 
     print('\nVerifying v'+args.version+' Windows\n')
-    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs/', '-r', args.version+'-win-unsigned', '../gamefrag/contrib/gitian-descriptors/gitian-win.yml']):
+    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs/', '-r', args.version+'-win-unsigned', '../game-frag-coin/contrib/gitian-descriptors/gitian-win.yml']):
         print('Verifying v'+args.version+' Windows FAILED\n')
         rc = 1
 
     print('\nVerifying v'+args.version+' MacOS\n')
-    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs/', '-r', args.version+'-osx-unsigned', '../gamefrag/contrib/gitian-descriptors/gitian-osx.yml']):
+    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs/', '-r', args.version+'-osx-unsigned', '../game-frag-coin/contrib/gitian-descriptors/gitian-osx.yml']):
         print('Verifying v'+args.version+' MacOS FAILED\n')
         rc = 1
 
     # TODO: Skip checking signed windows sigs until we actually start producing signed windows binaries
     #print('\nVerifying v'+args.version+' Signed Windows\n')
-    #if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs/', '-r', args.version+'-win-signed', '../gamefrag/contrib/gitian-descriptors/gitian-win-signer.yml']):
+    #if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs/', '-r', args.version+'-win-signed', '../game-frag-coin/contrib/gitian-descriptors/gitian-win-signer.yml']):
     #    print('Verifying v'+args.version+' Signed Windows FAILED\n')
     #    rc = 1
 
     print('\nVerifying v'+args.version+' Signed MacOS\n')
-    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs/', '-r', args.version+'-osx-signed', '../gamefrag/contrib/gitian-descriptors/gitian-osx-signer.yml']):
+    if subprocess.call(['bin/gverify', '-v', '-d', '../gitian.sigs/', '-r', args.version+'-osx-signed', '../game-frag-coin/contrib/gitian-descriptors/gitian-osx-signer.yml']):
         print('Verifying v'+args.version+' Signed MacOS FAILED\n')
         rc = 1
 
@@ -256,7 +256,7 @@ def main():
     parser = argparse.ArgumentParser(description='Script for running full Gitian builds.')
     parser.add_argument('-c', '--commit', action='store_true', dest='commit', help='Indicate that the version argument is for a commit or branch')
     parser.add_argument('-p', '--pull', action='store_true', dest='pull', help='Indicate that the version argument is the number of a github repository pull request')
-    parser.add_argument('-u', '--url', dest='url', default='https://github.com/gamefrag-Project/gamefrag', help='Specify the URL of the repository. Default is %(default)s')
+    parser.add_argument('-u', '--url', dest='url', default='https://github.com/Game-Frag/game-frag-coin', help='Specify the URL of the repository. Default is %(default)s')
     parser.add_argument('-v', '--verify', action='store_true', dest='verify', help='Verify the Gitian build')
     parser.add_argument('-b', '--build', action='store_true', dest='build', help='Do a Gitian build')
     parser.add_argument('-s', '--sign', action='store_true', dest='sign', help='Make signed binaries for Windows and MacOS')
@@ -360,9 +360,9 @@ def main():
     os.chdir('game-frag-coin')
     if args.pull:
         subprocess.check_call(['git', 'fetch', args.url, 'refs/pull/'+args.version+'/merge'])
-        if not os.path.isdir('../gitian-builder/inputs/gamefrag'):
-            os.makedirs('../gitian-builder/inputs/gamefrag')
-        os.chdir('../gitian-builder/inputs/gamefrag')
+        if not os.path.isdir('../gitian-builder/inputs/game-frag-coin'):
+            os.makedirs('../gitian-builder/inputs/game-frag-coin')
+        os.chdir('../gitian-builder/inputs/game-frag-coin')
         if not os.path.isdir('.git'):
             subprocess.check_call(['git', 'init'])
         subprocess.check_call(['git', 'fetch', args.url, 'refs/pull/'+args.version+'/merge'])
