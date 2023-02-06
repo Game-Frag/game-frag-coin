@@ -29,7 +29,7 @@ packages:
 - "python3-setuptools"
 - "fonts-tuffy"
 remotes:
-- "url": "https://github.com/gamefrag-project/gamefrag.git"
+- "url": "https://github.com/Game-Frag/game-frag-coin.git"
   "dir": "gamefrag"
 files:
 - "Xcode-11.3.1-11C505-extracted-SDK-with-libcxx-headers.tar.gz"
