@@ -109,7 +109,7 @@ def setup_repos():
         subprocess.check_call(['git', 'clone', 'https://github.com/Game-Frag/gamefrag-detached-sigs.git'])
     if not os.path.isdir('gitian-builder'):
         subprocess.check_call(['git', 'clone', 'https://github.com/devrandom/gitian-builder.git'])
-    if not os.path.isdir('gamefrag'):
+    if not os.path.isdir('game-frag-coin'):
         subprocess.check_call(['git', 'clone', 'https://github.com/Game-Frag/game-frag-coin.git'])
     os.chdir('gitian-builder')
     make_image_prog = ['bin/make-base-vm', '--suite', 'bionic', '--arch', 'amd64']
