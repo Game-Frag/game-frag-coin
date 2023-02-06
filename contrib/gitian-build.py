@@ -137,7 +137,7 @@ def setup_repos():
 def build():
     global args, workdir
 
-    os.makedirs('gamefrag-binaries/' + args.version, exist_ok=True)
+    os.makedirs('game-frag-coin-binaries/' + args.version, exist_ok=True)
     print('\nBuilding Dependencies\n')
     os.chdir('gitian-builder')
     os.makedirs('inputs', exist_ok=True)
