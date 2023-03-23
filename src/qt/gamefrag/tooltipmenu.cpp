@@ -5,7 +5,6 @@
 #include "qt/gamefrag/tooltipmenu.h"
 #include "qt/gamefrag/forms/ui_tooltipmenu.h"
 
-#include "qt/gamefrag/gamefraggui.h"
 #include "qt/gamefrag/qtutils.h"
 #include <QTimer>
 

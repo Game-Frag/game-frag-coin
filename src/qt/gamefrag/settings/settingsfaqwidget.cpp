@@ -8,16 +8,15 @@
 
 #include "qt/gamefrag/settings/settingsfaqwidget.h"
 #include "qt/gamefrag/settings/forms/ui_settingsfaqwidget.h"
-#include "clientmodel.h"
+#include "qt/gamefrag/mnmodel.h"
 #include "qt/gamefrag/qtutils.h"
 
 #include <QScrollBar>
 #include <QMetaObject>
 
-SettingsFaqWidget::SettingsFaqWidget(GAMEFRAGGUI* parent, ClientModel* _model) :
+SettingsFaqWidget::SettingsFaqWidget(GAMEFRAGGUI* parent, MNModel* mnModel) :
     QDialog(parent),
-    ui(new Ui::SettingsFaqWidget),
-    clientModel(_model)
+    ui(new Ui::SettingsFaqWidget)
 {
     ui->setupUi(this);
     this->setStyleSheet(parent->styleSheet());
@@ -124,7 +123,7 @@ SettingsFaqWidget::SettingsFaqWidget(GAMEFRAGGUI* parent, ClientModel* _model) :
                "to the network and in return, receive a portion of the block reward "
                "regularly. These services include:")
                 .arg(PACKAGE_NAME)
-                .arg(GUIUtil::formatBalance(clientModel->getMNCollateralRequiredAmount(), BitcoinUnits::FRAG)) +
+                .arg(GUIUtil::formatBalance(mnModel->getMNCollateralRequiredAmount(), BitcoinUnits::FRAG)) +
             formatFAQUnorderedList(
                 formatFAQListItem(tr("A decentralized governance (Proposal Voting)")) +
                 formatFAQListItem(tr("A decentralized budgeting system (Treasury)")) +
@@ -145,7 +144,7 @@ SettingsFaqWidget::SettingsFaqWidget(GAMEFRAGGUI* parent, ClientModel* _model) :
             tr("Requirements:") +
             formatFAQUnorderedList(
                 formatFAQListItem(tr("%1 per single Masternode instance")
-                        .arg(GUIUtil::formatBalance(clientModel->getMNCollateralRequiredAmount(), BitcoinUnits::FRAG))) +
+                        .arg(GUIUtil::formatBalance(mnModel->getMNCollateralRequiredAmount(), BitcoinUnits::FRAG))) +
                 formatFAQListItem(tr("Must be stored in a core wallet")) +
                 formatFAQListItem(tr("Need dedicated IP address")) +
                 formatFAQListItem(tr("Masternode wallet to remain online")))));
@@ -157,7 +156,7 @@ SettingsFaqWidget::SettingsFaqWidget(GAMEFRAGGUI* parent, ClientModel* _model) :
                "can reside during a Controller-Remote masternode setup. It is a wallet "
                "that can activate the remote masternode wallet(s) and allows you to keep "
                "your collateral coins offline while the remote masternode remains online.")
-                    .arg(GUIUtil::formatBalance(clientModel->getMNCollateralRequiredAmount(), BitcoinUnits::FRAG))));
+                    .arg(GUIUtil::formatBalance(mnModel->getMNCollateralRequiredAmount(), BitcoinUnits::FRAG))));
     ui->labelContent_MNController->setText(mNControllerContent);
 
 

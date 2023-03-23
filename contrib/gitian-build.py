@@ -104,13 +104,13 @@ def setup_darwin():
 
 def setup_repos():
     if not os.path.isdir('gitian.sigs'):
-        subprocess.check_call(['git', 'clone', 'https://github.com/Game-Frag/gitian.sigs.git'])
+        subprocess.check_call(['git', 'clone', 'https://github.com/gamefrag-Project/gitian.sigs.git'])
     if not os.path.isdir('gamefrag-detached-sigs'):
-        subprocess.check_call(['git', 'clone', 'https://github.com/Game-Frag/gamefrag-detached-sigs.git'])
+        subprocess.check_call(['git', 'clone', 'https://github.com/gamefrag-Project/gamefrag-detached-sigs.git'])
     if not os.path.isdir('gitian-builder'):
         subprocess.check_call(['git', 'clone', 'https://github.com/devrandom/gitian-builder.git'])
-    if not os.path.isdir('game-frag-coin'):
-        subprocess.check_call(['git', 'clone', 'https://github.com/Game-Frag/game-frag-coin.git'])
+    if not os.path.isdir('gamefrag'):
+        subprocess.check_call(['git', 'clone', 'https://github.com/gamefrag-Project/gamefrag.git'])
     os.chdir('gitian-builder')
     make_image_prog = ['bin/make-base-vm', '--suite', 'bionic', '--arch', 'amd64']
     if args.docker:
@@ -357,7 +357,7 @@ def main():
         raise Exception('Cannot have both commit and pull')
     args.commit = ('' if args.commit else 'v') + args.version
 
-    os.chdir('game-frag-coin')
+    os.chdir('gamefrag')
     if args.pull:
         subprocess.check_call(['git', 'fetch', args.url, 'refs/pull/'+args.version+'/merge'])
         if not os.path.isdir('../gitian-builder/inputs/gamefrag'):

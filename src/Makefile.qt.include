@@ -42,7 +42,6 @@ QT_FORMS_UI = \
   qt/gamefrag/forms/sendcustomfeedialog.ui \
   qt/gamefrag/forms/sendmultirow.ui \
   qt/gamefrag/forms/send.ui \
-  qt/gamefrag/forms/addnewaddressdialog.ui \
   qt/gamefrag/forms/addnewcontactdialog.ui \
   qt/gamefrag/forms/requestdialog.ui \
   qt/gamefrag/forms/receivewidget.ui \
@@ -95,7 +94,6 @@ QT_MOC_CPP = \
   qt/moc_paymentserver.cpp \
   qt/moc_qvalidatedlineedit.cpp \
   qt/moc_qvaluecombobox.cpp \
-  qt/moc_recentrequeststablemodel.cpp \
   qt/moc_rpcconsole.cpp \
   qt/moc_rpcexecutor.cpp \
   qt/moc_trafficgraphwidget.cpp \
@@ -134,7 +132,6 @@ QT_MOC_CPP = \
   qt/gamefrag/moc_sendmemodialog.cpp \
   qt/gamefrag/moc_sendmultirow.cpp \
   qt/gamefrag/moc_send.cpp \
-  qt/gamefrag/moc_addnewaddressdialog.cpp \
   qt/gamefrag/moc_addnewcontactdialog.cpp \
   qt/gamefrag/moc_requestdialog.cpp \
   qt/gamefrag/moc_receivewidget.cpp \
@@ -200,10 +197,8 @@ BITCOIN_QT_H = \
   qt/optionsmodel.h \
   qt/paymentserver.h \
   qt/peertablemodel.h \
-  qt/platformstyle.h \
   qt/qvalidatedlineedit.h \
   qt/qvaluecombobox.h \
-  qt/recentrequeststablemodel.h \
   qt/rpcconsole.h \
   qt/rpcexecutor.h \
   qt/trafficgraphwidget.h \
@@ -253,7 +248,6 @@ BITCOIN_QT_H = \
   qt/gamefrag/sendmemodialog.h \
   qt/gamefrag/sendmultirow.h \
   qt/gamefrag/send.h \
-  qt/gamefrag/addnewaddressdialog.h \
   qt/gamefrag/addnewcontactdialog.h \
   qt/gamefrag/requestdialog.h \
   qt/gamefrag/receivewidget.h \
@@ -533,7 +527,6 @@ BITCOIN_QT_BASE_CPP = \
   qt/notificator.cpp \
   qt/optionsmodel.cpp \
   qt/peertablemodel.cpp \
-  qt/platformstyle.cpp \
   qt/qvalidatedlineedit.cpp \
   qt/qvaluecombobox.cpp \
   qt/rpcconsole.cpp \
@@ -552,7 +545,6 @@ BITCOIN_QT_WALLET_CPP = \
   qt/editaddressdialog.cpp \
   qt/openuridialog.cpp \
   qt/paymentserver.cpp \
-  qt/recentrequeststablemodel.cpp \
   qt/transactionfilterproxy.cpp \
   qt/transactionrecord.cpp \
   qt/transactiontablemodel.cpp \
@@ -594,7 +586,6 @@ BITCOIN_QT_WALLET_CPP = \
   qt/gamefrag/sendmemodialog.cpp \
   qt/gamefrag/sendmultirow.cpp \
   qt/gamefrag/send.cpp \
-  qt/gamefrag/addnewaddressdialog.cpp \
   qt/gamefrag/addnewcontactdialog.cpp \
   qt/gamefrag/requestdialog.cpp \
   qt/gamefrag/receivewidget.cpp \

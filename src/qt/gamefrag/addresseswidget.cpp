@@ -9,7 +9,6 @@
 #include "qt/gamefrag/tooltipmenu.h"
 
 #include "qt/gamefrag/addnewcontactdialog.h"
-#include "qt/gamefrag/gamefraggui.h"
 #include "guiutil.h"
 #include "qt/gamefrag/qtutils.h"
 #include "walletmodel.h"

@@ -28,7 +28,7 @@ Build-Depends: debhelper,
  libzmq3-dev,
  dh-systemd
 Standards-Version: 3.9.2
-Homepage: http://www.game-frag.com
+Homepage: http://www.gamefrag.org
 Vcs-Git: git://github.com/Game-Frag/game-frag-coin.git
 Vcs-Browser: http://github.com/Game-Frag/game-frag-coin
 

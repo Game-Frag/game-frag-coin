@@ -5,7 +5,6 @@
 
 #include "libzerocoin/CoinSpend.h"
 #include "wallet/wallet.h"
-#include "zfragchain.h"
 #include "zfrag/zfragmodule.h"
 
 bool DisconnectZerocoinTx(const CTransaction& tx)
@@ -30,7 +29,7 @@ bool DisconnectZerocoinTx(const CTransaction& tx)
                         }
                         serial = publicSpend.getCoinSerialNumber();
                     } else {
-                        libzerocoin::CoinSpend spend = TxInToZerocoinSpend(txin);
+                        libzerocoin::CoinSpend spend = ZFRAGModule::TxInToZerocoinSpend(txin);
                         serial = spend.getCoinSerialNumber();
                     }
 

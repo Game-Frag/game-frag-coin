@@ -2,7 +2,7 @@
 # Copyright (c) 2019 The PIVX developers
 name: gamefrag-core
 base: core18
-version: 5.4.0
+version: 5.4.99
 summary:   GAMEFRAG (Private – Instant – Verified – Transaction)
 description: |
   GAMEFRAG is an MIT licensed,

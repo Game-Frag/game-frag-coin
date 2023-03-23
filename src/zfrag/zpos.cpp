@@ -5,7 +5,7 @@
 #include "zfrag/zpos.h"
 
 #include "validation.h"
-#include "zfragchain.h"
+#include "zfrag/zfragmodule.h"
 
 
 /*
@@ -72,7 +72,7 @@ CLegacyZFragStake* CLegacyZFragStake::NewZFragStake(const CTxIn& txin, int nHeig
     }
 
     // Check spend type
-    libzerocoin::CoinSpend spend = TxInToZerocoinSpend(txin);
+    libzerocoin::CoinSpend spend = ZFRAGModule::TxInToZerocoinSpend(txin);
     if (spend.getSpendType() != libzerocoin::SpendType::STAKE) {
         LogPrintf("%s : spend is using the wrong SpendType (%d)", __func__, (int)spend.getSpendType());
         return nullptr;

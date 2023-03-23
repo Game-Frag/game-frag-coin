@@ -3,7 +3,7 @@ GAMEFRAG Core
 
 Setup
 ---------------------
-[GAMEFRAG Core](https://github.com/Game-Frag/game-frag-coin/releases) is the original GAMEFRAG client and it builds the backbone of the network. However, it downloads and stores the entire history of GAMEFRAG transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
+[GAMEFRAG Core](http://gamefrag.org/wallet) is the original GAMEFRAG client and it builds the backbone of the network. However, it downloads and stores the entire history of GAMEFRAG transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
 
 Running
 ---------------------
@@ -30,7 +30,7 @@ Drag GAMEFRAG-Qt to your applications folder, and then run GAMEFRAG-Qt.
 
 * See the documentation at the [GAMEFRAG Wiki](https://github.com/Game-Frag/game-frag-coin/wiki)
 for help and more information.
-* Ask for help on the [GAMEFRAG Discord](https://discord.game-frag.com/).
+* Ask for help on the [GAMEFRAG Forum](http://forum.gamefrag.org/).
 * Join our Discord server [Discord Server](https://discord.game-frag.com)
 
 Building
@@ -58,11 +58,10 @@ The GAMEFRAG repo's [root README](/README.md) contains relevant information on t
 - [Dnsseed Policy](dnsseed-policy.md)
 
 ### Resources
-* Discuss on the [GAMEFRAG](https://discord.game-frag.com/) forum.
+* Discuss on the [GAMEFRAG](http://forum.gamefrag.org/) forum.
 * Join the [GAMEFRAG Discord](https://discord.game-frag.com).
 
 ### Miscellaneous
-- [Assets Attribution](assets-attribution.md)
 - [Files](files.md)
 - [Fuzz-testing](fuzzing.md)
 - [Reduce Memory](reduce-memory.md)

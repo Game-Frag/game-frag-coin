@@ -201,7 +201,7 @@ class MasternodeGovernanceBasicTest(GamefragTier2TestFramework):
         self.log.info("preparing budget proposal..")
         firstProposal = Proposal(
             "super-cool",
-            "https://forum.game-frag.com/t/test-proposal",
+            "https://forum.gamefrag.org/t/test-proposal",
             2,
             self.miner.getnewaddress(),
             300

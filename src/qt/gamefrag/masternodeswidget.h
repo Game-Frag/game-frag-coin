@@ -8,7 +8,6 @@
 #include "qt/gamefrag/pwidget.h"
 #include "qt/gamefrag/furabstractlistitemdelegate.h"
 #include "qt/gamefrag/tooltipmenu.h"
-#include "walletmodel.h"
 
 #include <atomic>
 

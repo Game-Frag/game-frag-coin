@@ -4,7 +4,6 @@
 
 #include "qt/gamefrag/navmenuwidget.h"
 #include "qt/gamefrag/forms/ui_navmenuwidget.h"
-#include "qt/gamefrag/gamefraggui.h"
 #include "qt/gamefrag/qtutils.h"
 #include "clientversion.h"
 #include "optionsmodel.h"

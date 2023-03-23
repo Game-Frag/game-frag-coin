@@ -1,5 +1,5 @@
 ---
-name: "gamefrag-osx-5.4"
+name: "gamefrag-osx-5.5"
 enable_cache: true
 distro: "ubuntu"
 suites:
@@ -85,7 +85,7 @@ script: |
   create_per-host_faketime_wrappers "2000-01-01 12:00:00"
   export PATH=${WRAP_DIR}:${PATH}
 
-  cd gamefrag
+  cd game-frag-coin
   BASEPREFIX="${PWD}/depends"
 
   mkdir -p ${BASEPREFIX}/SDKs
@@ -107,14 +107,14 @@ script: |
   ./autogen.sh
   CONFIG_SITE=${BASEPREFIX}/$(echo "${HOSTS}" | awk '{print $1;}')/share/config.site ./configure --prefix=/
   make dist
-  SOURCEDIST=$(echo gamefrag-*.tar.gz)
+  SOURCEDIST=$(echo game-frag-coin-*.tar.gz)
   DISTNAME=${SOURCEDIST/%.tar.gz}
 
   # Correct tar file order
   mkdir -p temp
   pushd temp
   tar -xf ../$SOURCEDIST
-  find gamefrag-* | sort | tar --mtime="$REFERENCE_DATETIME" --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ../$SOURCEDIST
+  find game-frag-coin-* | sort | tar --mtime="$REFERENCE_DATETIME" --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ../$SOURCEDIST
   popd
 
   # Workaround for tarball not building with the bare tag version (prep)

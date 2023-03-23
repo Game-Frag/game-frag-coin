@@ -611,7 +611,7 @@ int GAMEFRAGGUI::getNavWidth()
 void GAMEFRAGGUI::openFAQ(SettingsFaqWidget::Section section)
 {
     showHide(true);
-    SettingsFaqWidget* dialog = new SettingsFaqWidget(this, clientModel);
+    SettingsFaqWidget* dialog = new SettingsFaqWidget(this, mnModel);
     dialog->setSection(section);
     openDialogWithOpaqueBackgroundFullScreen(dialog, this);
     dialog->deleteLater();
@@ -625,9 +625,10 @@ void GAMEFRAGGUI::setGovModel(GovernanceModel* govModel)
     governancewidget->setGovModel(govModel);
 }
 
-void GAMEFRAGGUI::setMNModel(MNModel* mnModel)
+void GAMEFRAGGUI::setMNModel(MNModel* _mnModel)
 {
     if (!stackedContainer || !clientModel) return;
+    mnModel = _mnModel;
     governancewidget->setMNModel(mnModel);
     masterNodesWidget->setMNModel(mnModel);
 }

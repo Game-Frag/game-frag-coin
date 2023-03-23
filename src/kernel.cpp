@@ -15,7 +15,6 @@
 #include "util/system.h"
 #include "utilmoneystr.h"
 #include "validation.h"
-#include "zfragchain.h"
 #include "zfrag/zpos.h"
 
 /**

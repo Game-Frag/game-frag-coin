@@ -44,7 +44,7 @@ related to the DNS seed operation.
 If these expectations cannot be satisfied the operator should
 discontinue providing services and contact the active GAMEFRAG
 Core development team as well as posting on the
-[GAMEFRAG Forum](https://forum.game-frag.com).
+[GAMEFRAG Forum](https://forum.gamefrag.org).
 
 Behavior outside of these expectations may be reasonable in some
 situations but should be discussed in public in advance.

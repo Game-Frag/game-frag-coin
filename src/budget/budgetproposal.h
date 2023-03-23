@@ -10,13 +10,13 @@
 #include "net.h"
 #include "streams.h"
 
-static const CAmount PROPOSAL_FEE_TX = (100 * COIN);
-static const CAmount BUDGET_FEE_TX_OLD = (100 * COIN);
-static const CAmount BUDGET_FEE_TX = (10 * COIN);
+static const CAmount PROPOSAL_FEE_TX = (50 * COIN);
+static const CAmount BUDGET_FEE_TX_OLD = (50 * COIN);
+static const CAmount BUDGET_FEE_TX = (5 * COIN);
 static const int64_t BUDGET_VOTE_UPDATE_MIN = 60 * 60;
 
 // Minimum value for a proposal to be considered valid
-static const CAmount PROPOSAL_MIN_AMOUNT = 200 * COIN;
+static const CAmount PROPOSAL_MIN_AMOUNT = 10 * COIN;
 
 // Net ser values
 static const size_t PROP_URL_MAX_SIZE = 64;
@@ -37,11 +37,12 @@ private:
     std::string strInvalid;
 
     // Functions used inside UpdateValid()/IsWellFormed - setting strInvalid
-    bool IsHeavilyDownvoted(bool fNewRules);
+    bool IsHeavilyDownvoted(int mnCount);
     bool updateExpired(int nCurrentHeight);
     bool CheckStartEnd();
     bool CheckAmount(const CAmount& nTotalBudget);
     bool CheckAddress();
+    bool CheckStrings();
 
 protected:
     std::map<COutPoint, CBudgetVote> mapVotes;
@@ -68,7 +69,7 @@ public:
     void SyncVotes(CNode* pfrom, bool fPartial, int& nInvCount) const;
 
     // sets fValid and strInvalid, returns fValid
-    bool UpdateValid(int nHeight);
+    bool UpdateValid(int nHeight, int mnCount);
     // Static checks that should be done only once - sets strInvalid
     bool IsWellFormed(const CAmount& nTotalBudget);
     bool IsValid() const  { return fValid; }

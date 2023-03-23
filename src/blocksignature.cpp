@@ -5,7 +5,7 @@
 #include "blocksignature.h"
 
 #include "script/standard.h"
-#include "zfragchain.h"
+#include "zfrag/zfragmodule.h"
 
 static bool GetKeyIDFromUTXO(const CTxOut& utxo, CKeyID& keyIDRet)
 {
@@ -72,7 +72,7 @@ bool CheckBlockSignature(const CBlock& block)
     CPubKey pubkey;
     bool fzFRAGStake = block.vtx[1]->vin[0].IsZerocoinSpend();
     if (fzFRAGStake) {
-        libzerocoin::CoinSpend spend = TxInToZerocoinSpend(block.vtx[1]->vin[0]);
+        libzerocoin::CoinSpend spend = ZFRAGModule::TxInToZerocoinSpend(block.vtx[1]->vin[0]);
         pubkey = spend.getPubKey();
     } else {
         txnouttype whichType;
