@@ -1469,7 +1469,7 @@ QLineEdit[cssClass="edit-primary-book"]:hover {
     background-image: url("://ic-address_book_grey");
     background-position:right center;
     background-repeat:no-repeat;
-    bbackground-color:#ffffff; /* White. https://www.colorhexa.com/ffffff */
+    background-color:#ffffff; /* White. https://www.colorhexa.com/ffffff */
     font-size:18px;
     border-radius: 2px;
     padding:8px;
