@@ -214,8 +214,6 @@ QPushButton[cssClass="btn-check-cold-staking"]:checked {
 }
 
 *[cssClass="btn-nav-settings"]:hover {
-    qproperty-icon: url("://ic-nav-settings-hover");
-    qproperty-iconSize: 24px 40px;
     background-color: #1A000000; /* Black. https://www.colorhexa.com/000000 */
     color: #FFFFFF; /* White. https://www.colorhexa.com/ffffff */
 }

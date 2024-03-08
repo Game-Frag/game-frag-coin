@@ -48,8 +48,8 @@ Build GAMEFRAG Core
 
 1. Clone the GAMEFRAG Core source code:
 
-        git clone https://github.com/Game-Frag/game-frag-coin.git
-        cd game-frag-coin
+        git clone https://github.com/gamefrag-project/gamefrag
+        cd gamefrag
 
 2.  Build GAMEFRAG Core:
 

@@ -1,5 +1,5 @@
 ---
-name: "gamefrag-win-5.5"
+name: "gamefrag-win-5.6"
 enable_cache: true
 distro: "ubuntu"
 suites:
@@ -23,8 +23,8 @@ packages:
 - "ca-certificates"
 - "python3"
 remotes:
-- "url": "https://github.com/Game-Frag/game-frag-coin.git"
-  "dir": "game-frag-coin"
+- "url": "https://github.com/gamefrag-project/gamefrag.git"
+  "dir": "gamefrag"
 files: []
 script: |
   set -e -o pipefail
@@ -95,7 +95,7 @@ script: |
   create_per-host_compiler_wrapper "2000-01-01 12:00:00"
   export PATH=${WRAP_DIR}:${PATH}
 
-  cd game-frag-coin
+  cd gamefrag
   BASEPREFIX="${PWD}/depends"
   # Build dependencies for each host
   for i in $HOSTS; do
@@ -114,13 +114,13 @@ script: |
   ./autogen.sh
   CONFIG_SITE=${BASEPREFIX}//$(echo "${HOSTS}" | awk '{print $1;}')/share/config.site ./configure --prefix=/
   make dist
-  SOURCEDIST=$(echo game-frag-coin-*.tar.gz)
+  SOURCEDIST=$(echo gamefrag-*.tar.gz)
   DISTNAME=${SOURCEDIST/%.tar.gz}
   # Correct tar file order
   mkdir -p temp
   pushd temp
   tar -xf ../$SOURCEDIST
-  find game-frag-coin-* | sort | tar --mtime="$REFERENCE_DATETIME" --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ../$SOURCEDIST
+  find gamefrag-* | sort | tar --mtime="$REFERENCE_DATETIME" --no-recursion --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > ../$SOURCEDIST
   popd
 
   # Workaround for tarball not building with the bare tag version (prep)
@@ -144,6 +144,7 @@ script: |
     CONFIG_SITE=${BASEPREFIX}/${i}/share/config.site ./configure --prefix=/ --disable-ccache --disable-maintainer-mode --disable-dependency-tracking ${CONFIGFLAGS} CFLAGS="${HOST_CFLAGS}" CXXFLAGS="${HOST_CXXFLAGS}"
     make ${MAKEOPTS}
     make ${MAKEOPTS} -C src check-security
+    make ${MAKEOPTS} -C src check-symbols
     make deploy
     make install DESTDIR=${INSTALLPATH}
     cp -f --target-directory="${OUTDIR}" ./gamefrag-*-setup-unsigned.exe

@@ -1,5 +1,5 @@
 // Copyright (c) 2016-2020 The ZCash developers
-// Copyright (c) 2020 The PIVX developers
+// Copyright (c) 2020-2021 The GAMEFRAG Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or https://www.opensource.org/licenses/mit-license.php.
 
@@ -160,6 +160,12 @@ bool ContextualCheckTransaction(
 
     if (hasShieldedData) {
         uint256 dataToBeSigned;
+
+        if (tx.HasExchangeAddr() && Params().GetConsensus().NetworkUpgradeActive(nHeight, Consensus::UPGRADE_V5_6)) {
+            return state.DoS(100, error("%s: Sapling version with invalid data", __func__),
+                REJECT_INVALID, "bad-txns-exchange-addr-has-sapling");
+        }
+
         // Empty output script.
         CScript scriptCode;
         try {

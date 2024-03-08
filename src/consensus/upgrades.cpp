@@ -1,5 +1,5 @@
 // Copyright (c) 2018 The Zcash developers
-// Copyright (c) 2020 The PIVX developers
+// Copyright (c) 2020-2022 The GAMEFRAG Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -64,6 +64,10 @@ const struct NUInfo NetworkUpgradeInfo[Consensus::MAX_NETWORK_UPGRADES] = {
         {
                 /*.strName =*/ "GAMEFRAG_v5.5",
                 /*.strInfo =*/ "New rewards structure",
+        },
+        {
+                /*.strName =*/ "GAMEFRAG_v5.6",
+                /*.strInfo =*/ "Exchange address",
         },
         {
                 /*.strName =*/ "v6_evo",

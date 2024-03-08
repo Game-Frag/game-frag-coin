@@ -1,4 +1,4 @@
-// Copyright (c) 2019-2020 The PIVX developers
+// Copyright (c) 2019-2022 The GAMEFRAG Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -425,7 +425,7 @@ void GAMEFRAGGUI::message(const QString& title, const QString& message, unsigned
         } else {
             r = openStandardDialog((title.isEmpty() ? strTitle : title), message, "OK");
         }
-        if (ret != NULL)
+        if (ret != nullptr)
             *ret = r;
     } else if (style & CClientUIInterface::MSG_INFORMATION_SNACK) {
         messageInfo(message);
@@ -505,6 +505,7 @@ void GAMEFRAGGUI::goToAddresses()
 
 void GAMEFRAGGUI::goToMasterNodes()
 {
+    masterNodesWidget->resetCoinControl();
     showTop(masterNodesWidget);
 }
 
