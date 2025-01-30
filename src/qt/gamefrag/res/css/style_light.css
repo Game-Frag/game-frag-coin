@@ -323,7 +323,7 @@ QPushButton[cssClass="img-nav-logo"] {
     qproperty-iconSize: 24px 30px;
     background-color:transparent;
     font-size:14px;
-	color: #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    color: #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
 }
 
 *[cssClass="btn-nav-master"]:checked {
@@ -597,7 +597,7 @@ QPushButton[cssClass="btn-check-cold-staking"] {
     qproperty-iconSize: 24px 24px;
     color:#ffffff; /* White. https://www.colorhexa.com/ffffff */
     background-color:#50f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
-    border-bottom:2px solid f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
+    border-bottom:2px solid #f23030; /* Pure (or mostly pure) red. https://www.colorhexa.com/f23030 */
     border-radius:2px;
 }
 
@@ -3061,7 +3061,7 @@ QComboBox[cssClass="btn-combo-dialog"] {
     background-color:#ffffff; /* White. https://www.colorhexa.com/ffffff */
     padding:10px 20px 10px 10px;
     font-size:16px;
-        border:1px solid #ffffff; /* White. https://www.colorhexa.com/ffffff */
+    border:1px solid #ffffff; /* White. https://www.colorhexa.com/ffffff */
     color: #000000; /* Black. https://www.colorhexa.com/000000 */
     text-align: right;
 }
@@ -3844,7 +3844,7 @@ QPushButton[cssClass="btn-dots-welcome"]:pressed {
 }
 
 *[cssClass="edit-primary-welcome"] {
-	border:1px solid #000000; /* Black. https://www.colorhexa.com/000000 */
+    border:1px solid #000000; /* Black. https://www.colorhexa.com/000000 */
     border-right: 0px;
     background-color:#0F0000; /* Black. https://www.colorhexa.com/000000 */
     font-size:18px;
